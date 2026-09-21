@@ -6,7 +6,7 @@ const { chromium } = require("C:/Users/DYH/.cache/codex-runtimes/codex-primary-r
 const BASE = "file:///C:/Users/DYH/Documents/ChatGPT/课本教程/freshman-hub/index.html";
 const OUT = os.tmpdir();
 const errors = [];
-const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics","general-ed","english","python-ai","prep"];
+const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics","general-ed","english","python-ai","programming","prep"];
 
 (async () => {
   const browser = await chromium.launch({
@@ -45,6 +45,10 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
       throw new Error("course page incomplete: " + id);
     }
   }
+  await page.goto(BASE + "#/course/chemistry", { waitUntil: "load" });
+  await page.waitForTimeout(180);
+  if (!(await page.$("#insight-chemistry"))) throw new Error("chemistry AI insight slot missing");
+  if (!(await page.$("#chatAnalyze"))) throw new Error("AI courseware analyze button missing");
 
   await page.goto(BASE + "#/books", { waitUntil: "load" });
   await page.waitForTimeout(180);
@@ -52,10 +56,16 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
   await page.goto(BASE + "#/compare", { waitUntil: "load" });
   await page.waitForTimeout(180);
   if (!(await page.textContent("#app")).includes("中英教材对比")) throw new Error("compare page missing");
+  await page.goto(BASE + "#/deep", { waitUntil: "load" });
+  await page.waitForTimeout(250);
+  const deepText = await page.textContent("#app");
+  if (!deepText.includes("国内教材逐章精读") || !deepText.includes("官方大纲与每周进度") || !deepText.includes("大学数学 · 微积分（上）") || !deepText.includes("C++程序设计语言")) {
+    throw new Error("deep textbook page incomplete");
+  }
   await page.goto(BASE + "#/pdfs", { waitUntil: "load" });
   await page.waitForTimeout(200);
   const pdfCount = await page.$$eval(".pdf-link", els => els.length);
-  if (pdfCount !== 61) throw new Error("pdf library count != 61: " + pdfCount);
+  if (pdfCount !== 70) throw new Error("pdf library count != 70: " + pdfCount);
   if (!(await page.textContent("#app")).includes("PDF 资料库")) throw new Error("pdf library page missing");
 
   await page.goto(BASE, { waitUntil: "load" });
@@ -74,7 +84,7 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
     };
   });
   if (layout.overflow > 2) throw new Error("desktop horizontal overflow " + layout.overflow);
-  if (layout.h1Width < 200 || layout.rows !== 9) throw new Error("home layout broken");
+  if (layout.h1Width < 200 || layout.rows !== 10) throw new Error("home layout broken");
   if (layout.rowWidths.some(w => w <= 0)) throw new Error("course row zero width");
   console.log("Layout:", JSON.stringify(layout));
 

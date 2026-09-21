@@ -1,8 +1,9 @@
-const CACHE = "scai-me1-v5";
+const CACHE = "scai-me1-v6";
 const CORE = [
   "./index.html",
   "./data-courses.js",
   "./data-dual.js",
+  "./data-china-textbooks.js",
   "./data-meta.js",
   "./lesson-extra.js",
   "./config.local.js",

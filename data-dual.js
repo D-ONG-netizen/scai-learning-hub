@@ -15,9 +15,9 @@ window.SCAI_DUAL = {
       accent: "#C4522E",
       course: "calculus",
       zh: {
-        name: "高等数学（上、下册）",
-        author: "同济大学数学系 · 高等教育出版社",
-        chapters: "上册 7 章 + 下册 8 章",
+        name: "大学数学·微积分（上、下册）+ 同济高数参考",
+        author: "上海交通大学数学系微积分课程组",
+        chapters: "上册 1-6章 + 下册 7-11章",
         scope: "大一全年"
       },
       en: {

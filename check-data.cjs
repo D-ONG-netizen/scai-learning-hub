@@ -5,7 +5,7 @@ const vm = require("vm");
 const dir = "C:/Users/DYH/Documents/ChatGPT/课本教程/freshman-hub";
 const sandbox = { window: {} };
 vm.createContext(sandbox);
-for (const f of ["data-courses.js", "data-meta.js"]) {
+for (const f of ["data-courses.js", "data-meta.js", "data-china-textbooks.js"]) {
   vm.runInContext(fs.readFileSync(path.join(dir, f), "utf8"), sandbox, { filename: f });
 }
 
@@ -13,9 +13,10 @@ const courses = sandbox.window.SCAI_COURSES;
 const books = sandbox.window.SCAI_BOOKS;
 const plan = sandbox.window.SCAI_PLAN;
 const compare = sandbox.window.SCAI_COMPARE;
+const china = sandbox.window.SCAI_CHINA;
 const errors = [];
 
-if (courses.length !== 9) errors.push("course count != 9: " + courses.length);
+if (courses.length < 10) errors.push("course count < 10: " + courses.length);
 const ids = new Set();
 for (const c of courses) {
   if (ids.has(c.id)) errors.push("duplicate course id " + c.id);
@@ -42,7 +43,7 @@ for (const c of courses) {
   });
 }
 
-if (books.length !== 8) errors.push("book count != 8: " + books.length);
+if (books.length < 17) errors.push("book count < 17: " + books.length);
 books.forEach(b => {
   if (!ids.has(b.course)) errors.push("book course missing: " + b.course);
 });
@@ -50,6 +51,19 @@ books.forEach(b => {
 if (plan.weeks.length !== 16) errors.push("weeks != 16: " + plan.weeks.length);
 if (!plan.daily || !plan.daily.length) errors.push("daily template missing");
 if (!compare.similarities.length || !compare.differences.length || !compare.terms.length) errors.push("compare data incomplete");
+if (!china || !china.books || china.books.length < 9) errors.push("china textbook data incomplete");
+for (const book of (china && china.books) || []) {
+  if (!book.id || !book.title || !book.course || !book.summary || !book.strategy) errors.push("china book incomplete: " + (book.id || book.title));
+  if (!book.chapters || !book.chapters.length) errors.push("china book has no chapters: " + book.id);
+  for (const ch of book.chapters || []) {
+    if (!ch.title || !ch.summary || !(ch.points || []).length || !(ch.pitfalls || []).length || !(ch.exam || []).length) {
+      errors.push("china chapter incomplete: " + book.id + " / " + (ch.title || "?"));
+    }
+  }
+}
+if (!china || !china.syllabus || !china.syllabus.modeling || !china.syllabus.linearAlgebra || !china.syllabus.chemistry || !china.syllabus.physics) {
+  errors.push("formal syllabus schedules incomplete");
+}
 
 if (errors.length) {
   console.log("DATA CHECK FAILED");

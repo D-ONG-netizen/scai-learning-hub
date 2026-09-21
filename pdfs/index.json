@@ -392,6 +392,69 @@
     "file": "pdfs/python-ai/py-6.pdf"
   },
   {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-1",
+    "title": "C++ 程序结构、类型与表达式",
+    "file": "pdfs/programming/prog-1.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-2",
+    "title": "指针、数组、引用与函数",
+    "file": "pdfs/programming/prog-2.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-3",
+    "title": "类、资源管理与 RAII",
+    "file": "pdfs/programming/prog-3.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-4",
+    "title": "继承、多态与运算符重载",
+    "file": "pdfs/programming/prog-4.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-5",
+    "title": "模板、泛型与编译期计算",
+    "file": "pdfs/programming/prog-5.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-6",
+    "title": "STL、算法、异常与并发",
+    "file": "pdfs/programming/prog-6.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-7",
+    "title": "汇编基础、寻址与指令系统",
+    "file": "pdfs/programming/prog-7.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-8",
+    "title": "汇编程序控制、子程序与中断",
+    "file": "pdfs/programming/prog-8.pdf"
+  },
+  {
+    "course": "programming",
+    "courseName": "计算机编程：C++ 与汇编",
+    "lesson": "prog-9",
+    "title": "计算机系统、网络、多媒体与安全",
+    "file": "pdfs/programming/prog-9.pdf"
+  },
+  {
     "course": "prep",
     "courseName": "大一下先修",
     "lesson": "prep-1",

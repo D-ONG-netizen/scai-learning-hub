@@ -319,6 +319,50 @@ tr:last-child td{border-bottom:none}
 .phase-line.zh p{color:var(--accent)}
 .phase-line.en p{color:var(--blue)}
 .dual-resource-list{display:grid;gap:8px}
+.deep-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 24px}
+.deep-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.deep-stat b{display:block;font:700 1.65rem/1.1 var(--font-display)}
+.deep-stat span{color:var(--muted);font-size:.8rem}
+.deep-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.deep-toolbar button,.deep-toolbar a{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none}
+.deep-toolbar button:hover,.deep-toolbar button.active,.deep-toolbar a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.deep-book{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin:0 0 12px;overflow:hidden}
+.deep-book>summary{cursor:pointer;list-style:none;padding:17px 18px;display:grid;grid-template-columns:7px minmax(0,1fr) auto;gap:14px;align-items:center}
+.deep-book>summary::-webkit-details-marker{display:none}
+.deep-book>summary .deep-bar{width:7px;height:52px;border-radius:4px;background:var(--deep,var(--teal))}
+.deep-book>summary h3{margin:0;font:600 1.08rem/1.35 var(--font-display)}
+.deep-book>summary p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+.deep-book>summary .meta{text-align:right;color:var(--muted);font:600 .73rem/1.5 var(--font-mono)}
+.deep-body{padding:0 18px 18px;border-top:1px solid var(--line)}
+.deep-summary{padding:16px 0 10px}
+.deep-summary p{margin:4px 0}
+.deep-mindmap{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 15px}
+.deep-mindmap span{padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface2);font-size:.78rem}
+.chapter-list{display:grid;gap:8px}
+.chapter-card{border:1px solid var(--line);border-radius:6px;background:var(--surface2);overflow:hidden}
+.chapter-card>summary{cursor:pointer;list-style:none;padding:11px 13px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.chapter-card>summary::-webkit-details-marker{display:none}
+.chapter-card>summary b{font-size:.9rem}
+.chapter-card>summary small{color:var(--muted);font-size:.76rem;text-align:right}
+.chapter-body{padding:0 13px 13px;border-top:1px dashed var(--line)}
+.chapter-body>p{margin:10px 0;color:var(--muted);font-size:.88rem}
+.chapter-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px}
+.chapter-grid h5{margin:0 0 5px;font:700 .72rem/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+.chapter-grid ul{margin:0;padding-left:17px}
+.chapter-grid li{margin:3px 0;font-size:.82rem}
+.syllabus-card{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:var(--radius);background:var(--surface);padding:16px 18px;margin-bottom:12px}
+.syllabus-card h3{margin:0 0 6px;font-family:var(--font-display)}
+.syllabus-meta{color:var(--muted);font-size:.82rem;margin:2px 0}
+.syllabus-weeks{display:grid;gap:7px;margin-top:12px}
+.syllabus-week{display:grid;grid-template-columns:180px 1fr;gap:12px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface2);font-size:.84rem}
+.syllabus-week b{color:var(--blue)}
+.syllabus-week.current{border-color:var(--accent);background:var(--accent-soft)}
+.syllabus-week.current b{color:var(--accent)}
+.course-deep-shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.course-deep-shelf a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);text-decoration:none;color:inherit}
+.course-deep-shelf a:hover{border-color:var(--accent)}
+.course-deep-shelf b{display:block;font-size:.92rem}
+.course-deep-shelf small{display:block;color:var(--muted);margin-top:3px}
 .tt-grid{display:grid;grid-template-columns:90px repeat(5,1fr);gap:6px;overflow-x:auto;min-width:660px}
 .tt-head{font-weight:700;font-size:.85rem}
 .tt-cell{background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:8px;font-size:.8rem;min-height:46px}
@@ -334,6 +378,31 @@ tr:last-child td{border-bottom:none}
 .file-list .fname{font-weight:600}
 .file-list .fmeta{color:var(--muted);font-family:var(--font-mono);font-size:.75rem}
 .file-list button{border:none;background:none;color:var(--danger);cursor:pointer;font-size:.82rem}
+.insight-panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:16px;margin-top:14px}
+.insight-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.insight-head h3{margin:0;font-family:var(--font-display);font-size:1.08rem}
+.insight-head p{margin:3px 0 0;color:var(--muted);font-size:.8rem}
+.insight-actions{display:flex;flex-wrap:wrap;gap:7px}
+.insight-actions .btn{padding:7px 10px;font-size:.78rem}
+.insight-summary{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:0 6px 6px 0;padding:10px 12px;font-size:.88rem;margin-bottom:12px}
+.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.insight-col{border:1px solid var(--line);border-radius:6px;background:var(--surface2);padding:11px 12px}
+.insight-col h4{margin:0 0 6px;font:700 .73rem/1 var(--font-mono);letter-spacing:.06em}
+.insight-col.key h4{color:var(--teal)}
+.insight-col.warn h4{color:var(--danger)}
+.insight-col.exam h4{color:var(--gold)}
+.insight-col ul{margin:0;padding-left:17px}
+.insight-col li{font-size:.82rem;margin:4px 0}
+.insight-mindmap{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface2);padding:14px;overflow-x:auto}
+.insight-mindmap-root{display:inline-flex;align-items:center;justify-content:center;min-width:180px;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:700;margin-bottom:12px}
+.insight-mindmap-branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px}
+.insight-branch{position:relative;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 11px}
+.insight-branch::before{content:"";position:absolute;left:-7px;top:16px;width:7px;height:2px;background:var(--accent)}
+.insight-branch b{display:block;color:var(--blue);font-size:.84rem;margin-bottom:5px}
+.insight-branch span{display:block;font-size:.78rem;color:var(--muted);margin:3px 0}
+.insight-loading{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:.86rem}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1s infinite ease-in-out}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 .chat-panel{
   position:fixed;right:20px;bottom:20px;width:min(410px,calc(100vw - 32px));
   max-height:min(74vh,740px);background:var(--surface);border:1px solid var(--line);border-radius:14px;
@@ -465,6 +534,12 @@ tr:last-child td{border-bottom:none}
   .book-pair,.code-pair{grid-template-columns:1fr}
   .pair-arrow{display:none}
   .dual-range,.phase-line{grid-template-columns:1fr}
+  .deep-stats{grid-template-columns:1fr 1fr}
+  .deep-book>summary{grid-template-columns:7px minmax(0,1fr)}
+  .deep-book>summary .meta{display:none}
+  .chapter-grid,.syllabus-week{grid-template-columns:1fr}
+  .insight-grid{grid-template-columns:1fr}
+  .insight-head{flex-direction:column}
   .lesson-grid{grid-template-columns:1fr}
   .lesson summary{flex-direction:column;align-items:flex-start;gap:4px}
   .lesson summary .lmeta{white-space:normal}
@@ -478,6 +553,7 @@ tr:last-child td{border-bottom:none}
   .topbar,.chat-panel,.modal,.search-modal,.toast,.chat-actions{display:none!important}
   main{width:100%!important;max-width:none!important}
   .lesson{break-inside:avoid}
+  .chapter-card,.deep-book,.syllabus-card{break-inside:avoid}
   .lesson-notes textarea{border:none;background:none}
   a{color:#000}
 }
@@ -517,6 +593,10 @@ tr:last-child td{border-bottom:none}
   </div>
   <div class="chat-msgs" id="chatMessages"></div>
   <div class="chat-actions">
+    <button class="btn" id="chatAnalyze">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7L20 10l-6.1 1.3L12 17l-1.9-5.7L4 10l6.1-1.3z"/><path d="M19 15l.7 2.1L22 18l-2.3.9L19 21l-.7-2.1L16 18l2.3-.9z"/></svg>
+      分析课件
+    </button>
     <button class="btn" id="chatPlan">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7L20 10l-6.1 1.3L12 17l-1.9-5.7L4 10l6.1-1.3z"/></svg>
       根据课件调整计划
@@ -578,6 +658,7 @@ tr:last-child td{border-bottom:none}
 <script src="lesson-extra.js"></script>
 <script src="data-meta.js"></script>
 <script src="data-dual.js"></script>
+<script src="data-china-textbooks.js"></script>
 <script>
 (function(){
 "use strict";
@@ -587,6 +668,7 @@ const books = window.SCAI_BOOKS || [];
 const plan = window.SCAI_PLAN || {weeks:[],daily:[]};
 const compare = window.SCAI_COMPARE || {similarities:[],differences:[],terms:[]};
 const dual = window.SCAI_DUAL || {groups:[],principle:[],yearPlan:null};
+const china = window.SCAI_CHINA || {books:[],syllabus:{},principle:[]};
 const DAYS = ["周一","周二","周三","周四","周五","周六","周日"];
 
 const $ = (s,r)=> (r||document).querySelector(s);
@@ -603,6 +685,8 @@ let state = {
   progress: LS.get("scai_progress",{}),
   notes: LS.get("scai_notes",{}),
   courseware: LS.get("scai_uploaded_courseware",{}),
+  insights: LS.get("scai_courseware_insights",{}),
+  insightLoading: {},
   llm: LS.get("scai_llm_config", null),
   dual: LS.get("scai_dual_group","calculus"),
   chat: [],
@@ -621,6 +705,7 @@ function save(){
   LS.set("scai_progress",state.progress);
   LS.set("scai_notes",state.notes);
   LS.set("scai_uploaded_courseware",state.courseware);
+  LS.set("scai_courseware_insights",state.insights);
   LS.set("scai_llm_config",state.llm);
   LS.set("scai_dual_group",state.dual);
   LS.set("scai_plan_week",state.week);
@@ -637,16 +722,18 @@ function getRoute(){
   const parts=h.split("/").filter(Boolean);
   if(parts[0]==="course" && parts[1]) return {name:"course",id:parts[1],lesson:parts[2]||null};
   if(parts[0]==="dual") return {name:"dual",group:parts[1]||state.dual||null};
+  if(parts[0]==="deep") return {name:"deep",book:parts[1]||null};
   const names=["home","plan","books","compare","pdfs"];
   if(names.includes(parts[0])) return {name:parts[0]};
   return {name:"home"};
 }
-function currentWeek(){
-  const start=new Date(2026,8,13);
+function calendarWeek(){
+  const start=new Date(2026,7,31);
   const diff=Math.floor((new Date()-start)/86400000);
   if(diff<0) return 1;
-  return Math.min(16,Math.max(1,Math.floor(diff/7)+1));
+  return Math.max(1,Math.floor(diff/7)+1);
 }
+function currentWeek(){ return Math.min(16,calendarWeek()); }
 function activeWeek(){ return state.week||currentWeek(); }
 function videoCount(){ return data.reduce((n,c)=>n+c.lessons.reduce((m,l)=>m+(l.videos?l.videos.length:0),0),0); }
 function pdfCount(){ return data.reduce((n,c)=>n+c.lessons.length,0); }
@@ -713,6 +800,31 @@ function buildSearchIndex(){
       });
     });
   }
+  (china.books||[]).forEach(book=>{
+    out.push({
+      type:"国内教材",kind:"deep",hash:"#/deep/"+book.id,title:book.title,
+      sub:book.author+" · "+book.subject+" · "+book.chapters.length+" 章",
+      text:[book.title,book.author,book.subject,book.summary,book.strategy,(book.mindmap||[]).join(" ")].join(" ")
+    });
+    (book.chapters||[]).forEach(ch=>out.push({
+      type:"章节",kind:"deep",hash:"#/deep/"+book.id,title:book.title+" · "+ch.title,
+      sub:ch.summary,
+      text:[book.title,ch.title,ch.summary,...(ch.points||[]),...(ch.pitfalls||[]),...(ch.exam||[])].join(" ")
+    }));
+  });
+  const syllabusGroups=[
+    ["数学建模大纲",china.syllabus&&china.syllabus.modeling,"calculus"],
+    ["线性代数大纲",china.syllabus&&china.syllabus.linearAlgebra,"linear-algebra"],
+    ["物理课程周次",china.syllabus&&china.syllabus.physics,"physics"],
+    ["化学课程周次",china.syllabus&&china.syllabus.chemistry,"chemistry"]
+  ];
+  syllabusGroups.forEach(([label,s,course])=>{
+    if(!s) return;
+    (s.weeks||[]).forEach(w=>out.push({
+      type:"官方进度",kind:"deep",hash:"#/deep",title:label+" · "+w.title,
+      sub:w.summary,text:[label,w.title,w.summary,...(w.points||[]),...(w.pitfalls||[]),...(w.exam||[]),course].join(" ")
+    }));
+  });
   (plan.weeks||[]).forEach(w=>out.push({
     type:"计划",kind:"plan",hash:"#/plan",title:"第 "+w.week+" 周 · "+w.theme,
     sub:(w.focus||[]).join(" / "),text:[w.theme,...(w.focus||[]),...(w.milestones||[]),...(w.verify||[])].join(" ")
@@ -787,7 +899,7 @@ function bindSearch(){
 }
 function renderNav(){
   const r=getRoute();
-  const items=[["home","总览"],["plan","周计划"],["dual","双语对照"],["books","教材地图"],["pdfs","PDF 资料库"]];
+  const items=[["home","总览"],["plan","周计划"],["dual","双语对照"],["deep","国内教材精读"],["books","教材地图"],["pdfs","PDF 资料库"]];
   $("#nav").innerHTML=items.map(([id,label])=>`<a href="#/${id}" class="${r.name===id?"active":""}">${label}</a>`).join("");
 }
 function applyTheme(){
@@ -810,6 +922,7 @@ function render(){
     html=c?renderCourseHTML(c):`<section class="hero"><h1>课程不存在</h1><p><a href="#/home">返回总览</a></p></section>`;
   } else if(r.name==="plan") html=renderPlanHTML();
   else if(r.name==="dual") html=renderDualHTML();
+  else if(r.name==="deep") html=renderChinaBooksHTML(r.book);
   else if(r.name==="books") html=renderBooksHTML();
   else if(r.name==="compare") html=renderCompareHTML();
   else if(r.name==="pdfs") html=renderPdfLibraryHTML();
@@ -847,7 +960,7 @@ function renderHomeHTML(){
   return `
   <section class="hero">
     <div class="kicker">${esc(meta.semester)} · ${esc(meta.versionLabel||"")}</div>
-    <h1>大一全教材学习中心 · 第二版</h1>
+    <h1>大一全教材学习中心 · 第四版</h1>
     <p>${esc(meta.subtitle)}。以 SCAI 官方英文教材 + 机械设计制造及其自动化国内教材为双线，用“相同只学一遍、差异单独补”的对照方法、周计划与 AI 伴学把大一课程一次学透。</p>
   </section>
   <div class="stat-row">
@@ -879,10 +992,11 @@ function renderPlanHTML(){
   const tabs=plan.weeks.map(w=>`<button data-week="${w.week}" class="${w.week===cw?"active":""}">第 ${w.week} 周</button>`).join("");
   return `
   <section class="hero">
-    <div class="kicker">大一学年 · 双线周计划</div>
-    <h1>国内课程 + 英文课程并行推进</h1>
-    <p>上方为大一学年双线总节奏，下方周计划按当前学期展开：相同概念只学一遍，中文教材补计算与考点，英文教材补直觉与术语。导入真实课表后，周视图会切换为按节次渲染。</p>
+    <div class="kicker">大一上 · 官方大纲优先</div>
+    <h1>你的课程进度 + 跨课程补充计划</h1>
+    <p>先按 Mathematical Modeling 1、MATH0280、CHEM0960 和大学物理的官方周次执行；下方再按当前学期展开补充任务，用中英文教材差异与每日时间槽做巩固。导入真实课表后，周视图会切换为按节次渲染。</p>
   </section>
+  ${renderOfficialPlanHTML()}
   ${renderDualYearPlanHTML()}
   <div class="week-tabs" id="weekTabs">${tabs}</div>
   <div class="panel" id="weekPanel">
@@ -950,7 +1064,7 @@ function renderBooksHTML(){
     <thead><tr><th>教材</th><th>页数</th><th>章节</th><th>课程</th><th>角色</th><th>本学期</th><th>先修</th></tr></thead>
     <tbody>${rows}</tbody>
   </table></div></div>
-  <div class="section"><h2>国内课标 ↔ 国外原版</h2><span class="note">六本国内课程教材的双线配对</span></div>
+  <div class="section"><h2>国内课标 ↔ 国外原版</h2><span class="note">国内课程教材、分册与国外原版双线配对；逐章精读请进入“国内教材精读”</span></div>
   <div class="panel"><div class="table-wrap"><table class="compare-table">
     <thead><tr><th>国内教材</th><th>国外对照</th><th>入口</th></tr></thead>
     <tbody>${pairRows}</tbody>
@@ -1097,6 +1211,131 @@ function renderDualYearPlanHTML(){
     </div>`).join("")}`;
 }
 
+function chinaChapterCount(){
+  return (china.books||[]).reduce((total,book)=>total+(book.chapters||[]).length,0);
+}
+function chinaSyllabusForCourse(courseId){
+  const out=[];
+  if(courseId==="calculus"&&china.syllabus&&china.syllabus.modeling) out.push(china.syllabus.modeling);
+  if(courseId==="linear-algebra"&&china.syllabus&&china.syllabus.linearAlgebra) out.push(china.syllabus.linearAlgebra);
+  if(courseId==="physics"&&china.syllabus&&china.syllabus.physics) out.push({title:"大学物理官方周次进度",instructor:"按物理课程大纲",textbook:"Halliday/Resnick/Walker 章节进度",weeks:china.syllabus.physics});
+  if(courseId==="chemistry"&&china.syllabus&&china.syllabus.chemistry) out.push(china.syllabus.chemistry);
+  return out;
+}
+function renderChinaSyllabusCard(s){
+  const meta=[s.lecture,s.classroom,s.instructor].filter(Boolean).join(" · ");
+  return `
+    <article class="syllabus-card">
+      <h3>${esc(s.title)}</h3>
+      ${meta?`<p class="syllabus-meta">${esc(meta)}</p>`:""}
+      ${s.textbook?`<p class="syllabus-meta">教材：${esc(s.textbook)}</p>`:""}
+      ${s.mainCoverage?`<p class="syllabus-meta">范围：${esc(s.mainCoverage)}</p>`:""}
+      ${s.assessment?`<p class="syllabus-meta">考核：${esc(Array.isArray(s.assessment)?s.assessment.join(" · "):s.assessment)}</p>`:""}
+      ${s.slideNote?`<p class="syllabus-meta"><b>课件校正：</b>${esc(s.slideNote)}</p>`:""}
+      ${(s.objectives||[]).length?`<div class="focus-list">${s.objectives.map(x=>`<span class="focus-chip">${esc(x)}</span>`).join("")}</div>`:""}
+      <div class="syllabus-weeks">${(s.weeks||[]).map(w=>`
+        ${(()=>{const wp=Array.isArray(w.points)?w.points:(w.points?[w.points]:[]);const wm=String(w.title||"").match(/Week\s*(\d+)/i);const current=wm&&Number(wm[1])===calendarWeek();return `
+        <div class="syllabus-week ${current?"current":""}">
+          <b>${esc(w.title)}</b>
+          <span>${esc(w.summary)}${wp.length?`<br><small>${esc(wp.join(" · "))}</small>`:""}</span>
+        </div>`;})()}
+      `).join("")}</div>
+    </article>`;
+}
+function renderChinaChapter(ch){
+  return `
+    <details class="chapter-card">
+      <summary><b>${esc(ch.title)}</b><small>${esc(ch.summary)}</small></summary>
+      <div class="chapter-body">
+        <div class="chapter-grid">
+          <div><h5>本章概念</h5><ul>${(ch.points||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div><h5>易错点</h5><ul>${(ch.pitfalls||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div><h5>考法 / 练习</h5><ul>${(ch.exam||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+        </div>
+      </div>
+    </details>`;
+}
+function renderChinaBook(book,open){
+  const color=book.course==="physics"?"#5A6B4A":book.course==="programming"?"#2F6B8F":book.course==="linear-algebra"?"#2E6E5E":"#C4522E";
+  return `
+    <details class="deep-book" id="deep-${esc(book.id)}" ${open?"open":""} style="--deep:${color}">
+      <summary>
+        <span class="deep-bar"></span>
+        <span><h3>${esc(book.title)}</h3><p>${esc(book.author)} · ${esc(book.subject)} · ${esc(book.scope)}</p></span>
+        <span class="meta">${book.pages} 页<br>${book.chapters.length} 章 · ${esc(book.role)}</span>
+      </summary>
+      <div class="deep-body">
+        <div class="deep-summary">
+          <p>${esc(book.summary)}</p>
+          <p><b>合并学习策略：</b>${esc(book.strategy)}</p>
+        </div>
+        <div class="deep-mindmap">${(book.mindmap||[]).map(x=>`<span>${esc(x)}</span>`).join("")}</div>
+        <div class="chapter-list">${book.chapters.map(renderChinaChapter).join("")}</div>
+      </div>
+    </details>`;
+}
+function officialSyllabusSources(){
+  return [
+    china.syllabus&&china.syllabus.modeling,
+    china.syllabus&&china.syllabus.linearAlgebra,
+    china.syllabus&&china.syllabus.chemistry,
+    china.syllabus&&china.syllabus.physics&&{
+      title:"大学物理 2026 Fall 官方周次进度",
+      instructor:"Physics Section",
+      textbook:"Halliday / Resnick / Walker：Measurement through Waves and Sound",
+      assessment:"Midterm 1 第9周；Midterm 2 第14周；第18周 Overall Review",
+      weeks:china.syllabus.physics
+    }
+  ].filter(Boolean);
+}
+function renderChinaBooksHTML(bookId){
+  const books=china.books||[];
+  const syllabus=officialSyllabusSources();
+  const quickLinks=books.map(b=>`<a href="#/deep/${esc(b.id)}">${esc(b.subject)} · ${esc(b.title)}</a>`).join("");
+  return `
+  <section class="hero">
+    <div class="kicker">国内教材逐章精读</div>
+    <h1>${esc(china.title)}</h1>
+    <p>${esc(china.subtitle)}。每本书按真实目录整理为章节卡片，并把概念、易错点与考法集中到同一处；官方大纲另列，用于校准每周进度。</p>
+  </section>
+  <div class="deep-stats">
+    <div class="deep-stat"><b>${books.length}</b><span>本国内教材 / 分册</span></div>
+    <div class="deep-stat"><b>${chinaChapterCount()}</b><span>个章节摘要</span></div>
+    <div class="deep-stat"><b>${syllabus.length}</b><span>份官方课程进度</span></div>
+    <div class="deep-stat"><b>${books.reduce((n,b)=>n+(b.mindmap||[]).length,0)}</b><span>个思维导图节点</span></div>
+  </div>
+  <div class="panel">
+    <h3>使用原则</h3>
+    <ul class="check-list">${(china.principle||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  </div>
+  <div class="section"><h2>直达教材</h2><span class="note">按课程与分册定位</span></div>
+  <div class="deep-toolbar">${quickLinks}</div>
+  ${syllabus.length?`<div class="section"><h2>官方大纲与每周进度</h2><span class="note">数学建模、线性代数、大学物理</span></div>${syllabus.map(renderChinaSyllabusCard).join("")}`:""}
+  <div class="section"><h2>教材章节精读</h2><span class="note">点击书名展开全书，再展开章节查看概念与易错点</span></div>
+  ${books.map(b=>renderChinaBook(b,b.id===bookId)).join("")}`;
+}
+function renderOfficialPlanHTML(){
+  const schedules=officialSyllabusSources();
+  if(!schedules.length) return "";
+  return `
+    <div class="section"><h2>我的官方学习大纲</h2><span class="note">数学建模 · 线性代数 · 化学 · 大学物理｜当前日历周：第 ${calendarWeek()} 周</span></div>
+    <div class="panel plain-note">
+      <p>下面四份进度是主计划。课程页、PDF 讲义和周计划都围绕它们对齐；后续“跨课程补充计划”只用于安排练习、复习和先修，不覆盖正式教学顺序。</p>
+    </div>
+    ${schedules.map(renderChinaSyllabusCard).join("")}`;
+}
+function renderCourseDeepShelf(courseId){
+  const matched=(china.books||[]).filter(b=>b.course===courseId);
+  const syllabi=chinaSyllabusForCourse(courseId);
+  if(!matched.length&&!syllabi.length) return "";
+  return `
+    <div class="section"><h2>本课国内教材精读</h2><span class="note">中文教材章节摘要与官方进度</span></div>
+    <div class="course-deep-shelf">
+      ${matched.map(b=>`<a href="#/deep/${esc(b.id)}"><b>${esc(b.title)}</b><small>${b.chapters.length} 章 · ${esc(b.role)} · 点击查看逐章摘要</small></a>`).join("")}
+      ${syllabi.map(s=>`<a href="#/deep"><b>${esc(s.title||"官方课程进度")}</b><small>周次、考核与进阶主题</small></a>`).join("")}
+    </div>`;
+}
+
 function renderPdfLibraryHTML(){
   const rows=data.map(c=>`
     <section class="pdf-lib-course" id="pdf-${c.id}">
@@ -1186,6 +1425,7 @@ function renderCourseHTML(c){
     <p>${esc(c.summary)}</p>
     <div class="focus-list">${c.goals.map(g=>`<span class="focus-chip">${esc(g)}</span>`).join("")}</div>
   </section>
+  ${renderCourseDeepShelf(c.id)}
   <div class="section"><h2>知识地图</h2><span class="note">${esc(c.chapters)}</span></div>
   <div class="section"><h2>课程配套视频库</h2><span class="note">先看直觉视频，再回教材做计算，理解效率更高</span></div>
   <div class="video-list">${(c.extraVideos||[]).map(v=>`<a class="video-link" href="${esc(v.url)}" target="_blank" rel="noopener"><span>${esc(v.title)}<br><small class="note">${esc(v.note||"")}</small></span><span class="src">${esc(v.source)}</span></a>`).join("")}</div>
@@ -1198,10 +1438,11 @@ function renderCourseHTML(c){
   <div class="panel">
     <div class="drop">
       <strong>上传本课程课件</strong>
-      <small>解析后保存在本机浏览器；AI 助手会参考课件内容回答问题并调整计划。</small>
+      <small>上传 PPTX / PDF / DOCX 后自动生成关键知识点、易错点、复习题和思维导图；旧版 .ppt 请先另存为 .pptx。解析内容只保存在本机浏览器。</small>
       <div style="margin-top:12px"><label class="btn" for="file-${c.id}">选择文件</label><input type="file" id="file-${c.id}" accept=".txt,.md,.pdf,.docx,.pptx" multiple style="display:none"></div>
     </div>
     <ul class="file-list" id="cw-list-${c.id}"></ul>
+    <div id="insight-${c.id}">${renderCoursewareInsights(c.id)}</div>
   </div>`;
 }
 
@@ -1229,6 +1470,7 @@ function bindCourse(c){
   const input=$(`#file-${c.id}`);
   if(input) input.addEventListener("change",()=>handleFiles(input.files,c.id));
   renderCoursewareList(c.id);
+  bindInsightActions(c.id);
 }
 
 function renderCoursewareList(courseId){
@@ -1248,6 +1490,58 @@ function renderCoursewareList(courseId){
     renderCoursewareList(cid);
     toast("已删除课件");
   }));
+}
+
+function renderCoursewareInsights(courseId){
+  const insight=state.insights[courseId];
+  if(state.insightLoading[courseId]){
+    return `<div class="insight-panel"><div class="insight-loading"><span class="pulse-dot"></span><span>正在读取课件并生成知识结构，请稍候...</span></div></div>`;
+  }
+  if(!insight){
+    return `<div class="insight-panel"><div class="empty">上传 PPTX、PDF 或 DOCX 后，这里会自动生成本节课知识结构和思维导图。</div></div>`;
+  }
+  const mode=insight.mode==="ai"?"AI 生成":"本地生成";
+  const branches=(insight.mindmap&&insight.mindmap.branches)||[];
+  return `
+    <div class="insight-panel">
+      <div class="insight-head">
+        <div>
+          <h3>${esc(insight.mindmap&&insight.mindmap.root||courseName(courseId))}</h3>
+          <p>${esc(insight.lesson||"本课")} · ${esc(insight.fileName||"课件")} · ${mode} · ${new Date(insight.generatedAt||Date.now()).toLocaleString()}</p>
+        </div>
+        <div class="insight-actions">
+          <button class="btn" type="button" data-insight-regenerate="${esc(courseId)}">重新生成</button>
+        </div>
+      </div>
+      ${insight.summary?`<div class="insight-summary">${esc(insight.summary)}</div>`:""}
+      <div class="insight-grid">
+        <div class="insight-col key"><h4>关键知识点</h4><ul>${(insight.keyPoints||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+        <div class="insight-col warn"><h4>易错点</h4><ul>${(insight.pitfalls||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+        <div class="insight-col exam"><h4>复习与自测</h4><ul>${(insight.reviewQuestions||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+      </div>
+      <div class="insight-mindmap">
+        <div class="insight-mindmap-root">${esc(insight.mindmap&&insight.mindmap.root||courseName(courseId))}</div>
+        <div class="insight-mindmap-branches">${branches.map(b=>`
+          <div class="insight-branch"><b>${esc(b.title)}</b>${(b.items||[]).map(x=>`<span>${esc(x)}</span>`).join("")}</div>
+        `).join("")}</div>
+      </div>
+    </div>`;
+}
+function rerenderCoursewareInsights(courseId){
+  const host=document.getElementById("insight-"+courseId);
+  if(host){
+    host.innerHTML=renderCoursewareInsights(courseId);
+    bindInsightActions(courseId);
+  }
+}
+function bindInsightActions(courseId){
+  $$("[data-insight-regenerate]",document.getElementById("insight-"+courseId)||document).forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const cw=state.courseware[courseId]||[];
+      if(!cw.length){ toast("请先上传课件"); return; }
+      generateCoursewareInsights(courseId,cw[0]);
+    });
+  });
 }
 
 function ext(name){ const i=name.lastIndexOf("."); return i>=0?name.slice(i+1).toLowerCase():""; }
@@ -1276,7 +1570,7 @@ async function parsePdf(buf){
   }
   const pdf=await window.pdfjsLib.getDocument({data:buf}).promise;
   const pages=[];
-  const n=Math.min(pdf.numPages,20);
+  const n=Math.min(pdf.numPages,80);
   for(let i=1;i<=n;i++){
     const pg=await pdf.getPage(i);
     const tc=await pg.getTextContent();
@@ -1292,32 +1586,40 @@ async function parseDocx(buf){
 async function parsePptx(buf){
   if(!window.JSZip) await loadScript("https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js");
   const zip=await window.JSZip.loadAsync(buf);
-  const names=Object.keys(zip.files).filter(n=>/^ppt\/slides\/slide\d+\.xml$/.test(n)).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
-  let out="";
-  for(const n of names){
-    const xml=await zip.file(n).async("string");
+  const readXml=n=>zip.file(n).async("string").then(xml=>{
     const doc=new DOMParser().parseFromString(xml,"application/xml");
-    out+=(doc.documentElement.textContent||"").replace(/\s+/g," ")+"\n";
-  }
-  return out;
+    return (doc.documentElement.textContent||"").replace(/\s+/g," ");
+  });
+  const slides=Object.keys(zip.files).filter(n=>/^ppt\/slides\/slide\d+\.xml$/.test(n)).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
+  const notes=Object.keys(zip.files).filter(n=>/^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(n)).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
+  const slideText=[];
+  for(const n of slides) slideText.push("【Slide "+(n.match(/\d+/)[0])+"】"+await readXml(n));
+  const noteText=[];
+  if(notes.length) noteText.push("【Speaker Notes】");
+  for(const n of notes) noteText.push(await readXml(n));
+  return slideText.concat(noteText).join("\n");
 }
 async function handleFiles(files,courseId){
   const arr=Array.from(files||[]);
+  let lastStored=null;
   for(const file of arr){
     try{
       toast("正在解析 " + file.name + " ...");
       const text=await parseFile(file);
+      if(!text.trim()) throw new Error("没有提取到可分析文字；如果是图片型 PPT，请先补充讲者备注或转成带文本的 PDF");
       const list=state.courseware[courseId]||[];
-      list.unshift({name:file.name,size:file.size,ts:Date.now(),text:text.slice(0,30000)});
+      lastStored={name:file.name,size:file.size,ts:Date.now(),text:text.slice(0,60000)};
+      list.unshift(lastStored);
       state.courseware[courseId]=list.slice(0,6);
       save();
       renderCoursewareList(courseId);
-      toast("已解析 " + file.name);
+      toast("已解析 " + file.name + "，正在生成知识结构");
     }catch(err){
       console.error(err);
       toast("解析失败：" + file.name + " · " + err.message);
     }
   }
+  if(lastStored) await generateCoursewareInsights(courseId,lastStored);
   const input=document.getElementById("file-"+courseId);
   if(input) input.value="";
 }
@@ -1327,6 +1629,156 @@ function getLLMConfig(){
   if(state.llm && state.llm.apiKey) return Object.assign({},base,state.llm);
   if(window.LLM_CONFIG && window.LLM_CONFIG.apiKey) return Object.assign({},base,window.LLM_CONFIG);
   return base;
+}
+function parseAIJson(text){
+  const raw=String(text||"").replace(/```(?:json)?/gi,"").replace(/```/g,"").trim();
+  const start=raw.indexOf("{"),end=raw.lastIndexOf("}");
+  if(start<0||end<=start) throw new Error("AI 未返回 JSON 对象");
+  return JSON.parse(raw.slice(start,end+1));
+}
+function textLines(text){
+  return [...new Set(String(text||"")
+    .split(/\n|(?<=[。！？!?;；])/)
+    .map(x=>x.replace(/\s+/g," ").trim())
+    .filter(x=>x.length>=6&&x.length<=120)
+    .filter(x=>!/^(目录|谢谢|谢谢观看|本章结束|幻灯片|slide\s*\d+)$/i.test(x)))]
+    .slice(0,18);
+}
+function matchCourseLesson(course,text){
+  if(!course||!course.lessons||!course.lessons.length) return null;
+  const hay=String(text||"").toLowerCase();
+  let best=null,bestScore=0;
+  for(const lesson of course.lessons){
+    const terms=[lesson.title,lesson.en,...(lesson.points||[])]
+      .flatMap(x=>String(x||"").split(/[\s·、,，:：/()（）与和]+/))
+      .map(x=>x.trim().toLowerCase())
+      .filter(x=>x.length>=2);
+    let score=0;
+    for(const term of terms) if(hay.includes(term)) score+=term.length>4?2:1;
+    if(score>bestScore){ best=lesson; bestScore=score; }
+  }
+  return best||course.lessons[0];
+}
+function offlineCoursewareInsights(course,record,reason){
+  const lines=textLines(record.text);
+  const lesson=matchCourseLesson(course,record.text)||{title:"本课",points:[],pitfalls:[],exams:[]};
+  const keyPoints=(lines.length?lines:lesson.points).slice(0,10);
+  const pitfalls=(course&&course.lessons||[]).flatMap(l=>l.pitfalls||[]).slice(0,8);
+  const exams=(course&&course.lessons||[]).flatMap(l=>l.exams||[]).slice(0,8);
+  return {
+    fileName:record.name,
+    generatedAt:Date.now(),
+    mode:"offline",
+    note:reason||"未配置 AI Key，使用本地文本抽取结果。",
+    lesson:lesson.title,
+    summary:`已从《${record.name}》提取 ${record.text.length} 个字符，并匹配到《${lesson.title}》。已整理章节标题、概念和复习线索。${reason?" "+reason:""}`,
+    keyPoints,
+    pitfalls,
+    reviewQuestions:[
+      ...exams.slice(0,3).map(x=>"能否独立完成："+x),
+      "不看课件，用 3 分钟复述本课主线。",
+      "列出本课最容易混淆的两个概念并说明区别。"
+    ],
+    mindmap:{
+      root:(course&&course.name)||record.name,
+      branches:[
+        {title:"核心概念",items:keyPoints.slice(0,5)},
+        {title:"易错点",items:pitfalls.slice(0,4)},
+        {title:"高频考法",items:exams.slice(0,4)},
+        {title:"复习路径",items:["回顾课件标题","复述定义","重做例题","闭卷自测","错题复述"]}
+      ]
+    }
+  };
+}
+function normalizeCoursewareInsights(raw,course,record,mode,note){
+  const arr=(value,limit)=>Array.isArray(value)?value.filter(x=>typeof x==="string"&&x.trim()).slice(0,limit):[];
+  const branches=Array.isArray(raw&&raw.mindmap&&raw.mindmap.branches)
+    ? raw.mindmap.branches.map(b=>({title:String(b&&b.title||"分支"),items:arr(b&&b.items,6)})).filter(b=>b.items.length).slice(0,8)
+    : [];
+  const matched=matchCourseLesson(course,record.text);
+  return {
+    fileName:record.name,
+    generatedAt:Date.now(),
+    mode,
+    note:note||"",
+    lesson:String(raw&&raw.lesson||(matched&&matched.title)||"本课").slice(0,120),
+    summary:String(raw&&raw.summary||"").slice(0,600),
+    keyPoints:arr(raw&&raw.keyPoints,12),
+    pitfalls:arr(raw&&raw.pitfalls,10),
+    reviewQuestions:arr(raw&&raw.reviewQuestions,10),
+    mindmap:{
+      root:String(raw&&raw.mindmap&&raw.mindmap.root||(course&&course.name)||record.name).slice(0,100),
+      branches
+    }
+  };
+}
+async function requestAI(messages,options){
+  const cfg=getLLMConfig();
+  if(!cfg.apiKey) throw new Error("未配置 API Key");
+  const res=await fetch(cfg.baseURL.replace(/\/+$/,"")+"/chat/completions",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Authorization":"Bearer "+cfg.apiKey},
+    body:JSON.stringify({
+      model:cfg.model||"deepseek-chat",
+      messages,
+      max_tokens:(options&&options.maxTokens)||900,
+      temperature:options&&options.temperature!=null?options.temperature:0.3
+    })
+  });
+  if(!res.ok){
+    const t=await res.text().catch(()=>"");
+    throw new Error("HTTP "+res.status+" "+t.slice(0,160));
+  }
+  const j=await res.json();
+  const out=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;
+  if(!out) throw new Error("AI 返回空响应");
+  return out;
+}
+async function generateCoursewareInsights(courseId,record){
+  const course=data.find(x=>x.id===courseId);
+  if(!course||!record) return;
+  state.insightLoading[courseId]=true;
+  rerenderCoursewareInsights(courseId);
+  let insight;
+  try{
+    const cfg=getLLMConfig();
+    if(!cfg.apiKey){
+      insight=offlineCoursewareInsights(course,record,"请在设置中填写 API Key 以获得更深入的概念归纳。");
+    }else{
+      const courseContext=(course.lessons||[]).slice(0,12).map(l=>l.title+"："+(l.points||[]).join("；")).join("\n");
+      const prompt=[
+        "你是严谨的大一课程助教。请只根据给定课件内容生成本节课复习结构，不使用外部网页。",
+        "输出必须是单个 JSON 对象，不要 Markdown 代码围栏，不要附加解释。",
+        "JSON 结构：",
+        '{"lesson":"从课程目录中选择最匹配的一节","summary":"150字内本课主线","keyPoints":["5-10条关键知识点"],"pitfalls":["4-8条易错点"],"reviewQuestions":["5-8个闭卷自测问题"],"mindmap":{"root":"本课主题","branches":[{"title":"分支名","items":["3-6个短节点"]}]}}',
+        "思维导图必须包含 5-7 个分支，覆盖概念、公式/机制、例题、易错点、考试或应用、复习路径。",
+        "课程："+course.name+"（"+course.enName+"）",
+        "课程目录（lesson 必须优先选择其中之一）：\n"+(course.lessons||[]).map((l,i)=>(i+1)+". "+l.title+" / "+l.en).join("\n"),
+        "课程知识背景：\n"+courseContext,
+        "课件文件名："+record.name,
+        "课件文本：\n"+record.text.slice(0,16000)
+      ].join("\n");
+      try{
+        const answer=await requestAI([
+          {role:"system",content:"你负责把课堂课件转成结构化学习资料。内容准确、简洁、面向考试复习。"},
+          {role:"user",content:prompt}
+        ],{maxTokens:2400,temperature:0.2});
+        insight=normalizeCoursewareInsights(parseAIJson(answer),course,record,"ai");
+        if(!insight.keyPoints.length) throw new Error("AI 未生成关键知识点");
+      }catch(err){
+        console.warn("AI insight fallback",err);
+        insight=offlineCoursewareInsights(course,record,"在线 AI 生成失败，已切换到本地分析："+err.message);
+      }
+    }
+  }catch(err){
+    insight=offlineCoursewareInsights(course,record,"生成失败，已使用本地分析："+err.message);
+  }
+  state.insights[courseId]=insight;
+  state.insightLoading[courseId]=false;
+  save();
+  rerenderCoursewareInsights(courseId);
+  if(state.currentCourse===courseId) renderChat();
+  toast(insight.mode==="ai"?"AI 已生成知识点与思维导图":"已生成本地知识结构");
 }
 function buildSystemPrompt(courseId){
   const c=data.find(x=>x.id===courseId);
@@ -1340,6 +1792,14 @@ function buildSystemPrompt(courseId){
   const cw=state.courseware[courseId]||[];
   if(cw.length) s+="\n\n已上传课件摘要：\n"+cw.slice(0,3).map(f=>"【"+f.name+"】"+f.text.slice(0,1200)).join("\n");
   else s+="\n\n当前课程尚未上传课件。";
+  const insight=state.insights[courseId];
+  if(insight){
+    s+="\n\n课件结构化分析：";
+    s+="\n课程主线："+(insight.summary||"");
+    s+="\n关键知识点："+(insight.keyPoints||[]).join("；");
+    s+="\n易错点："+(insight.pitfalls||[]).join("；");
+    s+="\n复习问题："+(insight.reviewQuestions||[]).join("；");
+  }
   return s;
 }
 async function askAI(text,courseId){
@@ -1347,19 +1807,7 @@ async function askAI(text,courseId){
   if(!cfg.apiKey) return offlineAnswer(text,courseId);
   const messages=[{role:"system",content:buildSystemPrompt(courseId)},{role:"user",content:text}];
   try{
-    const res=await fetch(cfg.baseURL.replace(/\/+$/,"")+"/chat/completions",{
-      method:"POST",
-      headers:{"Content-Type":"application/json","Authorization":"Bearer "+cfg.apiKey},
-      body:JSON.stringify({model:cfg.model||"deepseek-chat",messages:messages,max_tokens:900,temperature:0.3})
-    });
-    if(!res.ok){
-      const t=await res.text().catch(()=>"");
-      throw new Error("HTTP "+res.status+" "+t.slice(0,140));
-    }
-    const j=await res.json();
-    const out=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;
-    if(!out) throw new Error("空响应");
-    return out;
+    return await requestAI(messages,{maxTokens:1100,temperature:0.3});
   }catch(err){
     console.warn(err);
     return offlineAnswer(text,courseId)+"\n\n[在线 AI 请求失败："+err.message+"，已切换离线模式]";
@@ -1436,6 +1884,13 @@ function bindChat(){
     if(!c){ toast("请先进入某门课程页再使用此功能"); openChat(null); return; }
     sendChat("请根据当前课件调整我的学习计划。");
   });
+  $("#chatAnalyze").addEventListener("click",()=>{
+    const c=data.find(x=>x.id===state.currentCourse);
+    if(!c){ toast("请先进入某门课程页再使用此功能"); openChat(null); return; }
+    const cw=state.courseware[c.id]||[];
+    if(!cw.length){ toast("请先在该课程页上传 PPTX / PDF / DOCX"); return; }
+    generateCoursewareInsights(c.id,cw[0]);
+  });
 }
 
 function renderSettings(){
@@ -1457,6 +1912,7 @@ function exportStudyData(){
     progress:state.progress,
     notes:state.notes,
     courseware:state.courseware,
+    insights:state.insights,
     week:state.week,
     timetable:state.timetable,
     chat:state.chat
@@ -1480,6 +1936,7 @@ async function importStudyData(file){
     state.progress=j.progress||{};
     state.notes=j.notes||{};
     state.courseware=j.courseware||{};
+    state.insights=j.insights||{};
     state.week=j.week||null;
     state.timetable=j.timetable||null;
     state.chat=Array.isArray(j.chat)?j.chat:[];
@@ -1515,8 +1972,8 @@ function bindSettings(){
   });
   $("#cfgClear").addEventListener("click",()=>{
     if(!confirm("确定清除本地学习数据与 AI 配置？")) return;
-    state.quiz={}; state.progress={}; state.notes={}; state.courseware={}; state.llm=null; state.chat=[]; state.timetable=null; state.week=null;
-    ["scai_quiz_scores","scai_progress","scai_notes","scai_uploaded_courseware","scai_llm_config","scai_dual_group","scai_plan_week","scai_timetable"].forEach(k=>LS.del(k));
+    state.quiz={}; state.progress={}; state.notes={}; state.courseware={}; state.insights={}; state.llm=null; state.chat=[]; state.timetable=null; state.week=null;
+    ["scai_quiz_scores","scai_progress","scai_notes","scai_uploaded_courseware","scai_courseware_insights","scai_llm_config","scai_dual_group","scai_plan_week","scai_timetable"].forEach(k=>LS.del(k));
     if(window.LLM_CONFIG) window.LLM_CONFIG.apiKey="";
     render();
     toast("本地数据已清除");

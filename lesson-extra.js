@@ -503,8 +503,44 @@ window.SCAI_LESSON_EXTRA={
       "note": "张量、自动微分与训练循环官方教程"
     }
   },
-  "prep-1": {
+  "prog-1": {
     "mindmapPage": 57,
+    "courseware": null
+  },
+  "prog-2": {
+    "mindmapPage": 58,
+    "courseware": null
+  },
+  "prog-3": {
+    "mindmapPage": 59,
+    "courseware": null
+  },
+  "prog-4": {
+    "mindmapPage": 60,
+    "courseware": null
+  },
+  "prog-5": {
+    "mindmapPage": 61,
+    "courseware": null
+  },
+  "prog-6": {
+    "mindmapPage": 62,
+    "courseware": null
+  },
+  "prog-7": {
+    "mindmapPage": 63,
+    "courseware": null
+  },
+  "prog-8": {
+    "mindmapPage": 64,
+    "courseware": null
+  },
+  "prog-9": {
+    "mindmapPage": 65,
+    "courseware": null
+  },
+  "prep-1": {
+    "mindmapPage": 66,
     "courseware": {
       "title": "OpenStax Calculus Volume 3 · 多元函数",
       "source": "OpenStax",
@@ -513,7 +549,7 @@ window.SCAI_LESSON_EXTRA={
     }
   },
   "prep-2": {
-    "mindmapPage": 58,
+    "mindmapPage": 67,
     "courseware": {
       "title": "OpenStax University Physics Vol 2",
       "source": "OpenStax",
@@ -522,7 +558,7 @@ window.SCAI_LESSON_EXTRA={
     }
   },
   "prep-3": {
-    "mindmapPage": 59,
+    "mindmapPage": 68,
     "courseware": {
       "title": "OpenStax Chemistry: Atoms First 2e · 反应速率",
       "source": "OpenStax",
@@ -531,7 +567,7 @@ window.SCAI_LESSON_EXTRA={
     }
   },
   "prep-4": {
-    "mindmapPage": 60,
+    "mindmapPage": 69,
     "courseware": {
       "title": "MIT 18.05 · 概率统计课程讲义入口",
       "source": "MIT OCW",
@@ -540,7 +576,7 @@ window.SCAI_LESSON_EXTRA={
     }
   },
   "prep-5": {
-    "mindmapPage": 61,
+    "mindmapPage": 70,
     "courseware": {
       "title": "Python 官方教程 · 类",
       "source": "Python.org",

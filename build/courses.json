@@ -5,12 +5,12 @@
     "name": "数学建模 1 · 微积分",
     "enName": "Mathematical Modeling 1 / Essential Calculus",
     "code": "FALL-01",
-    "textbook": "Essential Calculus 2e (Stewart) + 同济《高等数学（上册）》第八版",
-    "pages": "976 / 442",
-    "chapters": "Stewart Ch 1-13 · 同济 上册 Ch 1-7",
+    "textbook": "Essential Calculus 2e (Stewart) + 上海交大《大学数学·微积分》上/下 + 同济高数参考",
+    "pages": "976 / 383 / 307",
+    "chapters": "Stewart Ch 1-13 · 上海交大微积分 第1-11章",
     "semester": "fall",
     "accent": "#C4522E",
-    "summary": "一元微积分是全部工程数学的发动机。本学期按 Stewart 第 1-7 章打透极限、导数、积分与微分方程，中文版同济高数用来补计算熟练度和应试题感。",
+    "summary": "本课程与 Mathematical Modeling 1 大纲同步：前 5 周从量纲、概率和函数进入导数，第 6-16 周集中突破求导、优化、积分技巧、数值近似与建模。Stewart 负责英文概念，上海交大《大学数学·微积分》负责中文章节精读和规范计算。",
     "goals": [
       "能用极限语言解释连续与导数",
       "熟练求导、积分与常见 ODE",
@@ -3304,8 +3304,528 @@
     ]
   },
   {
-    "id": "prep",
+    "id": "programming",
     "order": 9,
+    "name": "计算机编程：C++ 与汇编",
+    "enName": "C++ Programming and Assembly Language",
+    "code": "CS-01",
+    "textbook": "Stroustrup《C++程序设计语言》 + 《汇编语言程序设计》 + 《大学计算机基础》",
+    "pages": "750 / 255 / 234",
+    "chapters": "C++ 第1-29章 · 汇编第1-12章 · 计算机基础第1-8章",
+    "semester": "fall",
+    "accent": "#2F6B8F",
+    "summary": "把程序设计、机器级执行和计算机通识作为完整的一条计算机主线。C++ 负责现代抽象、资源管理和工程组织，汇编负责看清寄存器、指令、堆栈与中断，计算机基础负责补系统、网络、数据库与安全。",
+    "goals": [
+      "掌握 C++ 类型、函数、类和 RAII",
+      "理解继承、模板与标准库的设计逻辑",
+      "能阅读并编写 8086 汇编小程序",
+      "建立 CPU、内存、操作系统和网络的整体模型",
+      "用项目与调试记录证明编程能力"
+    ],
+    "extraVideos": [
+      {
+        "title": "黑马程序员 C++ 从入门到精通",
+        "source": "Bilibili",
+        "url": "https://www.bilibili.com/video/BV1et411b73Z/",
+        "note": "语法、类和 STL 的中文系统课"
+      },
+      {
+        "title": "程序设计入门：C语言",
+        "source": "中国大学MOOC",
+        "url": "https://www.icourse163.org/course/ZJU-1001541001",
+        "note": "先补 C 语法与指针，再进入汇编和现代 C++"
+      },
+      {
+        "title": "计算机科学速成课",
+        "source": "Bilibili",
+        "url": "https://search.bilibili.com/all?keyword=计算机科学速成课",
+        "note": "快速建立计算机系统全局观"
+      },
+      {
+        "title": "汇编语言程序设计",
+        "source": "Bilibili",
+        "url": "https://search.bilibili.com/all?keyword=汇编语言程序设计 8086",
+        "note": "按教材章节选择寄存器、指令、中断与文件操作专题"
+      }
+    ],
+    "lessons": [
+      {
+        "id": "prog-1",
+        "title": "C++ 程序结构、类型与表达式",
+        "en": "Program Structure, Types and Expressions",
+        "chapters": "Stroustrup 第1-3、6、9-10章",
+        "week": "第1-3周",
+        "focus": "从完整程序出发，理解声明、类型、作用域和表达式求值。",
+        "points": [
+          "编译、链接与执行",
+          "基本类型和对象",
+          "声明、定义与初始化",
+          "运算符优先级与求值顺序",
+          "if/switch/循环",
+          "值类别与类型转换"
+        ],
+        "pitfalls": [
+          "未初始化变量",
+          "有符号整数溢出",
+          "把赋值当比较",
+          "依赖未规定的表达式求值顺序",
+          "隐式窄化转换"
+        ],
+        "exams": [
+          "输出结果题",
+          "类型与表达式判断",
+          "语句改错"
+        ],
+        "videos": [
+          {
+            "title": "黑马程序员 C++ 基础语法",
+            "source": "Bilibili",
+            "url": "https://www.bilibili.com/video/BV1et411b73Z/"
+          },
+          {
+            "title": "程序设计入门：C语言",
+            "source": "MOOC",
+            "url": "https://www.icourse163.org/course/ZJU-1001541001"
+          }
+        ]
+      },
+      {
+        "id": "prog-2",
+        "title": "指针、数组、引用与函数",
+        "en": "Pointers, Arrays, References and Functions",
+        "chapters": "Stroustrup 第7、12章",
+        "week": "第3-5周",
+        "focus": "建立地址、对象生命周期和函数接口模型。",
+        "points": [
+          "指针与引用",
+          "数组与指针关系",
+          "const 与所有权",
+          "值传递、引用传递",
+          "函数重载和默认参数",
+          "返回值和生命周期"
+        ],
+        "pitfalls": [
+          "返回局部变量引用或指针",
+          "数组越界",
+          "悬空引用",
+          "重载歧义",
+          "修改 const 对象"
+        ],
+        "exams": [
+          "指针输出题",
+          "函数参数选择",
+          "内存错误定位"
+        ],
+        "videos": [
+          {
+            "title": "C语言指针专题",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=C语言 指针 翁恺"
+          },
+          {
+            "title": "黑马程序员 C++ 函数与指针",
+            "source": "Bilibili",
+            "url": "https://www.bilibili.com/video/BV1et411b73Z/"
+          }
+        ]
+      },
+      {
+        "id": "prog-3",
+        "title": "类、资源管理与 RAII",
+        "en": "Classes, Resource Management and RAII",
+        "chapters": "Stroustrup 第16-17章",
+        "week": "第5-7周",
+        "focus": "用类维护对象不变量，用构造和析构绑定资源生命周期。",
+        "points": [
+          "封装与接口",
+          "成员初始化列表",
+          "构造函数与析构函数",
+          "拷贝与移动语义",
+          "Rule of Zero/Five",
+          "智能指针浅入"
+        ],
+        "pitfalls": [
+          "成员初始化顺序",
+          "浅拷贝导致重复释放",
+          "析构函数抛异常",
+          "移动后的对象未保持有效状态",
+          "自赋值"
+        ],
+        "exams": [
+          "设计类接口",
+          "写出拷贝/移动构造",
+          "查找资源泄漏"
+        ],
+        "videos": [
+          {
+            "title": "C++ 类与对象",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=C++ 类与对象 黑马"
+          },
+          {
+            "title": "C++ Core Guidelines",
+            "source": "GitHub",
+            "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"
+          }
+        ]
+      },
+      {
+        "id": "prog-4",
+        "title": "继承、多态与运算符重载",
+        "en": "Inheritance, Polymorphism and Operators",
+        "chapters": "Stroustrup 第18-22章",
+        "week": "第7-9周",
+        "focus": "用接口设计解耦代码，并理解虚函数和动态绑定。",
+        "points": [
+          "继承与访问控制",
+          "虚函数和 override",
+          "抽象类与接口",
+          "对象切片",
+          "动态类型识别",
+          "常用运算符重载"
+        ],
+        "pitfalls": [
+          "基类析构函数未声明 virtual",
+          "派生类对象按值传给基类",
+          "覆盖与隐藏混淆",
+          "滥用 RTTI",
+          "重载运算符破坏直觉"
+        ],
+        "exams": [
+          "类层次设计题",
+          "虚函数输出题",
+          "运算符重载题"
+        ],
+        "videos": [
+          {
+            "title": "C++ 继承与多态",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=C++ 继承 多态"
+          },
+          {
+            "title": "C++ Core Guidelines",
+            "source": "GitHub",
+            "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"
+          }
+        ]
+      },
+      {
+        "id": "prog-5",
+        "title": "模板、泛型与编译期计算",
+        "en": "Templates, Generic Programming and Metaprogramming",
+        "chapters": "Stroustrup 第23-29章",
+        "week": "第9-11周",
+        "focus": "从函数模板到概念、特化和元编程，理解零开销抽象。",
+        "points": [
+          "函数模板与类模板",
+          "类型推导和约束",
+          "特化与偏特化",
+          "泛型算法",
+          "constexpr 与 type traits",
+          "模板实例化和链接"
+        ],
+        "pitfalls": [
+          "模板定义与调用分离导致链接错误",
+          "约束不满足产生长错误信息",
+          "特化匹配顺序",
+          "元编程过度导致不可读"
+        ],
+        "exams": [
+          "模板函数编写",
+          "特化判断",
+          "编译期计算题"
+        ],
+        "videos": [
+          {
+            "title": "C++ 模板与 STL",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=C++ 模板 STL"
+          },
+          {
+            "title": "C++ Core Guidelines",
+            "source": "GitHub",
+            "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"
+          }
+        ]
+      },
+      {
+        "id": "prog-6",
+        "title": "STL、算法、异常与并发",
+        "en": "STL, Algorithms, Exceptions and Concurrency",
+        "chapters": "Stroustrup 第4-5、13章",
+        "week": "第11-13周",
+        "focus": "用标准库组织数据、算法和错误处理，并理解最基本的并发安全。",
+        "points": [
+          "string/vector/map",
+          "迭代器和算法",
+          "lambda 与函数对象",
+          "异常安全",
+          "thread/mutex",
+          "智能指针所有权"
+        ],
+        "pitfalls": [
+          "迭代器失效",
+          "erase 后继续使用迭代器",
+          "异常期间泄漏资源",
+          "数据竞争",
+          "死锁",
+          "shared_ptr 循环引用"
+        ],
+        "exams": [
+          "STL 综合编程",
+          "异常安全分析",
+          "并发概念题"
+        ],
+        "videos": [
+          {
+            "title": "STL 标准模板库",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=STL 标准模板库"
+          },
+          {
+            "title": "cppreference",
+            "source": "cppreference",
+            "url": "https://en.cppreference.com/w/"
+          }
+        ]
+      },
+      {
+        "id": "prog-7",
+        "title": "汇编基础、寻址与指令系统",
+        "en": "Assembly Basics, Addressing and Instructions",
+        "chapters": "汇编语言 第1-4章",
+        "week": "第3-6周",
+        "focus": "看清数据在寄存器与内存中的流动，理解机器级程序。",
+        "points": [
+          "8086/8088 寄存器",
+          "物理地址和段地址",
+          "补码与数据表示",
+          "七种寻址方式",
+          "数据传送和算术逻辑指令",
+          "标志位"
+        ],
+        "pitfalls": [
+          "段地址左移四位",
+          "操作数类型不匹配",
+          "混淆 CPU 与内存",
+          "忽略标志位变化",
+          "非法寻址组合"
+        ],
+        "exams": [
+          "寄存器内容跟踪",
+          "寻址方式判断",
+          "指令纠错"
+        ],
+        "videos": [
+          {
+            "title": "汇编语言 8086 入门",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=8086 汇编语言 寄存器 寻址方式"
+          },
+          {
+            "title": "计算机组成原理",
+            "source": "中国大学MOOC",
+            "url": "https://www.icourse163.org/search.htm?search=计算机组成原理"
+          }
+        ]
+      },
+      {
+        "id": "prog-8",
+        "title": "汇编程序控制、子程序与中断",
+        "en": "Control Flow, Procedures and Interrupts",
+        "chapters": "汇编语言 第5-12章",
+        "week": "第6-10周",
+        "focus": "把高级语言的分支、循环、函数和 I/O 映射到机器级实现。",
+        "points": [
+          "顺序、分支和循环",
+          "call/ret 与堆栈",
+          "参数传递和现场保护",
+          "宏与多模块",
+          "DOS/BIOS 调用",
+          "中断向量与中断服务程序",
+          "文件读写"
+        ],
+        "pitfalls": [
+          "堆栈不平衡",
+          "寄存器被调用者意外覆盖",
+          "跳转范围",
+          "中断未保护现场",
+          "未发 EOI",
+          "文件句柄未关闭"
+        ],
+        "exams": [
+          "汇编程序改错",
+          "子程序编写",
+          "中断与文件调用"
+        ],
+        "videos": [
+          {
+            "title": "汇编语言程序设计",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=汇编语言 子程序 中断 文件"
+          },
+          {
+            "title": "计算机系统基础",
+            "source": "中国大学MOOC",
+            "url": "https://www.icourse163.org/search.htm?search=计算机系统基础"
+          }
+        ]
+      },
+      {
+        "id": "prog-9",
+        "title": "计算机系统、网络、多媒体与安全",
+        "en": "Computer Systems, Networks, Multimedia and Security",
+        "chapters": "大学计算机基础 第1-6章",
+        "week": "第1-8周",
+        "focus": "建立从二进制、CPU、操作系统到网络和数据安全的完整通识地图。",
+        "points": [
+          "冯诺依曼结构与指令周期",
+          "数制、编码与数据表示",
+          "操作系统与文件管理",
+          "TCP/IP、IP、DNS 与 Internet",
+          "音频、图像、视频编码与压缩",
+          "密码、病毒、网络攻击和信息安全"
+        ],
+        "pitfalls": [
+          "位与字节换算",
+          "原码反码补码范围",
+          "进程与线程混淆",
+          "子网掩码计算",
+          "采样与量化概念混淆",
+          "哈希和加密概念混用"
+        ],
+        "exams": [
+          "进制与补码",
+          "操作系统概念",
+          "IP 与网络协议",
+          "多媒体编码",
+          "安全判断题"
+        ],
+        "videos": [
+          {
+            "title": "大学计算机基础",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=大学计算机基础 数制 网络 数据库"
+          },
+          {
+            "title": "计算机科学速成课",
+            "source": "Bilibili",
+            "url": "https://search.bilibili.com/all?keyword=计算机科学速成课"
+          }
+        ]
+      }
+    ],
+    "quiz": [
+      {
+        "q": "C++ 中用于确保对象离开作用域时释放资源的机制是？",
+        "options": [
+          "GC",
+          "RAII",
+          "反射",
+          "模板元编程"
+        ],
+        "answer": 1,
+        "explain": "RAII 把资源生命周期绑定到对象生命周期，典型实现是构造函数获取资源、析构函数释放资源。"
+      },
+      {
+        "q": "基类指针删除派生类对象时，基类析构函数必须满足？",
+        "options": [
+          "是 private",
+          "是 virtual",
+          "返回 void*",
+          "是 static"
+        ],
+        "answer": 1,
+        "explain": "基类析构函数应为 virtual，否则通过基类指针删除派生类对象可能产生未定义行为。"
+      },
+      {
+        "q": "8086 实模式下物理地址通常怎样形成？",
+        "options": [
+          "段地址 + 偏移",
+          "段地址×16 + 偏移",
+          "偏移×16",
+          "页号 + 页内偏移"
+        ],
+        "answer": 1,
+        "explain": "实模式物理地址 = 段地址左移 4 位（乘 16）后加偏移地址。"
+      },
+      {
+        "q": "下列哪一项能够修改函数外部传入对象且避免拷贝？",
+        "options": [
+          "传值",
+          "传 const 引用",
+          "传非 const 引用",
+          "返回局部引用"
+        ],
+        "answer": 2,
+        "explain": "非 const 引用既能修改实参，也避免对象复制。"
+      },
+      {
+        "q": "vector 在使用迭代器遍历时插入元素，最需要注意？",
+        "options": [
+          "迭代器可能失效",
+          "元素自动排序",
+          "长度不能增加",
+          "类型会改变"
+        ],
+        "answer": 0,
+        "explain": "vector 扩容可能重新分配内存，原有迭代器、指针和引用可能失效。"
+      },
+      {
+        "q": "中断服务程序返回前通常需要发送 EOI 的原因是？",
+        "options": [
+          "关闭文件",
+          "通知中断控制器结束本次中断",
+          "清除内存",
+          "修改段寄存器"
+        ],
+        "answer": 1,
+        "explain": "发送 EOI 通知可编程中断控制器本次中断处理完成，以便处理后续中断。"
+      }
+    ],
+    "online": [
+      {
+        "title": "LeetCode 中国",
+        "url": "https://leetcode.cn/problemset/",
+        "note": "用 C++ 刷数组、字符串、栈队列和树"
+      },
+      {
+        "title": "洛谷",
+        "url": "https://www.luogu.com.cn/problem/list",
+        "note": "适合基础语法、模拟和算法训练"
+      },
+      {
+        "title": "Compiler Explorer",
+        "url": "https://godbolt.org/",
+        "note": "观察 C++ 编译后的汇编输出"
+      },
+      {
+        "title": "cppreference",
+        "url": "https://en.cppreference.com/w/",
+        "note": "C++ 标准库和语言规则参考"
+      }
+    ],
+    "practice": [
+      {
+        "title": "程序设计入门：C语言",
+        "url": "https://www.icourse163.org/course/ZJU-1001541001",
+        "note": "C 语言基础与指针练习"
+      },
+      {
+        "title": "计算机组成原理课程",
+        "url": "https://www.icourse163.org/search.htm?search=计算机组成原理",
+        "note": "配合汇编理解 CPU 与存储器"
+      },
+      {
+        "title": "C++ Core Guidelines",
+        "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines",
+        "note": "现代 C++ 工程规范"
+      }
+    ]
+  },
+  {
+    "id": "prep",
+    "order": 10,
     "name": "大一下先修",
     "enName": "Spring Semester Prep",
     "code": "PREP-01",

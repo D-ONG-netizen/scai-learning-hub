@@ -1,22 +1,31 @@
 window.SCAI_META = {
   title: "SCAI ME1 Study Hub",
-  version: "2.0.0",
-  versionLabel: "第二版 · 双语双线",
-  subtitle: "大一全教材学习中心 · 国内 ↔ 英文双线 · 学年周计划 · AI 伴学",
+  version: "2.2.0",
+  versionLabel: "第四版 · 官方大纲与课件智能分析",
+  subtitle: "大一全教材学习中心 · 国内 ↔ 英文双线 · 官方大纲进度 · 课件自动知识图谱 · AI 伴学",
   semester: "2026 Fall · Sichuan University - Auckland Institute · Mechanical Engineering 1",
   startLabel: "开学第 1 周（2026 秋）",
-  generated: "2026-09-03"
+  generated: "2026-09-14"
 };
 
 window.SCAI_BOOKS = [
   { id: "essential-calculus", title: "Essential Calculus", edition: "2nd Edition", author: "James Stewart", pages: 976, course: "calculus", role: "主教材", chapters: "13 章", fall: "Ch 1-7", spring: "Ch 8-13" },
   { id: "tongji-calculus", title: "高等数学（上册）", edition: "第八版", author: "同济大学数学科学学院", pages: 442, course: "calculus", role: "中文参考", chapters: "7 章", fall: "全册", spring: "—" },
+  { id: "sjtu-calculus-1", title: "大学数学 · 微积分（上）", edition: "上海交通大学课程组", author: "上海交通大学数学系微积分课程组", pages: 383, course: "calculus", role: "国内逐章精读", chapters: "第1-6章", fall: "全册", spring: "—" },
+  { id: "sjtu-calculus-2", title: "大学数学 · 微积分（下）", edition: "上海交通大学课程组", author: "上海交通大学数学系微积分课程组", pages: 307, course: "calculus", role: "国内先修精读", chapters: "第7-11章", fall: "先修", spring: "全册" },
   { id: "poole", title: "Linear Algebra: A Modern Introduction", edition: "4th Edition", author: "David Poole", pages: 721, course: "linear-algebra", role: "主教材", chapters: "7 章 + 在线 Ch 8", fall: "Ch 1-7", spring: "Ch 8 拓展" },
   { id: "physics", title: "Principles of Physics", edition: "12th Edition, International Adaptation", author: "Halliday / Resnick / Walker", pages: 1457, course: "physics", role: "主教材", chapters: "44 章", fall: "Ch 1-20", spring: "Ch 21-44" },
   { id: "chemistry", title: "Chemistry: Atoms First", edition: "4th Edition", author: "Julia Burdge & Jason Overby", pages: 1273, course: "chemistry", role: "主教材", chapters: "26 章", fall: "Ch 1-13", spring: "Ch 14-26" },
   { id: "statics", title: "Engineering Mechanics: Statics", edition: "9th Edition", author: "Meriam / Kraige / Bolton", pages: 460, course: "mechanics", role: "主教材", chapters: "7 章", fall: "Ch 1-7", spring: "—" },
   { id: "dynamics", title: "Engineering Mechanics: Dynamics", edition: "9th Edition", author: "Meriam / Kraige / Bolton", pages: 623, course: "mechanics", role: "主教材", chapters: "8 章", fall: "Ch 1-4", spring: "Ch 5-8" },
-  { id: "mech-combined", title: "Engineering Mechanics Statics and Dynamics", edition: "9th Edition · 合并版", author: "Meriam 等 · 印度改编版", pages: 1981, course: "mechanics", role: "备用 / 对照", chapters: "15 章", fall: "Part I + IIA", spring: "Part IIB" }
+  { id: "mech-combined", title: "Engineering Mechanics Statics and Dynamics", edition: "9th Edition · 合并版", author: "Meriam 等 · 印度改编版", pages: 1981, course: "mechanics", role: "备用 / 对照", chapters: "15 章", fall: "Part I + IIA", spring: "Part IIB" },
+  { id: "zhang-physics-mt", title: "大学物理学（第4版）· 力学、热学", edition: "第4版", author: "张三慧", pages: 428, course: "physics", role: "国内逐章精读", chapters: "11 章", fall: "全册", spring: "—" },
+  { id: "zhang-physics-eo", title: "大学物理学（第4版）· 电磁学、光学、量子物理", edition: "第4版", author: "张三慧", pages: 515, course: "physics", role: "国内逐章精读", chapters: "第12-30章", fall: "先修", spring: "全册" },
+  { id: "zhang-physics-split", title: "大学物理学 · 热学、光学、量子物理", edition: "分册版", author: "张三慧", pages: 496, course: "physics", role: "分册对照", chapters: "第17-30章", fall: "对照", spring: "对照" },
+  { id: "zhang-physics-guide", title: "大学物理学 学习辅导与习题解答", edition: "第4版", author: "张三慧", pages: 402, course: "physics", role: "解题辅导", chapters: "全章配套", fall: "全册", spring: "全册" },
+  { id: "cpp-stroustrup", title: "C++程序设计语言（第1-3部分）", edition: "原书第4版", author: "Bjarne Stroustrup", pages: 750, course: "programming", role: "国内编程精读", chapters: "第1-29章", fall: "全年", spring: "全年" },
+  { id: "assembly", title: "汇编语言程序设计", edition: "国内课程教材", author: "高校汇编课程组", pages: 255, course: "programming", role: "机器级编程", chapters: "12 章", fall: "全年", spring: "全年" },
+  { id: "computer-fundamentals", title: "大学计算机基础", edition: "人民邮电出版社", author: "姚琳 主编", pages: 234, course: "programming", role: "计算机通识", chapters: "6 章", fall: "全册", spring: "—" }
 ];
 
 window.SCAI_PLAN = {
