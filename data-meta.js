@@ -1,7 +1,7 @@
 window.SCAI_META = {
   title: "SCAI ME1 Study Hub",
   version: "2.3.0",
-  versionLabel: "第五版 · 本地完整版 · 每日训练",
+  versionLabel: "学习总览 · 每日训练",
   subtitle: "大一全教材学习中心 · 国内 ↔ 英文双线 · 官方大纲进度 · 课件自动知识图谱 · AI 伴学",
   semester: "2026 Fall · Sichuan University - Auckland Institute · Mechanical Engineering 1",
   startLabel: "开学第 1 周（2026 秋）",

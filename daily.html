@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#24352F">
+<meta name="theme-color" content="#58BDE8">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>SCAI 每日训练打卡</title>
 <style>
@@ -212,6 +212,7 @@ a{color:var(--green)}
   body{background:#fff}.shell{width:100%}.panel,.word-card{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="ui-theme.css">
 </head>
 <body>
 <header class="topbar">
@@ -936,7 +937,10 @@ function bind(){
   });
 }
 setInterval(timerTick,1000);
+const syncTopbar=()=>$(".topbar").classList.toggle("scrolled",window.scrollY>8);
+window.addEventListener("scroll",syncTopbar,{passive:true});
 applyTheme();renderAll();bind();
+syncTopbar();
 })();
 </script>
 </body>

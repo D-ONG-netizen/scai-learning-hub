@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#24352F">
+<meta name="theme-color" content="#58BDE8">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>SCAI 升学竞赛作战台</title>
 <style>
@@ -226,6 +226,7 @@ details.more[open] summary::after{content:" −"}
   body{background:#fff}.shell{width:100%}.comp-card,.stage,.task{break-inside:avoid}
 }
 </style>
+<link rel="stylesheet" href="ui-theme.css">
 </head>
 <body>
 <header class="topbar">
@@ -601,6 +602,9 @@ function init(){
   $("#updatedAt").textContent=competitions.updated||"";
   $("#routeNotice").textContent="重要口径：2026年校级转专业通知限制匹兹堡学院学生原则上只能在学院内转专业；奥克兰学院公开介绍说明可在其五个专业间申请转专业。是否能申请本部计算机学院必须向学院和教务处书面确认。";
   bind();
+  const syncTopbar=()=>document.querySelector(".topbar").classList.toggle("scrolled",window.scrollY>8);
+  window.addEventListener("scroll",syncTopbar,{passive:true});
+  syncTopbar();
 }
 init();
 })();

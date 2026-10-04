@@ -1,4 +1,4 @@
-const CACHE = "scai-me1-v8";
+const CACHE = "scai-me1-v9";
 const CORE = [
   "./index.html",
   "./growth.html",
@@ -16,6 +16,7 @@ const CORE = [
   "./mindmaps/思维导图预览.pdf",
   "./mindmaps/思维导图预览.html",
   "./manifest.webmanifest",
+  "./ui-theme.css",
   "./icon.svg"
 ];
 
