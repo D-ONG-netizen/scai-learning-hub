@@ -1,7 +1,10 @@
 @echo off
-set "HUB=C:\Users\DYH\Documents\ChatGPT\课本教程\freshman-hub"
-cd /d "%HUB%"
-powershell -NoProfile -Command "$port=Get-NetTCPConnection -LocalPort 8765 -State Listen -ErrorAction SilentlyContinue; if (-not $port) { Start-Process -FilePath 'python' -ArgumentList @('-m','http.server','8765','--directory','C:\Users\DYH\Documents\ChatGPT\课本教程\freshman-hub') -WindowStyle Hidden }"
-timeout /t 1 /nobreak >nul
-start "" "http://127.0.0.1:8765/index.html"
-exit
+setlocal
+chcp 65001 >nul
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0启动学习网站.ps1"
+if errorlevel 1 (
+  echo.
+  echo SCAI 本地学习网站启动失败，请查看上方错误信息。
+  pause
+)
+exit /b
