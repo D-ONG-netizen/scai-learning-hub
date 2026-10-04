@@ -51,6 +51,7 @@ function buildUnits(ielts, target, minWords, maxWords) {
 
 const ielts = loadWindow("data-ielts.js").SCAI_IELTS_WORDS;
 const daily = loadWindow("data-daily.js").SCAI_DAILY;
+const pat = loadWindow("data-pat.js").SCAI_PAT;
 const allWords = ielts.chapters
   .filter(chapter => Number(chapter.number) >= Number(ielts.startChapter || 6))
   .flatMap(chapter => chapter.words || []);
@@ -83,6 +84,15 @@ assert.strictEqual(programmingTasks.length, 56, "programming sequence must conta
 for (let day = 1; day <= 56; day += 1) {
   assert(daily.programming.phases.some(phase => day >= phase.days[0] && day <= phase.days[1]), `programming day ${day} is not covered`);
 }
+assert.strictEqual(pat.totalProblems, 223, "PAT plan must contain all 223 problems");
+assert.strictEqual(pat.totalDays, 56, "PAT plan must contain 56 days");
+assert.strictEqual(pat.days.length, 56, "PAT day groups mismatch");
+assert.strictEqual(new Set(pat.problems.map(problem => problem.id)).size, 223, "PAT problem IDs must be unique");
+assert.deepStrictEqual(
+  [...pat.problems].map(problem => Number(problem.id.slice(2))),
+  Array.from({ length: 223 }, (_, index) => index + 1),
+  "PAT problem IDs must be sequential"
+);
 
 (async () => {
   const browser = await chromium.launch({
@@ -107,6 +117,8 @@ for (let day = 1; day <= 56; day += 1) {
   const initialStats = await page.textContent("#vocabStats");
   assert(initialStats.includes("49 词"), "Chapter 6 first unit should show 49 words");
   assert.strictEqual(await page.$$eval(".heat-cell", nodes => nodes.length), 56, "heatmap must show 56 days");
+  assert.strictEqual(await page.$$eval(".pat-day", nodes => nodes.length), 56, "PAT roadmap must show 56 days");
+  assert((await page.$$eval(".problem-row", nodes => nodes.length)) > 0, "current PAT problems must be visible");
 
   const today = dateKey(new Date());
   const tomorrow = addDays(today, 1);

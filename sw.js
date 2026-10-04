@@ -1,4 +1,4 @@
-const CACHE = "scai-me1-v10";
+const CACHE = "scai-me1-v11";
 const CORE = [
   "./index.html",
   "./landing.html",
@@ -10,6 +10,7 @@ const CORE = [
   "./data-competitions.js",
   "./data-daily.js",
   "./data-ielts.js",
+  "./data-pat.js",
   "./data-meta.js",
   "./lesson-extra.js",
   "./config.local.js",

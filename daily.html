@@ -179,6 +179,29 @@ a{color:var(--green)}
 .advice{border:1px solid var(--line);border-radius:7px;background:var(--surface2);padding:12px}
 .advice b{font-size:.86rem}
 .advice p{margin:3px 0 0;color:var(--muted);font-size:.79rem}
+.pat-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}
+.pat-summary div{border:1px solid var(--line);border-radius:8px;background:var(--surface2);padding:9px 10px}
+.pat-summary span{display:block;color:var(--muted);font-size:.7rem}
+.pat-summary b{display:block;margin-top:3px;font-size:.95rem}
+.pat-problems{display:grid;gap:7px;margin:12px 0}
+.problem-row{display:grid;grid-template-columns:20px minmax(0,1fr) auto;align-items:center;gap:9px;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:var(--surface);cursor:pointer}
+.problem-row input{width:16px;height:16px;accent-color:var(--green)}
+.problem-row span{min-width:0;font-size:.82rem}
+.problem-row b{font-family:var(--mono);color:var(--accent);margin-right:5px}
+.problem-row small{color:var(--muted);font-family:var(--mono);white-space:nowrap}
+.problem-row.solved{background:var(--green-soft);border-color:color-mix(in srgb,var(--green) 38%,var(--line))}
+.problem-row.solved span{text-decoration:line-through;opacity:.72}
+.pat-roadmap{display:grid;gap:14px}
+.pat-phase{border:1px solid var(--line);border-radius:10px;background:var(--surface2);padding:13px}
+.pat-phase h3{margin:0;font-size:.98rem}
+.pat-phase p{margin:3px 0 11px;color:var(--muted);font-size:.78rem}
+.pat-days{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:8px}
+.pat-day{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:9px 10px}
+.pat-day.current{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.pat-day.done{background:var(--green-soft)}
+.pat-day b{display:block;font:700 .73rem/1 var(--mono)}
+.pat-day span{display:block;margin-top:5px;color:var(--muted);font-size:.7rem;word-break:break-word}
+.pat-day small{display:block;margin-top:6px;color:var(--muted);font-size:.66rem}
 .toast{
   position:fixed;left:50%;bottom:24px;z-index:90;transform:translateX(-50%) translateY(18px);
   background:var(--ink);color:var(--paper);padding:9px 15px;border-radius:999px;font-size:.84rem;
@@ -283,10 +306,12 @@ a{color:var(--green)}
 
     <section class="panel">
       <div class="panel-head">
-        <div><h3>C 语言 · 30 分钟</h3><p>先基础，再逐步加入算法平台</p></div>
+        <div><h3>PTA PAT · 30 分钟</h3><p>223 道题拆分到 56 天，按题号和分值逐步完成</p></div>
         <span class="status" id="programmingStatus">进行中</span>
       </div>
       <div id="programmingTask"></div>
+      <div class="pat-summary" id="patSummary"></div>
+      <div class="pat-problems" id="programmingProblems"></div>
       <div class="timer">
         <div class="timer-display" id="timerDisplay">30:00</div>
         <button class="btn small" id="timerToggle" type="button">开始</button>
@@ -317,6 +342,12 @@ a{color:var(--green)}
   <section class="panel heat-wrap"><div class="heat" id="heatmap"></div></section>
 
   <div class="section-head">
+    <h2>PTA 56 天 PAT 路线</h2>
+    <span class="note">223 题按知识点和分值分配到每天，已完成天数自动同步</span>
+  </div>
+  <section class="panel"><div class="pat-roadmap" id="patRoadmap"></div></section>
+
+  <div class="section-head">
     <h2>编程练习平台对比</h2>
     <span class="note">当前主平台：PTA</span>
   </div>
@@ -341,12 +372,14 @@ a{color:var(--green)}
 <div class="toast" id="toast"></div>
 
 <script src="data-ielts.js"></script>
+<script src="data-pat.js"></script>
 <script src="data-daily.js"></script>
 <script>
 (function(){
 "use strict";
 const IELTS=window.SCAI_IELTS_WORDS||{chapters:[]};
 const DAILY=window.SCAI_DAILY||{};
+const PAT=window.SCAI_PAT||{days:[],phases:[],totalDays:0,totalProblems:0,totalPoints:0};
 const META=DAILY.meta||{};
 const LISTENING=DAILY.listening||{items:[]};
 const PROGRAMMING=DAILY.programming||{phases:[],platforms:[]};
@@ -525,6 +558,19 @@ function listeningRecord(id){
   return state.dailyTasks.listening[id];
 }
 function programmingTaskForDay(day){
+  const plan=PAT.days&&PAT.days[day-1];
+  if(plan){
+    const ids=plan.problems.map(problem=>problem.id).join("、");
+    return {
+      day,
+      phase:plan.phase,
+      plan,
+      task:{
+        title:`PTA Day ${day} · ${plan.problems.length} 道题`,
+        goal:`${plan.focus} 今日题号：${ids}。目标分值约 ${plan.points} 分。`
+      }
+    };
+  }
   for(const phase of PROGRAMMING.phases||[]){
     if(day>=phase.days[0]&&day<=phase.days[1]){
       const localIndex=day-phase.days[0];
@@ -534,20 +580,23 @@ function programmingTaskForDay(day){
   return {day,phase:"巩固与复盘",task:{title:"回炉本周错题",goal:"重写两道错题并补测试用例。"}};
 }
 function firstUncompletedProgrammingDay(){
-  for(let day=1;day<=56;day++){
+  const totalDays=PAT.totalDays||56;
+  for(let day=1;day<=totalDays;day++){
     if(!(state.programming[day]&&state.programming[day].completedAt))return day;
   }
   return null;
 }
 function programmingRecord(day){
-  if(!state.programming[day])state.programming[day]={steps:{},form:{},elapsed:0,completedAt:null};
+  if(!state.programming[day])state.programming[day]={steps:{},form:{},problems:{},elapsed:0,completedAt:null};
   if(!state.programming[day].steps)state.programming[day].steps={};
   if(!state.programming[day].form)state.programming[day].form={};
+  if(!state.programming[day].problems)state.programming[day].problems={};
   return state.programming[day];
 }
 function platformForDay(day){
   const platforms=PROGRAMMING.platforms||[];
   const byId=id=>platforms.find(p=>p.id===id)||platforms[0];
+  if(PAT.days&&PAT.days.length)return byId("pta");
   if(day<=21)return byId("pta");
   if(day<=28)return [1,2,4,5,7].includes(((day-22)%7)+1)?byId("pta"):byId("nowcoder");
   if(day<=42)return [1,2,4,5].includes(((day-29)%7)+1)?byId("pta"):byId("leetcode");
@@ -735,29 +784,53 @@ function renderListening(){
   }
   saveAll();
 }
+function programmingComplete(record,plan){
+  const problemsDone=!plan||!plan.problems.length||plan.problems.every(problem=>record.problems&&record.problems[problem.id]);
+  const routineDone=(PROGRAMMING.routine||[]).every((_,i)=>record.steps&&record.steps[["review","solve","log"][i]||`step${i}`]);
+  return problemsDone&&routineDone;
+}
 function renderProgramming(){
   let day=firstUncompletedProgrammingDay();
   const task=dateTask(activeDateKey());
   if(!day){
-    $("#programmingStatus").textContent="56天已完成";
+    $("#programmingStatus").textContent="PAT 路线已完成";
     $("#programmingStatus").className="status done";
-    $("#programmingTask").innerHTML=`<div class="empty">已完成 56 天起步计划，继续刷题和复盘错题。</div>`;
+    $("#programmingTask").innerHTML=`<div class="empty">已完成 223 道 PTA 练习题，继续复盘错题和限时训练。</div>`;
+    $("#patSummary").innerHTML="";
+    $("#programmingProblems").innerHTML="";
     $("#programmingSteps").innerHTML="";
     return;
   }
   task.programmingDay=day;
   const detail=programmingTaskForDay(day);
+  const plan=detail.plan;
   const record=programmingRecord(day);
   const platform=platformForDay(day);
   $("#programmingStatus").textContent=record.completedAt?"已完成":"进行中";
   $("#programmingStatus").className="status "+(record.completedAt?"done":"");
   $("#programmingTask").innerHTML=`
     <div class="stat-line">
-      <span class="stat-chip">Day <b>${day}/56</b></span>
+      <span class="stat-chip">Day <b>${day}/${PAT.totalDays||56}</b></span>
       <span class="stat-chip"><b>${esc(detail.phase)}</b></span>
       <span class="stat-chip">主平台 <b>${esc(platform.name)}</b></span>
     </div>
     <div class="advice"><b>${esc(detail.task.title)}</b><p>${esc(detail.task.goal)}</p></div>`;
+  if(plan){
+    const solved=plan.problems.filter(problem=>record.problems[problem.id]).length;
+    $("#patSummary").innerHTML=`
+      <div><span>今日题量</span><b>${plan.problems.length} 题</b></div>
+      <div><span>目标分值</span><b>${plan.points} 分</b></div>
+      <div><span>完成进度</span><b>${solved}/${plan.problems.length}</b></div>`;
+    $("#programmingProblems").innerHTML=plan.problems.map(problem=>`
+      <label class="problem-row ${record.problems[problem.id]?"solved":""}">
+        <input type="checkbox" data-pat-problem="${esc(problem.id)}" ${record.problems[problem.id]?"checked":""}>
+        <span><b>${esc(problem.id)}</b>${esc(problem.title)}</span>
+        <small>${problem.score} pts</small>
+      </label>`).join("");
+  }else{
+    $("#patSummary").innerHTML="";
+    $("#programmingProblems").innerHTML="";
+  }
   $("#programmingLink").href=platform.url;
   $("#programmingLink").textContent="打开 "+platform.name;
   $("#programmingSteps").innerHTML=(PROGRAMMING.routine||[]).map((step,i)=>{
@@ -772,6 +845,24 @@ function renderProgramming(){
     input.value=record.form[key]||"";
   });
   saveAll();
+}
+function renderPatRoadmap(){
+  const current=firstUncompletedProgrammingDay()||PAT.totalDays||0;
+  $("#patRoadmap").innerHTML=(PAT.phases||[]).map(phase=>{
+    const days=(PAT.days||[]).filter(item=>item.day>=phase.days[0]&&item.day<=phase.days[1]);
+    return `<section class="pat-phase">
+      <h3>${esc(phase.title)}</h3>
+      <p>${esc(phase.focus)}</p>
+      <div class="pat-days">${days.map(item=>{
+        const done=Boolean(state.programming[item.day]&&state.programming[item.day].completedAt);
+        return `<div class="pat-day ${item.day===current?"current":""} ${done?"done":""}">
+          <b>DAY ${pad(item.day)}</b>
+          <span>${item.problems.map(problem=>problem.id).join(", ")}</span>
+          <small>${item.problems.length} 题 · ${item.points} 分</small>
+        </div>`;
+      }).join("")}</div>
+    </section>`;
+  }).join("");
 }
 function renderHeatmap(){
   const start=state.profile.startDate;
@@ -824,7 +915,7 @@ function timerTick(){
   updateTimerDisplay();
 }
 function renderAll(){
-  renderHero();renderDashboard();renderVocabulary();renderListening();renderProgramming();renderHeatmap();renderPlatforms();renderAdvice();updateTimerDisplay();saveAll();
+  renderHero();renderDashboard();renderVocabulary();renderListening();renderProgramming();renderPatRoadmap();renderHeatmap();renderPlatforms();renderAdvice();updateTimerDisplay();saveAll();
 }
 function bind(){
   $("#themeBtn").addEventListener("click",()=>{state.theme=state.theme==="dark"?"light":"dark";applyTheme()});
@@ -866,7 +957,23 @@ function bind(){
     const task=dateTask(activeDateKey());
     task.programmingDay=day;
     const record=programmingRecord(day);record.steps[e.target.dataset.programStep]=e.target.checked;
-    if((PROGRAMMING.routine||[]).every((_,i)=>record.steps[["review","solve","log"][i]])){
+    if(programmingComplete(record,PAT.days&&PAT.days[day-1])){
+      record.completedAt=record.completedAt||new Date().toISOString();
+      task.programmingDone=true;
+    }else{
+      record.completedAt=null;
+      task.programmingDone=false;
+    }
+    saveAll();renderProgramming();renderDashboard();renderHeatmap();
+  });
+  $("#programmingProblems").addEventListener("change",e=>{
+    if(e.target.type!=="checkbox")return;
+    const day=firstUncompletedProgrammingDay();if(!day)return;
+    const task=dateTask(activeDateKey());
+    task.programmingDay=day;
+    const record=programmingRecord(day);
+    record.problems[e.target.dataset.patProblem]=e.target.checked;
+    if(programmingComplete(record,PAT.days&&PAT.days[day-1])){
       record.completedAt=record.completedAt||new Date().toISOString();
       task.programmingDone=true;
     }else{
@@ -883,10 +990,12 @@ function bind(){
     });
   });
   $("#programmingDoneBtn").addEventListener("click",()=>{
-    const day=firstUncompletedProgrammingDay();if(!day){toast("56天计划已完成");return}
+    const day=firstUncompletedProgrammingDay();if(!day){toast("PAT 路线已完成");return}
     const record=programmingRecord(day);
     record.completedAt=new Date().toISOString();
     (PROGRAMMING.routine||[]).forEach((_,i)=>record.steps[["review","solve","log"][i]]=true);
+    const plan=PAT.days&&PAT.days[day-1];
+    if(plan)plan.problems.forEach(problem=>record.problems[problem.id]=true);
     const task=dateTask(activeDateKey());
     task.programmingDay=day;
     task.programmingDone=true;
