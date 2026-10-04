@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="ui-theme.css">
 <style>
 :root{
+  --font-display:"Bahnschrift","Segoe UI Variable Display","Segoe UI",Arial,sans-serif;
+  --font-body:"Segoe UI Variable Text","Segoe UI",Arial,sans-serif;
   --landing-blue:#3050f0;
   --landing-blue-strong:#2445df;
   --landing-blue-soft:#edf0ff;
@@ -89,9 +91,9 @@ a{color:inherit;text-decoration:none}
 .landing-hero{
   position:relative;
   isolation:isolate;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.88fr);
-  align-items:center;gap:clamp(34px,6vw,88px);
-  min-height:650px;padding:64px 0 58px;
+  display:grid;grid-template-columns:1fr;
+  align-items:center;gap:46px;
+  min-height:720px;padding:76px 0 68px;
 }
 .landing-hero::before{
   content:"";position:absolute;z-index:-1;right:7%;top:48px;
@@ -109,19 +111,22 @@ a{color:inherit;text-decoration:none}
   color:var(--landing-blue);font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
 }
 .landing-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--landing-blue)}
+.landing-hero-copy{width:100%;max-width:1060px;margin:0 auto;text-align:center}
 .landing-hero h1{
-  margin:20px 0 18px;max-width:11ch;
+  margin:24px auto 20px;max-width:14ch;
   font-family:var(--font-display);font-size:clamp(3rem,6.3vw,5.9rem);
   font-weight:850;line-height:.94;letter-spacing:-.065em;text-wrap:balance;
 }
 .landing-hero h1 span{color:var(--landing-blue)}
 .landing-hero-copy>p{max-width:62ch;margin:0;color:var(--landing-muted);font-size:1.04rem;line-height:1.78}
-.landing-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.landing-proof{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px;color:var(--landing-muted);font-size:.78rem}
+.landing-hero-copy>p{margin-left:auto;margin-right:auto}
+.landing-hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}
+.landing-proof{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-top:30px;color:var(--landing-muted);font-size:.78rem}
 .landing-proof span{display:inline-flex;align-items:center;gap:7px}
 .landing-proof i{width:7px;height:7px;border-radius:50%;background:var(--landing-yellow);box-shadow:0 0 0 4px color-mix(in srgb,var(--landing-yellow) 24%,transparent)}
 .hero-product{
   position:relative;
+  width:min(1120px,100%);margin:0 auto;
   background:var(--landing-surface);border:1px solid var(--landing-line);
   border-radius:26px;padding:17px;box-shadow:0 30px 80px rgba(22,30,56,.14);
 }
@@ -167,11 +172,11 @@ a{color:inherit;text-decoration:none}
 .landing-section-head{display:flex;align-items:end;justify-content:space-between;gap:22px;margin-bottom:22px}
 .landing-section-head h2{margin:0;font:820 clamp(1.8rem,3vw,2.8rem)/1.08 var(--font-display);letter-spacing:-.05em}
 .landing-section-head p{max-width:56ch;margin:0;color:var(--landing-muted);font-size:.88rem;text-align:right}
-.course-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.course-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .course-card{
   --course-color:var(--landing-blue);
-  position:relative;display:flex;flex-direction:column;min-height:235px;
-  padding:17px;border:1px solid var(--landing-line);border-radius:20px;
+  position:relative;display:flex;flex-direction:column;min-height:255px;
+  padding:20px;border:1px solid var(--landing-line);border-radius:22px;
   background:var(--landing-surface);overflow:hidden;
   transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
 }
@@ -194,10 +199,10 @@ a{color:inherit;text-decoration:none}
 .course-progress-track{height:7px;border-radius:999px;background:var(--landing-line);overflow:hidden}
 .course-progress-track i{display:block;height:100%;border-radius:inherit;background:var(--course-color);transition:width .34s ease}
 .course-progress span{display:flex;justify-content:space-between;gap:8px;margin-top:7px;color:var(--landing-muted);font-size:.66rem}
-.shortcut-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.shortcut-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .shortcut-card{
-  display:flex;align-items:center;gap:13px;min-height:104px;padding:16px;
-  border:1px solid var(--landing-line);border-radius:19px;background:var(--landing-surface);
+  display:flex;align-items:center;gap:16px;min-height:124px;padding:20px;
+  border:1px solid var(--landing-line);border-radius:21px;background:var(--landing-surface);
   transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
 }
 .shortcut-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--landing-blue) 48%,var(--landing-line));box-shadow:0 16px 38px rgba(22,30,56,.1)}
@@ -249,20 +254,20 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 <header class="landing-topbar">
-  <nav class="landing-nav" aria-label="落地页导航">
+  <nav class="landing-nav" aria-label="Landing page navigation">
     <a class="landing-brand" href="landing.html">
       <span class="landing-logo">SC</span>
       <span>SCAI Learning Hub</span>
     </a>
     <div class="landing-links">
-      <a href="#courses">课程</a>
-      <a href="daily.html">每日训练</a>
-      <a href="growth.html">竞赛</a>
-      <a href="index.html#/home">完整学习中心</a>
+      <a href="#courses">Courses</a>
+      <a href="daily.html">Daily Practice</a>
+      <a href="growth.html">Competitions</a>
+      <a href="index.html#/home">Full Dashboard</a>
     </div>
     <div class="landing-actions">
-      <button class="landing-button small" id="themeBtn" type="button">切换主题</button>
-      <a class="landing-button blue small" href="daily.html">开始今天</a>
+      <button class="landing-button small" id="themeBtn" type="button">Dark Mode</button>
+      <a class="landing-button blue small" href="daily.html">Start Today</a>
     </div>
   </nav>
 </header>
@@ -270,30 +275,30 @@ a{color:inherit;text-decoration:none}
 <main class="landing-main">
   <section class="landing-hero">
     <div class="landing-hero-copy">
-      <span class="landing-eyebrow">SCAI ME1 · 2026 Fall</span>
-      <h1>把每天的学习，变成清晰的<span>下一步</span>。</h1>
-      <p>课程、教材、每日打卡与竞赛准备集中在同一个工作台。先看今天该做什么，再进入对应科目继续学习。</p>
+      <span class="landing-eyebrow">SCAI ME1 · Fall 2026</span>
+      <h1>Turn every study day into a clear <span>next step.</span></h1>
+      <p>Courses, textbooks, daily check-ins and competition planning in one focused workspace. See what matters today, then continue exactly where you left off.</p>
       <div class="landing-hero-actions">
-        <a class="landing-button blue" href="daily.html">进入今日训练</a>
-        <a class="landing-button" href="#courses">查看全部课程</a>
+        <a class="landing-button blue" href="daily.html">Start Today's Session</a>
+        <a class="landing-button" href="#courses">Explore Courses</a>
       </div>
       <div class="landing-proof">
-        <span><i></i>课程进度实时读取</span>
-        <span><i></i>每日任务自动同步</span>
-        <span><i></i>数据只保存在本机</span>
+        <span><i></i>Live course progress</span>
+        <span><i></i>Daily tasks synced</span>
+        <span><i></i>Stored on this device</span>
       </div>
     </div>
 
-    <aside class="hero-product" id="heroProduct" aria-label="今日学习概览"></aside>
+    <aside class="hero-product" id="heroProduct" aria-label="Today's study overview"></aside>
   </section>
 
   <section class="landing-section" id="courses">
     <div class="landing-section-head">
       <div>
         <span class="landing-eyebrow">Core Courses</span>
-        <h2>需要学习的科目</h2>
+        <h2>Your Learning Path</h2>
       </div>
-      <p>每门课程直接进入完整知识结构、视频、PDF 讲义和练习。完成度根据完整学习中心中的课程状态自动计算。</p>
+      <p>Open any course to access its complete knowledge map, videos, PDF notes and practice. Progress is calculated from your full dashboard.</p>
     </div>
     <div class="course-grid" id="courseGrid"></div>
   </section>
@@ -301,33 +306,33 @@ a{color:inherit;text-decoration:none}
   <section class="landing-section" id="shortcuts">
     <div class="landing-section-head">
       <div>
-        <span class="landing-eyebrow">Quick Actions</span>
-        <h2>常用快捷入口</h2>
+        <span class="landing-eyebrow">Quick Access</span>
+        <h2>Move Faster</h2>
       </div>
-      <p>把每天最常用的四类操作保留在第一屏之后，减少在多个页面之间寻找入口。</p>
+      <p>Keep the four most common actions one click away, without searching through the full dashboard.</p>
     </div>
     <div class="shortcut-grid">
       <a class="shortcut-card" href="daily.html">
         <span class="shortcut-icon blue">DAY</span>
-        <span><b>每日打卡</b><span>词汇、精听、C 语言和连续打卡</span></span>
+        <span><b>Daily Check-in</b><span>Vocabulary, listening and C practice</span></span>
       </a>
       <a class="shortcut-card" href="growth.html">
         <span class="shortcut-icon yellow">WIN</span>
-        <span><b>竞赛作战台</b><span>报名时间、目标清单和备战路线</span></span>
+        <span><b>Competition Hub</b><span>Deadlines, goals and preparation roadmap</span></span>
       </a>
       <a class="shortcut-card" href="index.html#/home">
         <span class="shortcut-icon ink">HUB</span>
-        <span><b>完整学习中心</b><span>周计划、教材地图和全部课程页面</span></span>
+        <span><b>Full Dashboard</b><span>Weekly plan, textbooks and all course pages</span></span>
       </a>
       <a class="shortcut-card" href="index.html#/pdfs">
         <span class="shortcut-icon green">PDF</span>
-        <span><b>PDF 资料库</b><span>知识点、易错点、练习和解析</span></span>
+        <span><b>PDF Library</b><span>Key points, common mistakes and solutions</span></span>
       </a>
     </div>
   </section>
 
   <footer class="landing-footer">
-    <span>SCAI Learning Hub · 本机个人学习入口</span>
+    <span>SCAI Learning Hub · Personal local workspace</span>
     <span id="updatedAt"></span>
   </footer>
 </main>
@@ -342,6 +347,39 @@ const courses=window.SCAI_COURSES||[];
 const meta=window.SCAI_META||{};
 const competitionData=window.SCAI_COMPETITIONS||{competitions:[]};
 const selectedIds=["calculus","linear-algebra","physics","chemistry","mechanics","programming","english","python-ai"];
+const courseChapters={
+  calculus:"Stewart Chapters 1-13 · SJTU Calculus 1-11",
+  "linear-algebra":"Poole Chapters 1-7 · Online Chapter 8",
+  physics:"Physics for Scientists and Engineers · Chapters 1-44",
+  chemistry:"Chemistry: Atoms First · Chapters 1-26",
+  mechanics:"Statics 1-7 · Dynamics 1-8",
+  programming:"C++ 1-29 · Assembly 1-12 · Computer Fundamentals 1-8",
+  english:"Vocabulary · Listening · Speaking · Writing · IELTS",
+  "python-ai":"Python · NumPy · Pandas · Machine Learning"
+};
+const competitionNames={
+  "ccf-csp":"CCF CSP Software Certification",
+  "scu-cpc":"Sichuan University Programming Contest",
+  bluebridge:"Blue Bridge Cup",
+  gplt:"Team Programming Ladder Tournament",
+  "icpc-ccpc":"ICPC / CCPC",
+  "4c":"China Collegiate Computing Design Contest",
+  ciscn:"National Information Security Competition",
+  apmcm:"APMCM Mathematical Modeling Contest",
+  "mcm-icm":"MCM / ICM",
+  cumcm:"China Undergraduate Mathematical Contest in Modeling",
+  cmc:"Chinese Mathematics Competition",
+  mathorcup:"MathorCup Mathematical Modeling Challenge",
+  daisai:"National College Student Innovation Competition",
+  ncss:"National College Student Innovation Training Program",
+  "challenge-cup":"Challenge Cup",
+  "ai-education":"AI + Education Innovation Competition",
+  smartcar:"National Smart Car Competition",
+  embedded:"Embedded Chip and System Design Competition",
+  "robot-ai":"China Robot Competition / AI Robot Competition",
+  english:"FLTRP Cup / National English Competition",
+  mechanics:"Sichuan Mechanics Competition"
+};
 const shortCodes={
   calculus:"CAL",
   "linear-algebra":"LA",
@@ -405,7 +443,7 @@ function activeStudyDay(){
 }
 function dateLabel(key){
   const date=parseDate(key);
-  return `${date.getMonth()+1}月${date.getDate()}日 · ${["周日","周一","周二","周三","周四","周五","周六"][date.getDay()]}`;
+  return `${date.toLocaleDateString("en-US",{month:"short",day:"numeric"})} · ${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][date.getDay()]}`;
 }
 function courseProgress(course){
   const lessons=course.lessons||[];
@@ -438,6 +476,15 @@ function competitionMonthDistance(competition){
   const [currentYear,currentMonth]=current.split("-").map(Number);
   return (year-currentYear)*12+(month-currentMonth);
 }
+function competitionSchedule(competition){
+  const current=dateKey().slice(0,7);
+  const months=(competition.months||[]).filter(month=>month>=current).sort().slice(0,2);
+  if(!months.length)return "Schedule available in Competition Hub";
+  return months.map(month=>{
+    const [year,monthNumber]=month.split("-").map(Number);
+    return new Date(year,monthNumber-1,1).toLocaleDateString("en-US",{month:"short",year:"numeric"});
+  }).join(" · ");
+}
 function nextCompetition(){
   const all=competitionData.competitions||[];
   const goalIds=Object.keys(state.goals||{});
@@ -455,7 +502,7 @@ function nextCompetition(){
 function applyTheme(){
   document.documentElement.setAttribute("data-theme",state.theme);
   LS.set("scai_theme",state.theme);
-  $("#themeBtn").textContent=state.theme==="dark"?"浅色主题":"深色主题";
+  $("#themeBtn").textContent=state.theme==="dark"?"Light Mode":"Dark Mode";
 }
 function renderHero(){
   const status=dailyStatus();
@@ -475,22 +522,22 @@ function renderHero(){
     </div>
     <div class="hero-dashboard">
       <div class="dashboard-main">
-        <div class="dashboard-kicker">第 ${status.day} 天 · 本机学习进度</div>
-        <div class="dashboard-title"><b>今日训练</b><strong>${completed}/3</strong></div>
+        <div class="dashboard-kicker">DAY ${status.day} · LOCAL PROGRESS</div>
+        <div class="dashboard-title"><b>Today's Plan</b><strong>${completed}/3</strong></div>
         <div class="dashboard-progress"><i style="width:${completed/3*100}%"></i></div>
         <div class="task-list">
-          <div class="task-row ${status.vocab?"done":""}"><i></i><span>雅思词汇</span><span>${status.vocab?"完成":"待完成"}</span></div>
-          <div class="task-row ${status.listening?"done":""}"><i></i><span>剑桥精听</span><span>${status.listening?"完成":"待完成"}</span></div>
-          <div class="task-row ${status.programming?"done":""}"><i></i><span>C 语言训练</span><span>${status.programming?"完成":"待完成"}</span></div>
+          <div class="task-row ${status.vocab?"done":""}"><i></i><span>IELTS Vocabulary</span><span>${status.vocab?"Done":"Pending"}</span></div>
+          <div class="task-row ${status.listening?"done":""}"><i></i><span>Cambridge Listening</span><span>${status.listening?"Done":"Pending"}</span></div>
+          <div class="task-row ${status.programming?"done":""}"><i></i><span>C Programming</span><span>${status.programming?"Done":"Pending"}</span></div>
         </div>
       </div>
       <div class="dashboard-side">
-        <div class="side-stat blue"><span>核心课程总进度</span><b>${overall}%</b></div>
-        <div class="side-stat yellow"><span>连续打卡</span><b>${streak()} 天</b></div>
+        <div class="side-stat blue"><span>Core Course Progress</span><b>${overall}%</b></div>
+        <div class="side-stat yellow"><span>Current Streak</span><b>${streak()} days</b></div>
         <div class="competition-mini">
-          <small>最近关注竞赛</small>
-          <b>${competition?esc(competition.name):"暂未设置竞赛目标"}</b>
-          <span>${competition?esc(competition.dateLabel):"进入竞赛作战台添加目标"}</span>
+          <small>Next Competition</small>
+          <b>${competition?esc(competitionNames[competition.id]||competition.name):"No competition selected"}</b>
+          <span>${competition?esc(competitionSchedule(competition)):"Add a goal in the Competition Hub"}</span>
         </div>
       </div>
     </div>`;
@@ -514,18 +561,18 @@ function renderCourses(){
         <span class="course-mark">${esc(shortCodes[id]||course.name.slice(0,2))}</span>
         <span class="course-pct">${progress.pct}%</span>
       </div>
-      <h3>${esc(course.name)}</h3>
-      <div class="en">${esc(course.enName)}</div>
-      <div class="chapters">${esc(course.chapters)}</div>
+      <h3>${esc(course.enName)}</h3>
+      <div class="en">${course.semester==="fall"?"Fall 2026 · Core Course":"Self-paced Track"}</div>
+      <div class="chapters">${esc(courseChapters[id]||course.chapters)}</div>
       <div class="course-progress">
         <div class="course-progress-track"><i style="width:${progress.pct}%"></i></div>
-        <span><span>${progress.done}/${progress.total} 课完成</span><span>${progress.pct===100?"已完成":"继续学习"}</span></span>
+        <span><span>${progress.done}/${progress.total} lessons</span><span>${progress.pct===100?"Complete":"Continue"}</span></span>
       </div>
     </a>`;
   }).join("");
 }
 function renderMeta(){
-  $("#updatedAt").textContent=`竞赛数据更新：${competitionData.updated||meta.generated||""}`;
+  $("#updatedAt").textContent=`Competition data updated: ${competitionData.updated||meta.generated||""}`;
 }
 function render(){
   state.progress=LS.get("scai_progress",{});

@@ -38,8 +38,10 @@ async function centerDelta(page, selector) {
   await page.waitForTimeout(250);
   assert.strictEqual(await page.locator(".course-card").count(), 8, "expected eight core course cards");
   assert.strictEqual(await page.locator(".shortcut-card").count(), 4, "expected four shortcut cards");
-  assert((await page.textContent("#courseGrid")).includes("数学建模 1 · 微积分"), "calculus card missing");
-  assert((await page.textContent("#courseGrid")).includes("矩阵与线性代数"), "linear algebra card missing");
+  assert((await page.textContent("#courseGrid")).includes("Mathematical Modeling 1"), "calculus card missing");
+  assert((await page.textContent("#courseGrid")).includes("Matrices and Linear Algebra"), "linear algebra card missing");
+  assert.strictEqual(await page.locator(".landing-hero h1").evaluate(node => getComputedStyle(node).textAlign), "center", "hero title must be centered");
+  assert.strictEqual(await page.locator("body").evaluate(node => /[\u3400-\u9fff]/.test(node.innerText)), false, "landing page should be English-only");
 
   const today = dateKey(new Date());
   const calculusLesson = await page.evaluate(() => {
