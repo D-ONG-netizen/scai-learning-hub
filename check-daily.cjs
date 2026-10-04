@@ -113,9 +113,10 @@ assert.deepStrictEqual(
   await page.reload({ waitUntil: "load" });
   await page.waitForTimeout(250);
 
-  assert((await page.textContent("body")).includes("章节动态批次"), "flexible batch heading missing");
+  assert((await page.textContent("body")).includes("Chapter Batches + Spaced Review"), "flexible batch heading missing");
+  assert.strictEqual(await page.locator("body").evaluate(node => /[\u3400-\u9fff]/.test(node.innerText)), false, "daily page should be English-only");
   const initialStats = await page.textContent("#vocabStats");
-  assert(initialStats.includes("49 词"), "Chapter 6 first unit should show 49 words");
+  assert(initialStats.includes("49 words"), "Chapter 6 first unit should show 49 words");
   assert.strictEqual(await page.$$eval(".heat-cell", nodes => nodes.length), 56, "heatmap must show 56 days");
   assert.strictEqual(await page.$$eval(".pat-day", nodes => nodes.length), 56, "PAT roadmap must show 56 days");
   assert((await page.$$eval(".problem-row", nodes => nodes.length)) > 0, "current PAT problems must be visible");
@@ -155,9 +156,9 @@ assert.deepStrictEqual(
     await page.reload({ waitUntil: "load" });
     await page.waitForTimeout(80);
     const tabs = await page.textContent("#wordTabs");
-    assert(tabs.includes("复习 1"), `review offset +${offset} should be due`);
+    assert(tabs.includes("Review 1"), `review offset +${offset} should be due`);
     await page.click('[data-word-tab="review"]');
-    assert((await page.textContent("#wordList")).includes(`复习 +${offset} 天`), `review offset label +${offset} missing`);
+    assert((await page.textContent("#wordList")).includes(`Review +${offset}d`), `review offset label +${offset} missing`);
   }
 
   await page.evaluate(({ today, tomorrow, wordId }) => {
@@ -185,7 +186,7 @@ assert.deepStrictEqual(
   }, { today, tomorrow, wordId: firstWord.id });
   await page.reload({ waitUntil: "load" });
   await page.waitForTimeout(80);
-  assert((await page.textContent("#wordTabs")).includes("加练 1"), "forgot rating should create next-day extra review");
+  assert((await page.textContent("#wordTabs")).includes("Extra 1"), "forgot rating should create next-day extra review");
 
   const listeningSteps = await page.$$eval("[data-listening-step]", nodes => nodes.map(node => node.dataset.listeningStep));
   for (const step of listeningSteps) await page.check(`[data-listening-step="${step}"]`);

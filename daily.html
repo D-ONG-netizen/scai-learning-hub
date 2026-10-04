@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#58BDE8">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>SCAI 每日训练打卡</title>
+<title>SCAI Daily Training</title>
 <style>
 :root{
   --paper:#F4F2EC;
@@ -236,25 +236,26 @@ a{color:var(--green)}
 }
 </style>
 <link rel="stylesheet" href="ui-theme.css">
+<link rel="stylesheet" href="daily-theme.css">
 </head>
 <body>
 <header class="topbar">
   <a class="brand" href="landing.html">SCAI <span>DAILY</span></a>
   <div class="top-actions">
-    <a class="btn small" href="index.html#/home">完整版</a>
-    <a class="btn small" href="growth.html">竞赛计划</a>
-    <button class="btn small" id="exportBtn" type="button">导出进度</button>
-    <label class="btn small" for="importFile">导入进度</label>
+    <a class="btn small" href="index.html#/home">Full Dashboard</a>
+    <a class="btn small" href="growth.html">Competition Plan</a>
+    <button class="btn small" id="exportBtn" type="button">Export Progress</button>
+    <label class="btn small" for="importFile">Import Progress</label>
     <input id="importFile" type="file" accept=".json,application/json" hidden>
-    <button class="btn small" id="themeBtn" type="button">切换主题</button>
+    <button class="btn small" id="themeBtn" type="button">Dark Mode</button>
   </div>
 </header>
 
 <main class="shell">
   <section class="hero">
     <div>
-      <div class="eyebrow">Daily Practice Board · 从 2026-10-05 开始</div>
-      <h1 id="heroTitle">今天的训练台</h1>
+      <div class="eyebrow">Daily Practice Board · Starts 2026-10-05</div>
+      <h1 id="heroTitle">Today's Training Board</h1>
       <p id="heroText"></p>
     </div>
     <aside class="checkin-box">
@@ -266,21 +267,21 @@ a{color:var(--green)}
         <div class="ring" id="dailyRing"><b id="dailyPct">0%</b></div>
       </div>
       <div class="checkin-steps" id="checkinSteps"></div>
-      <button class="btn primary" id="checkinBtn" type="button" style="width:100%;margin-top:11px">完成今日打卡</button>
+      <button class="btn primary" id="checkinBtn" type="button" style="width:100%;margin-top:11px">Complete Today's Check-in</button>
     </aside>
   </section>
 
   <section class="dash" id="dash"></section>
 
   <div class="section-head">
-    <h2>今日训练</h2>
-    <span class="note">每天 00:00 进入新任务，未完成项保留为补学队列</span>
+    <h2>Today's Training</h2>
+    <span class="note">Tasks reset at 00:00; unfinished work stays in the catch-up queue.</span>
   </div>
   <section class="training-grid">
     <section class="panel training-main">
       <div class="panel-head">
-        <div><h3>雅思词汇 · 章节动态批次 + 遗忘曲线复习</h3><p id="vocabSub"></p></div>
-        <span class="status" id="vocabStatus">进行中</span>
+        <div><h3>IELTS Vocabulary · Chapter Batches + Spaced Review</h3><p id="vocabSub"></p></div>
+        <span class="status" id="vocabStatus">In Progress</span>
       </div>
       <div class="stat-line" id="vocabStats"></div>
       <div class="word-tabs" id="wordTabs"></div>
@@ -289,84 +290,84 @@ a{color:var(--green)}
         <span id="wordPageMeta"></span>
       </div>
       <div class="word-list" id="wordList"></div>
-      <div class="load-more"><button class="btn small" id="wordMoreBtn" type="button">加载更多</button></div>
+      <div class="load-more"><button class="btn small" id="wordMoreBtn" type="button">Load More</button></div>
       <div id="wordWarning"></div>
-      <button class="btn" id="vocabDoneBtn" type="button" style="margin-top:12px">完成今日词汇任务</button>
+      <button class="btn" id="vocabDoneBtn" type="button" style="margin-top:12px">Complete Vocabulary Session</button>
     </section>
 
     <section class="panel">
       <div class="panel-head">
-        <div><h3>剑桥雅思精听</h3><p id="listeningSub">Cambridge 10-21 · 每天一个 Section</p></div>
-        <span class="status" id="listeningStatus">进行中</span>
+        <div><h3>Cambridge IELTS Listening</h3><p id="listeningSub">Cambridge 10-21 · One section per day</p></div>
+        <span class="status" id="listeningStatus">In Progress</span>
       </div>
       <div id="listeningTask"></div>
       <div class="steps" id="listeningSteps"></div>
-      <a class="btn primary" id="dictationLink" href="https://www.idictation.cn/main/book" target="_blank" rel="noopener">打开爱听写</a>
+      <a class="btn primary" id="dictationLink" href="https://www.idictation.cn/main/book" target="_blank" rel="noopener">Open dictation practice</a>
     </section>
 
     <section class="panel">
       <div class="panel-head">
-        <div><h3>PTA PAT · 30 分钟</h3><p>223 道题拆分到 56 天，按题号和分值逐步完成</p></div>
-        <span class="status" id="programmingStatus">进行中</span>
+        <div><h3>PTA PAT · 30 Minutes</h3><p>223 problems distributed across 56 days by topic, score and sequence.</p></div>
+        <span class="status" id="programmingStatus">In Progress</span>
       </div>
       <div id="programmingTask"></div>
       <div class="pat-summary" id="patSummary"></div>
       <div class="pat-problems" id="programmingProblems"></div>
       <div class="timer">
         <div class="timer-display" id="timerDisplay">30:00</div>
-        <button class="btn small" id="timerToggle" type="button">开始</button>
-        <button class="btn small" id="timerReset" type="button">重置</button>
+        <button class="btn small" id="timerToggle" type="button">Start</button>
+        <button class="btn small" id="timerReset" type="button">Reset</button>
       </div>
       <div class="steps" id="programmingSteps"></div>
       <div class="form-grid">
-        <label>题目名称<input id="problemName" data-program-field="problemName" type="text" placeholder="写下你完成的题目"></label>
-        <label>练习结果<select id="problemResult" data-program-field="result">
-          <option value="">待记录</option>
-          <option value="independent">独立完成</option>
-          <option value="hint">提示后完成</option>
-          <option value="solution">看题解后重写</option>
+        <label>Problem Name<input id="problemName" data-program-field="problemName" type="text" placeholder="Record the problem you completed"></label>
+        <label>Result<select id="problemResult" data-program-field="result">
+          <option value="">Not recorded</option>
+          <option value="independent">Solved independently</option>
+          <option value="hint">Solved after a hint</option>
+          <option value="solution">Rewritten after reading solution</option>
         </select></label>
-        <label class="wide">错误类型<textarea id="problemErrors" data-program-field="errors" placeholder="如：数组越界、循环边界、类型转换、输入格式"></textarea></label>
+        <label class="wide">Mistake Type<textarea id="problemErrors" data-program-field="errors" placeholder="Examples: array bounds, loop boundary, type conversion, input format"></textarea></label>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-        <a class="btn primary" id="programmingLink" href="https://pintia.cn/problem-sets/2096403164988022784/exam/overview" target="_blank" rel="noopener">打开练习题</a>
-        <button class="btn" id="programmingDoneBtn" type="button">完成今日编程任务</button>
+        <a class="btn primary" id="programmingLink" href="https://pintia.cn/problem-sets/2096403164988022784/exam/overview" target="_blank" rel="noopener">Open PTA Problem Set</a>
+        <button class="btn" id="programmingDoneBtn" type="button">Complete PAT Session</button>
       </div>
     </section>
   </section>
 
   <div class="section-head">
-    <h2>8 周打卡记录</h2>
-    <span class="note">绿色为完整打卡，黄色为部分完成</span>
+    <h2>8-Week Check-in History</h2>
+    <span class="note">Green means complete; yellow means partially complete.</span>
   </div>
   <section class="panel heat-wrap"><div class="heat" id="heatmap"></div></section>
 
   <div class="section-head">
-    <h2>PTA 56 天 PAT 路线</h2>
-    <span class="note">223 题按知识点和分值分配到每天，已完成天数自动同步</span>
+    <h2>PTA 56-Day PAT Roadmap</h2>
+    <span class="note">223 problems grouped by topic and score. Completed days sync automatically.</span>
   </div>
   <section class="panel"><div class="pat-roadmap" id="patRoadmap"></div></section>
 
   <div class="section-head">
-    <h2>编程练习平台对比</h2>
-    <span class="note">当前主平台：PTA</span>
+    <h2>Programming Practice Platforms</h2>
+    <span class="note">Current primary platform: PTA</span>
   </div>
   <section class="panel platform-table-wrap">
     <table class="platform-table">
-      <thead><tr><th>平台</th><th>语言</th><th>难度</th><th>最适合</th><th>建议</th><th>说明</th></tr></thead>
+      <thead><tr><th>Platform</th><th>Language</th><th>Difficulty</th><th>Best For</th><th>Recommendation</th><th>Notes</th></tr></thead>
       <tbody id="platformRows"></tbody>
     </table>
   </section>
 
   <div class="section-head">
-    <h2>坚持建议</h2>
-    <span class="note">优先保证真实练习，不用打开页面代替完成</span>
+    <h2>Consistency Rules</h2>
+    <span class="note">Real practice is the goal; opening this page is not completion.</span>
   </div>
   <section class="advice-list" id="habitAdvice"></section>
 
   <footer class="footer">
-    <span>IELTS 词库来源：《雅思词汇真经》可检索文本层，仅存单词、章节和页码。</span>
-    <span>平台需自行登录；数据保存与备份均在本机浏览器完成。</span>
+    <span>IELTS vocabulary source: searchable text layer; only words, chapters and pages are stored.</span>
+    <span>Platforms require your own login. Progress and backups stay in this browser.</span>
   </footer>
 </main>
 <div class="toast" id="toast"></div>
@@ -383,6 +384,24 @@ const PAT=window.SCAI_PAT||{days:[],phases:[],totalDays:0,totalProblems:0,totalP
 const META=DAILY.meta||{};
 const LISTENING=DAILY.listening||{items:[]};
 const PROGRAMMING=DAILY.programming||{phases:[],platforms:[]};
+const LISTENING_STEP_LABELS={blind:"Blind listening",dictation:"Dictation",correct:"Correction",shadow:"Shadowing"};
+const ROUTINE_LABELS=["Review yesterday's mistakes and tests","Complete today's assigned problems","Record mistakes, edge cases and approach"];
+const PLATFORM_META={
+  pta:{name:"PTA",locale:"Chinese",difficulty:"Beginner to comprehensive",bestFor:"Course alignment and C fundamentals",recommend:"Primary platform",note:"Use the course problem set; login may be required."},
+  nowcoder:{name:"Nowcoder C",locale:"Chinese",difficulty:"Beginner",bestFor:"Input/output and syntax drills",recommend:"Add in week 4",note:"Use for extra input/output and grammar practice."},
+  leetcode:{name:"LeetCode China",locale:"Chinese",difficulty:"Easy to hard",bestFor:"Interview algorithms, arrays and strings",recommend:"Add in weeks 5-6",note:"Start with easy problems and skip unfamiliar data structures."},
+  luogu:{name:"Luogu",locale:"Chinese",difficulty:"Beginner to contest",bestFor:"Simulation, searching and dynamic programming",recommend:"Add after week 7",note:"Enter after basic syntax is stable."},
+  codeforces:{name:"Codeforces",locale:"English",difficulty:"Contest system",bestFor:"English statements and timed problem solving",recommend:"Limited use after week 7",note:"Start at 800-1000; rating is not the initial goal."},
+  hackerrank:{name:"HackerRank C",locale:"English",difficulty:"Beginner",bestFor:"Structured C modules",recommend:"Optional",note:"Useful for English statements and functions."},
+  exercism:{name:"Exercism C",locale:"English",difficulty:"Beginner to intermediate",bestFor:"Code quality and mentor feedback",recommend:"Optional",note:"Best for one carefully reviewed problem on weekends."}
+};
+const HABITS_EN=[
+  "Complete the real practice before checking in; opening this page is not completion.",
+  "Keep vocabulary and programming timers separate.",
+  "Export a learning backup every week.",
+  "If three days are missed, pause new words and clear review backlog first.",
+  "After a 30-day streak, increase problem difficulty before adding more platforms."
+];
 const $=(s,r)=>(r||document).querySelector(s);
 const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
 const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
@@ -428,8 +447,8 @@ function addDays(key,n){const d=parseDateKey(key);d.setDate(d.getDate()+n);retur
 function diffDays(a,b){return Math.round((parseDateKey(b)-parseDateKey(a))/86400000)}
 function dateLabel(key){
   const d=parseDateKey(key);
-  const week=["周日","周一","周二","周三","周四","周五","周六"][d.getDay()];
-  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · ${week}`;
+  const week=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d.getDay()];
+  return `${d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})} · ${week}`;
 }
 function todayKey(){return localDateKey(new Date())}
 function activeDateKey(){
@@ -462,7 +481,7 @@ function dateTask(key){
 function applyTheme(){
   document.documentElement.setAttribute("data-theme",state.theme);
   LS.set("scai_theme",state.theme);
-  $("#themeBtn").textContent=state.theme==="dark"?"浅色主题":"深色主题";
+  $("#themeBtn").textContent=state.theme==="dark"?"Light Mode":"Dark Mode";
 }
 function toast(message){
   const node=$("#toast");node.textContent=message;node.classList.add("show");
@@ -489,7 +508,7 @@ function buildWordUnits(){
         id:`${chapter.id}-part-${part}`,
         chapter:chapter.number,
         chapterTitle:chapter.title,
-        label:`Chapter ${chapter.number} · ${chapter.title} · 第 ${part}/${parts} 组`,
+        label:`Chapter ${chapter.number} · Part ${part}/${parts}`,
         part,
         parts,
         words:slice.map(word=>({...word,chapter:chapter.number,chapterTitle:chapter.title}))
@@ -566,18 +585,12 @@ function programmingTaskForDay(day){
       phase:plan.phase,
       plan,
       task:{
-        title:`PTA Day ${day} · ${plan.problems.length} 道题`,
-        goal:`${plan.focus} 今日题号：${ids}。目标分值约 ${plan.points} 分。`
+        title:`PTA Day ${day} · ${plan.problems.length} problems`,
+        goal:`${plan.focus} Today's IDs: ${ids}. Target score: ${plan.points} points.`
       }
     };
   }
-  for(const phase of PROGRAMMING.phases||[]){
-    if(day>=phase.days[0]&&day<=phase.days[1]){
-      const localIndex=day-phase.days[0];
-      return {day,phase:phase.title,task:phase.tasks[localIndex]||phase.tasks[phase.tasks.length-1]};
-    }
-  }
-  return {day,phase:"巩固与复盘",task:{title:"回炉本周错题",goal:"重写两道错题并补测试用例。"}};
+  return {day,phase:"Consolidation and Review",task:{title:"Review this week's mistakes",goal:"Rewrite two failed problems and add boundary test cases."}};
 }
 function firstUncompletedProgrammingDay(){
   const totalDays=PAT.totalDays||56;
@@ -642,7 +655,7 @@ function rateWord(wordId,rating,pool){
   renderDashboard();
 }
 function speak(word){
-  if(!("speechSynthesis"in window)){toast("当前浏览器不支持语音朗读");return}
+  if(!("speechSynthesis"in window)){toast("Speech synthesis is not supported in this browser.");return}
   window.speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(word);
   utterance.lang=/^[A-Za-z]/.test(word)?"en-GB":"en-US";
@@ -651,14 +664,14 @@ function speak(word){
 }
 function renderHero(){
   const day=studyDay(),date=activeDateKey(),before=diffDays(date,todayKey())>0;
-  $("#heroTitle").textContent=before?"训练从明天开始":"今天的训练台";
+  $("#heroTitle").textContent=before?"Training Starts Tomorrow":"Today's Training Board";
   $("#heroText").textContent=before
-    ? `计划从 ${dateLabel(date)} 开始。今天可以先预览词库、精听顺序和 C 语言任务，正式打卡将从明天计算。`
-    : "先完成雅思词汇、剑桥精听和 C 语言练习，再完成当日打卡。每天的记录只保存在当前浏览器。";
+    ? `The plan begins ${dateLabel(date)}. Preview the word bank, listening sequence and PTA work today; check-in starts tomorrow.`
+    : "Complete IELTS vocabulary, Cambridge listening and PTA practice before checking in. All records stay in this browser.";
   $("#dateTitle").textContent=dateLabel(date);
-  $("#dateMeta").textContent=`第 ${day} 天 · 自然日 00:00 切换 · ${state.profile.startDate} 起始`;
+  $("#dateMeta").textContent=`Day ${day} · Resets at 00:00 · Start date ${state.profile.startDate}`;
 }
-function statusText(done){return done?"已完成":"进行中"}
+function statusText(done){return done?"Complete":"In Progress"}
 function renderDashboard(){
   const pool=buildWordPool();
   const listening=firstUncompletedListening();
@@ -666,10 +679,10 @@ function renderDashboard(){
   const streak=calculateStreak();
   const vocabDay=Math.min(dayBatchCount(),studyDay());
   $("#dash").innerHTML=`
-    <article class="metric green"><b>${streak}</b><span>当前连续打卡天数</span></article>
-    <article class="metric"><b>${pool.newWords.length}</b><span>新词与补学待完成</span></article>
-    <article class="metric"><b>${pool.reviewWords.length+pool.extraWords.length}</b><span>今日到期复习词</span></article>
-    <article class="metric"><b>${listening?`C${listening.book}`:"完成"}</b><span>${programmingDay?`编程 Day ${programmingDay}`:"编程已进入复盘"}</span></article>`;
+    <article class="metric green"><b>${streak}</b><span>Current check-in streak</span></article>
+    <article class="metric"><b>${pool.newWords.length}</b><span>New or catch-up words</span></article>
+    <article class="metric"><b>${pool.reviewWords.length+pool.extraWords.length}</b><span>Vocabulary reviews due</span></article>
+    <article class="metric"><b>${listening?`C${listening.book}`:"Done"}</b><span>${programmingDay?`PAT Day ${programmingDay}`:"PAT review mode"}</span></article>`;
   renderCheckin();
 }
 function dayBatchCount(){return Math.min(WORD_UNITS.length,studyDay())}
@@ -686,10 +699,10 @@ function renderCheckin(){
   $("#dailyRing").style.setProperty("--p",pct);
   $("#dailyPct").textContent=pct+"%";
   $("#checkinSteps").innerHTML=[
-    ["雅思词汇","vocab"],["剑桥精听","listening"],["C 语言 30 分钟","programming"]
-  ].map(([label,key])=>`<div class="checkin-step ${req[key]?"done":""}"><span>${label}</span><b>${req[key]?"完成":"待完成"}</b></div>`).join("");
+    ["IELTS Vocabulary","vocab"],["Cambridge Listening","listening"],["PTA PAT 30 Minutes","programming"]
+  ].map(([label,key])=>`<div class="checkin-step ${req[key]?"done":""}"><span>${label}</span><b>${req[key]?"Complete":"Pending"}</b></div>`).join("");
   const done=!!state.checkins[activeDateKey()];
-  $("#checkinBtn").textContent=done?"今日已打卡":"完成今日打卡";
+  $("#checkinBtn").textContent=done?"Checked In Today":"Complete Today's Check-in";
   $("#checkinBtn").disabled=done||count<3;
 }
 function calculateStreak(){
@@ -708,44 +721,44 @@ function renderVocabulary(){
   const current=allPool[state.wordTab]||[];
   const total=pool.newWords.length+pool.reviewWords.length+pool.extraWords.length;
   const currentUnit=WORD_UNITS[studyDay()-1];
-  $("#vocabSub").textContent=`Chapter 6 起 · 按章节动态分批 · 目标约 ${state.profile.newWordsPerDay} 词/天（实际约 ${META.minWordsPerDay||30}-${META.maxWordsPerDay||60} 词） · 复习节点 ${(META.reviewOffsets||[]).join("/")} 天`;
+  $("#vocabSub").textContent=`From Chapter 6 · Chapter-balanced batches · Target ${state.profile.newWordsPerDay} words/day (${META.minWordsPerDay||30}-${META.maxWordsPerDay||60} actual) · Review intervals ${(META.reviewOffsets||[]).join("/")} days`;
   $("#vocabStats").innerHTML=`
-    <span class="stat-chip">${currentUnit?esc(currentUnit.label):"章末复习"} · <b>${pool.currentBatch.length}</b> 词</span>
-    <span class="stat-chip">补学 <b>${pool.backlog.length}</b></span>
-    <span class="stat-chip">到期复习 <b>${pool.reviewWords.length}</b></span>
-    <span class="stat-chip">加练 <b>${pool.extraWords.length}</b></span>
-    <span class="stat-chip">总待办 <b>${total}</b></span>`;
+    <span class="stat-chip">${currentUnit?esc(currentUnit.label):"Chapter review"} · <b>${pool.currentBatch.length}</b> words</span>
+    <span class="stat-chip">Catch-up <b>${pool.backlog.length}</b></span>
+    <span class="stat-chip">Reviews due <b>${pool.reviewWords.length}</b></span>
+    <span class="stat-chip">Extra practice <b>${pool.extraWords.length}</b></span>
+    <span class="stat-chip">Total pending <b>${total}</b></span>`;
   const task=dateTask(activeDateKey());
-  $("#vocabStatus").textContent=task.vocab?"已完成":"进行中";
+  $("#vocabStatus").textContent=task.vocab?"Complete":"In Progress";
   $("#vocabStatus").className="status "+(task.vocab?"done":"");
-  $("#vocabDoneBtn").textContent=task.vocab?"重新打开今日词汇任务":"完成今日词汇任务";
-  $("#pauseNewBtn").textContent=state.profile.pauseNew?"恢复每日新词":"暂停新增词";
+  $("#vocabDoneBtn").textContent=task.vocab?"Reopen Vocabulary Session":"Complete Vocabulary Session";
+  $("#pauseNewBtn").textContent=state.profile.pauseNew?"Resume New Words":"Pause New Words";
   $("#pauseNewBtn").setAttribute("aria-pressed",state.profile.pauseNew?"true":"false");
   $("#wordTabs").innerHTML=[
-    ["new","新词",pool.newWords.length],["review","复习",pool.reviewWords.length],
-    ["extra","加练",pool.extraWords.length],["completed","已标记",Object.keys(state.wordRecords).length]
+    ["new","New",pool.newWords.length],["review","Review",pool.reviewWords.length],
+    ["extra","Extra",pool.extraWords.length],["completed","Marked",Object.keys(state.wordRecords).length]
   ].map(([id,label,count])=>`<button class="tab ${state.wordTab===id?"active":""}" type="button" data-word-tab="${id}">${label} ${count}</button>`).join("");
   const items=state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).slice(0,state.wordLimit):current.slice(0,state.wordLimit);
-  $("#wordPageMeta").textContent=`${items.length} / ${state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).length:current.length} 项`;
-  $("#wordList").innerHTML=items.length?items.map(word=>renderWordCard(word,state.wordTab)).join(""):`<div class="empty">这个分类当前没有任务。</div>`;
+  $("#wordPageMeta").textContent=`${items.length} / ${state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).length:current.length} items`;
+  $("#wordList").innerHTML=items.length?items.map(word=>renderWordCard(word,state.wordTab)).join(""):`<div class="empty">No tasks in this category.</div>`;
   $("#wordMoreBtn").style.display=items.length<((state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).length:current.length))?"inline-flex":"none";
   $("#wordWarning").innerHTML=total>(DAILY.ielts&&DAILY.ielts.overloadThreshold||200)
-    ?`<div class="warning">当前待复习量较大。建议暂时停止新增词，先清完复习；点击上方“暂停新增词”即可。</div>`:"";
+    ?`<div class="warning">Review load is high. Pause new words temporarily and clear the review queue first.</div>`:"";
 }
 function renderWordCard(word,pool){
   const record=wordRecord(word.id);
   const done=Boolean(record&&record.firstLearnedDate&&(pool!=="new"||record.lastReviewedDate===activeDateKey()));
-  const chapter=word.chapter?`Chapter ${word.chapter} · ${word.chapterTitle}`:`Chapter ${word.Chapter||""}`;
-  const due=word.dueInfo&&word.dueInfo.type==="scheduled"?`复习 +${word.dueInfo.offset} 天`:word.dueInfo?"加练":"";
+  const chapter=word.chapter?`Chapter ${word.chapter}`:`Chapter ${word.Chapter||""}`;
+  const due=word.dueInfo&&word.dueInfo.type==="scheduled"?`Review +${word.dueInfo.offset}d`:word.dueInfo?"Extra practice":"";
   return `<article class="word-card ${done?"done":""} ${pool==="review"?"review":""} ${pool==="extra"?"extra":""}" data-word-id="${esc(word.id)}">
     <div class="word-head">
       <div><b>${esc(word.word)}</b><div class="word-meta">${esc(chapter)} · PDF p.${word.page}${due?" · "+due:""}</div></div>
-      <button class="speak" type="button" data-speak="${esc(word.word)}" aria-label="朗读 ${esc(word.word)}">▶</button>
+      <button class="speak" type="button" data-speak="${esc(word.word)}" aria-label="Pronounce ${esc(word.word)}">▶</button>
     </div>
     <div class="rate-row">
-      <button class="known" type="button" data-rate="known" data-word="${esc(word.id)}">认识</button>
-      <button class="fuzzy" type="button" data-rate="fuzzy" data-word="${esc(word.id)}">模糊</button>
-      <button class="forgot" type="button" data-rate="forgot" data-word="${esc(word.id)}">忘记</button>
+      <button class="known" type="button" data-rate="known" data-word="${esc(word.id)}">Known</button>
+      <button class="fuzzy" type="button" data-rate="fuzzy" data-word="${esc(word.id)}">Fuzzy</button>
+      <button class="forgot" type="button" data-rate="forgot" data-word="${esc(word.id)}">Forgot</button>
     </div>
   </article>`;
 }
@@ -753,33 +766,33 @@ function renderListening(){
   const item=firstUncompletedListening();
   const task=dateTask(activeDateKey());
   if(!item){
-    $("#listeningStatus").textContent="全部完成";
+    $("#listeningStatus").textContent="Complete";
     $("#listeningStatus").className="status done";
-    $("#listeningTask").innerHTML=`<div class="empty">C10-C21 已全部完成，进入整套模考和错题回炉模式。</div>`;
+    $("#listeningTask").innerHTML=`<div class="empty">Cambridge 10-21 is complete. Move to full mock tests and mistake review.</div>`;
     $("#listeningSteps").innerHTML="";
     return;
   }
   task.listeningId=item.id;
   const record=listeningRecord(item.id);
-  $("#listeningStatus").textContent=record.completedAt?"已完成":"进行中";
+  $("#listeningStatus").textContent=record.completedAt?"Complete":"In Progress";
   $("#listeningStatus").className="status "+(record.completedAt?"done":"");
   $("#listeningTask").innerHTML=`
     <div class="stat-line">
-      <span class="stat-chip">顺序 <b>${item.order}/192</b></span>
+      <span class="stat-chip">Order <b>${item.order}/192</b></span>
       <span class="stat-chip"><b>Cambridge ${item.book}</b></span>
       <span class="stat-chip">Test <b>${item.test}</b> · Section <b>${item.section}</b></span>
-      ${item.reviewAfterTest?`<span class="stat-chip">本日含 Test 回炉</span>`:""}
+      ${item.reviewAfterTest?`<span class="stat-chip">Includes Test review</span>`:""}
     </div>`;
   $("#listeningSteps").innerHTML=(LISTENING.steps||[]).map(step=>`
     <label class="step ${record.steps[step.id]?"done":""}">
       <input type="checkbox" data-listening-step="${step.id}" ${record.steps[step.id]?"checked":""}>
-      <span><b>${esc(step.label)} · ${step.minutes} 分钟</b><p>按精听流程完成再勾选。</p></span>
+      <span><b>${esc(LISTENING_STEP_LABELS[step.id]||step.id)} · ${step.minutes} min</b><p>Complete this step before checking it.</p></span>
     </label>`).join("");
   if(item.reviewAfterTest){
     $("#listeningSteps").insertAdjacentHTML("beforeend",`
       <label class="step ${record.steps.review?"done":""}">
         <input type="checkbox" data-listening-step="review" ${record.steps.review?"checked":""}>
-        <span><b>本 Test 回炉复习</b><p>找出最弱的 Section，重听错题和连读。</p></span>
+        <span><b>Test-level Review</b><p>Replay the weakest section, missed answers and connected speech.</p></span>
       </label>`);
   }
   saveAll();
@@ -793,9 +806,9 @@ function renderProgramming(){
   let day=firstUncompletedProgrammingDay();
   const task=dateTask(activeDateKey());
   if(!day){
-    $("#programmingStatus").textContent="PAT 路线已完成";
+    $("#programmingStatus").textContent="PAT Roadmap Complete";
     $("#programmingStatus").className="status done";
-    $("#programmingTask").innerHTML=`<div class="empty">已完成 223 道 PTA 练习题，继续复盘错题和限时训练。</div>`;
+    $("#programmingTask").innerHTML=`<div class="empty">All 223 PTA problems are complete. Continue mistake review and timed practice.</div>`;
     $("#patSummary").innerHTML="";
     $("#programmingProblems").innerHTML="";
     $("#programmingSteps").innerHTML="";
@@ -806,25 +819,25 @@ function renderProgramming(){
   const plan=detail.plan;
   const record=programmingRecord(day);
   const platform=platformForDay(day);
-  $("#programmingStatus").textContent=record.completedAt?"已完成":"进行中";
+  $("#programmingStatus").textContent=record.completedAt?"Complete":"In Progress";
   $("#programmingStatus").className="status "+(record.completedAt?"done":"");
   $("#programmingTask").innerHTML=`
     <div class="stat-line">
       <span class="stat-chip">Day <b>${day}/${PAT.totalDays||56}</b></span>
       <span class="stat-chip"><b>${esc(detail.phase)}</b></span>
-      <span class="stat-chip">主平台 <b>${esc(platform.name)}</b></span>
+      <span class="stat-chip">Platform <b>${esc(PLATFORM_META[platform.id]?.name||platform.name)}</b></span>
     </div>
     <div class="advice"><b>${esc(detail.task.title)}</b><p>${esc(detail.task.goal)}</p></div>`;
   if(plan){
     const solved=plan.problems.filter(problem=>record.problems[problem.id]).length;
     $("#patSummary").innerHTML=`
-      <div><span>今日题量</span><b>${plan.problems.length} 题</b></div>
-      <div><span>目标分值</span><b>${plan.points} 分</b></div>
-      <div><span>完成进度</span><b>${solved}/${plan.problems.length}</b></div>`;
+      <div><span>Problems Today</span><b>${plan.problems.length}</b></div>
+      <div><span>Target Score</span><b>${plan.points} pts</b></div>
+      <div><span>Completion</span><b>${solved}/${plan.problems.length}</b></div>`;
     $("#programmingProblems").innerHTML=plan.problems.map(problem=>`
       <label class="problem-row ${record.problems[problem.id]?"solved":""}">
         <input type="checkbox" data-pat-problem="${esc(problem.id)}" ${record.problems[problem.id]?"checked":""}>
-        <span><b>${esc(problem.id)}</b>${esc(problem.title)}</span>
+        <span><b>${esc(problem.id)}</b>${esc(/[\u3400-\u9fff]/.test(problem.title)?`PTA exercise ${problem.id}`:problem.title)}</span>
         <small>${problem.score} pts</small>
       </label>`).join("");
   }else{
@@ -832,12 +845,12 @@ function renderProgramming(){
     $("#programmingProblems").innerHTML="";
   }
   $("#programmingLink").href=platform.url;
-  $("#programmingLink").textContent="打开 "+platform.name;
+  $("#programmingLink").textContent="Open PTA Problem Set";
   $("#programmingSteps").innerHTML=(PROGRAMMING.routine||[]).map((step,i)=>{
     const key=["review","solve","log"][i]||`step${i}`;
     return `<label class="step ${record.steps[key]?"done":""}">
       <input type="checkbox" data-program-step="${key}" ${record.steps[key]?"checked":""}>
-      <span><b>${step.minutes} 分钟 · ${esc(step.label)}</b></span>
+      <span><b>${step.minutes} min · ${esc(ROUTINE_LABELS[i]||step.label)}</b></span>
     </label>`;
   }).join("");
   $$("[data-program-field]").forEach(input=>{
@@ -858,7 +871,7 @@ function renderPatRoadmap(){
         return `<div class="pat-day ${item.day===current?"current":""} ${done?"done":""}">
           <b>DAY ${pad(item.day)}</b>
           <span>${item.problems.map(problem=>problem.id).join(", ")}</span>
-          <small>${item.problems.length} 题 · ${item.points} 分</small>
+          <small>${item.problems.length} problems · ${item.points} pts</small>
         </div>`;
       }).join("")}</div>
     </section>`;
@@ -878,26 +891,29 @@ function renderHeatmap(){
     ].filter(Boolean).length:0;
     cells.push({key,day:offset+1,checked,count:req});
   }
-  $("#heatmap").innerHTML=`<div class="heat-label">周次</div>${Array.from({length:8},(_,i)=>`<div class="heat-label">W${i+1}</div>`).join("")}
+  $("#heatmap").innerHTML=`<div class="heat-label">Week</div>${Array.from({length:8},(_,i)=>`<div class="heat-label">W${i+1}</div>`).join("")}
     ${Array.from({length:7},(_,weekday)=>`
-      <div class="heat-label">${["日","一","二","三","四","五","六"][weekday]}</div>
-      ${cells.filter((_,i)=>i%7===weekday).map(cell=>`<div class="heat-cell ${cell.checked?"complete":cell.count?"partial":""}" title="${cell.key}"><span>D${cell.day}</span><small>${cell.checked?"完成":cell.count?cell.count+"/3":"—"}</small></div>`).join("")}`).join("")}`;
+      <div class="heat-label">${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][weekday]}</div>
+      ${cells.filter((_,i)=>i%7===weekday).map(cell=>`<div class="heat-cell ${cell.checked?"complete":cell.count?"partial":""}" title="${cell.key}"><span>D${cell.day}</span><small>${cell.checked?"Complete":cell.count?cell.count+"/3":"—"}</small></div>`).join("")}`).join("")}`;
 }
 function renderPlatforms(){
-  $("#platformRows").innerHTML=(PROGRAMMING.platforms||[]).map(p=>`
+  $("#platformRows").innerHTML=(PROGRAMMING.platforms||[]).map(p=>{
+    const info=PLATFORM_META[p.id]||{name:p.name,locale:p.locale,difficulty:p.difficulty,bestFor:p.bestFor,recommend:p.recommend,note:p.note};
+    return `
     <tr>
-      <td><a class="platform-name" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a></td>
-      <td>${esc(p.locale)}</td><td>${esc(p.difficulty)}</td><td>${esc(p.bestFor)}</td>
-      <td>${esc(p.recommend)}</td><td>${esc(p.note)}</td>
-    </tr>`).join("");
+      <td><a class="platform-name" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(info.name)}</a></td>
+      <td>${esc(info.locale)}</td><td>${esc(info.difficulty)}</td><td>${esc(info.bestFor)}</td>
+      <td>${esc(info.recommend)}</td><td>${esc(info.note)}</td>
+    </tr>`;
+  }).join("");
 }
 function renderAdvice(){
-  $("#habitAdvice").innerHTML=(DAILY.habits||[]).map(x=>`<article class="advice"><p>${esc(x)}</p></article>`).join("");
+  $("#habitAdvice").innerHTML=HABITS_EN.map(x=>`<article class="advice"><p>${esc(x)}</p></article>`).join("");
 }
 function updateTimerDisplay(){
   const total=Math.max(0,Math.floor(state.timer.remaining));
   $("#timerDisplay").textContent=`${pad(Math.floor(total/60))}:${pad(total%60)}`;
-  $("#timerToggle").textContent=state.timer.running?"暂停":"开始";
+  $("#timerToggle").textContent=state.timer.running?"Pause":"Start";
 }
 function timerTick(){
   if(state.timer.running){
@@ -907,7 +923,7 @@ function timerTick(){
       state.timer.lastTick=now;
       if(state.timer.remaining===0){
         state.timer.running=false;
-        toast("30 分钟训练完成");
+        toast("30-minute session complete.");
       }
       saveAll();
     }
@@ -926,7 +942,7 @@ function bind(){
   $("#wordMoreBtn").addEventListener("click",()=>{state.wordLimit+=40;renderVocabulary()});
   $("#pauseNewBtn").addEventListener("click",()=>{
     state.profile.pauseNew=!state.profile.pauseNew;saveAll();renderVocabulary();
-    toast(state.profile.pauseNew?"已暂停新增词，先清理积压":"已恢复每日新增词");
+    toast(state.profile.pauseNew?"New words paused. Clear the backlog first.":"New words resumed.");
   });
   $("#vocabDoneBtn").addEventListener("click",()=>{
     const task=dateTask(activeDateKey());task.vocab=!task.vocab;saveAll();renderVocabulary();renderDashboard();
@@ -990,7 +1006,7 @@ function bind(){
     });
   });
   $("#programmingDoneBtn").addEventListener("click",()=>{
-    const day=firstUncompletedProgrammingDay();if(!day){toast("PAT 路线已完成");return}
+    const day=firstUncompletedProgrammingDay();if(!day){toast("PAT roadmap is complete.");return}
     const record=programmingRecord(day);
     record.completedAt=new Date().toISOString();
     (PROGRAMMING.routine||[]).forEach((_,i)=>record.steps[["review","solve","log"][i]]=true);
@@ -999,7 +1015,7 @@ function bind(){
     const task=dateTask(activeDateKey());
     task.programmingDay=day;
     task.programmingDone=true;
-    saveAll();renderProgramming();renderDashboard();renderHeatmap();toast("已记录今天的编程训练");
+    saveAll();renderProgramming();renderDashboard();renderHeatmap();toast("PAT session recorded.");
   });
   $("#timerToggle").addEventListener("click",()=>{
     state.timer.lastTick=Date.now();state.timer.running=!state.timer.running;saveAll();updateTimerDisplay();
@@ -1008,9 +1024,9 @@ function bind(){
     state.timer.remaining=1800;state.timer.running=false;state.timer.lastTick=Date.now();saveAll();updateTimerDisplay();
   });
   $("#checkinBtn").addEventListener("click",()=>{
-    const req=dailyRequirements();if(Object.values(req).some(x=>!x)){toast("三项训练全部标记完成后才能打卡");return}
+    const req=dailyRequirements();if(Object.values(req).some(x=>!x)){toast("Complete all three training tasks before checking in.");return}
     const key=activeDateKey();state.checkins[key]={completedAt:new Date().toISOString(),taskCount:3};
-    saveAll();renderDashboard();renderHeatmap();toast("今日打卡完成");
+    saveAll();renderDashboard();renderHeatmap();toast("Today's check-in is complete.");
   });
   $("#exportBtn").addEventListener("click",()=>{
     const payload={
@@ -1021,20 +1037,20 @@ function bind(){
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
     const a=document.createElement("a");a.href=URL.createObjectURL(blob);
     a.download="scai-daily-backup-"+todayKey()+".json";document.body.appendChild(a);a.click();a.remove();
-    URL.revokeObjectURL(a.href);toast("每日训练进度已导出");
+    URL.revokeObjectURL(a.href);toast("Daily training progress exported.");
   });
   $("#importFile").addEventListener("change",async e=>{
     const file=e.target.files[0];if(!file)return;
     try{
       const data=JSON.parse(await file.text());
-      if(data.app!=="scai-daily"||!data.profile)throw new Error("不是每日训练备份文件");
+      if(data.app!=="scai-daily"||!data.profile)throw new Error("This is not a SCAI Daily backup file.");
       state.profile=Object.assign(state.profile,data.profile);
       state.wordRecords=data.wordRecords||{};
       state.dailyTasks=data.dailyTasks||{byDate:{},listening:{}};
       state.programming=data.programming||{};
       state.checkins=data.checkins||{};
-      saveAll();renderAll();toast("每日训练进度已导入");
-    }catch(error){toast("导入失败："+error.message)}
+      saveAll();renderAll();toast("Daily training progress imported.");
+    }catch(error){toast("Import failed: "+error.message)}
     e.target.value="";
   });
   document.addEventListener("keydown",e=>{
