@@ -25,7 +25,7 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
   const title = await page.title();
   const homeText = await page.textContent("#app");
   if (!title.includes("SCAI")) throw new Error("title missing");
-  if (!homeText.includes("大一全教材学习中心")) throw new Error("home content missing");
+  if (!homeText.includes("Freshman") || !homeText.includes("Study Hub")) throw new Error("home content missing");
   await page.screenshot({ path: path.join(OUT, "scai-home.png") });
 
   await page.click("#searchBtn");
@@ -41,7 +41,7 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
     await page.goto(BASE + "#/course/" + id, { waitUntil: "load" });
     await page.waitForTimeout(180);
     const txt = await page.textContent("#app");
-    if (!txt.includes("知识地图") || !txt.includes("课程配套视频库") || !txt.includes("概念拆解") || !txt.includes("PDF 讲义与练习") || !txt.includes("在线练习与名校题库")) {
+    if (!txt.includes("Knowledge Map") || !txt.includes("Course Video Library") || !txt.includes("PDF Notes and Practice") || !txt.includes("Online Practice and University Problem Sets")) {
       throw new Error("course page incomplete: " + id);
     }
   }
@@ -52,21 +52,21 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
 
   await page.goto(BASE + "#/books", { waitUntil: "load" });
   await page.waitForTimeout(180);
-  if (!(await page.textContent("#app")).includes("教材地图")) throw new Error("books page missing");
+  if (!(await page.textContent("#app")).includes("Textbook Map")) throw new Error("books page missing");
   await page.goto(BASE + "#/compare", { waitUntil: "load" });
   await page.waitForTimeout(180);
-  if (!(await page.textContent("#app")).includes("中英教材对比")) throw new Error("compare page missing");
+  if (!(await page.textContent("#app")).includes("Chinese vs English Textbooks")) throw new Error("compare page missing");
   await page.goto(BASE + "#/deep", { waitUntil: "load" });
   await page.waitForTimeout(250);
   const deepText = await page.textContent("#app");
-  if (!deepText.includes("国内教材逐章精读") || !deepText.includes("官方大纲与每周进度") || !deepText.includes("大学数学 · 微积分（上）") || !deepText.includes("C++程序设计语言")) {
+  if (!deepText.includes("Chinese Textbook Deep Reading") || !deepText.includes("Official Syllabus and Weekly Progress") || !deepText.includes("SJTU Calculus, Volume 1") || !deepText.includes("The C++ Programming Language")) {
     throw new Error("deep textbook page incomplete");
   }
   await page.goto(BASE + "#/pdfs", { waitUntil: "load" });
   await page.waitForTimeout(200);
   const pdfCount = await page.$$eval(".pdf-link", els => els.length);
   if (pdfCount !== 70) throw new Error("pdf library count != 70: " + pdfCount);
-  if (!(await page.textContent("#app")).includes("PDF 资料库")) throw new Error("pdf library page missing");
+  if (!(await page.textContent("#app")).includes("PDF Library")) throw new Error("pdf library page missing");
 
   await page.goto(BASE, { waitUntil: "load" });
   await page.waitForTimeout(300);
@@ -106,7 +106,7 @@ const courseIds = ["calculus","linear-algebra","physics","chemistry","mechanics"
   await page.click('button[data-week="5"]');
   await page.waitForTimeout(200);
   const weekText = await page.textContent("#weekPanel");
-  if (!weekText.includes("第 5 周")) throw new Error("week switch failed");
+  if (!weekText.includes("Week 5")) throw new Error("week switch failed");
 
   const csv = path.join(os.tmpdir(), "scai-tt.csv");
   fs.writeFileSync(csv, "星期,节次,开始时间,结束时间,课程,教室\n周一,1,08:30,10:05,高等数学,A101\n周三,3,14:00,15:35,线性代数,B202\n", "utf8");

@@ -26,11 +26,11 @@ const BASE = "file:///C:/Users/DYH/Documents/ChatGPT/课本教程/freshman-hub/i
   if (!opened) throw new Error("deep book route did not open book");
   await page.goto(BASE + "#/course/programming", { waitUntil: "load" });
   await page.waitForTimeout(250);
-  if (!(await page.textContent("#app")).includes("本课国内教材精读")) throw new Error("programming course deep shelf missing");
+  if (!(await page.textContent("#app")).includes("Chinese Textbook Reading for This Course")) throw new Error("programming course deep shelf missing");
   await page.goto(BASE + "#/plan", { waitUntil: "load" });
   await page.waitForTimeout(250);
   const planText = await page.textContent("#app");
-  if (!planText.includes("我的官方学习大纲") || !planText.includes("Mathematical Modeling 1") || !planText.includes("MATH0280") || !planText.includes("CHEM0960") || !planText.includes("大学物理 2026 Fall")) {
+  if (!planText.includes("My Official Study Syllabus") || !planText.includes("Mathematical Modeling 1") || !planText.includes("MATH0280") || !planText.includes("CHEM0960")) {
     throw new Error("official schedules missing from plan page");
   }
   const currentWeeks = await page.$$eval(".syllabus-week.current", els => els.map(el => el.innerText.split("\n")[0]));

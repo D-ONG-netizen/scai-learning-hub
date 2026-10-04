@@ -21,10 +21,10 @@ const BASE = process.env.GROWTH_BASE || "file:///C:/Users/DYH/Documents/ChatGPT/
     console.log("BODY", (await page.textContent("body")).slice(0, 1200));
     console.log("ERRORS", errors);
   }
-  if (!(await page.textContent("body")).includes("大一升学作战台")) throw new Error("growth hero missing");
+  if (!(await page.textContent("body")).includes("Freshman Competition Hub")) throw new Error("growth hero missing");
   if (await page.$$eval(".metric", els => els.length) !== 4) throw new Error("dashboard metrics missing");
   if (await page.$$eval(".comp-card", els => els.length) < 20) throw new Error("competition cards missing");
-  if (!(await page.textContent("#routeNotice")).includes("本部计算机学院")) throw new Error("transfer route notice missing");
+  if (!(await page.textContent("#routeNotice")).includes("main Computer Science College")) throw new Error("transfer route notice missing");
 
   await page.click('[data-category="cs"]');
   const csCards = await page.$$eval(".comp-card", els => els.length);
@@ -49,7 +49,7 @@ const BASE = process.env.GROWTH_BASE || "file:///C:/Users/DYH/Documents/ChatGPT/
   if (!storedGoals[goalId]) throw new Error("competition goal persistence failed");
 
   await page.click('[data-week="10"]');
-  if (!(await page.textContent("#weekPlan")).includes("第 10 周")) throw new Error("week selector failed");
+  if (!(await page.textContent("#weekPlan")).includes("Week 10")) throw new Error("week selector failed");
   const checkbox = page.locator('#weekPlan input[type="checkbox"]').first();
   await checkbox.check();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("scai_growth_progress") || "{}"));

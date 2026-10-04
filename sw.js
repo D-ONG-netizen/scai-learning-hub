@@ -1,4 +1,4 @@
-const CACHE = "scai-me1-v12";
+const CACHE = "scai-me1-v14";
 const CORE = [
   "./index.html",
   "./landing.html",
@@ -20,6 +20,8 @@ const CORE = [
   "./manifest.webmanifest",
   "./ui-theme.css",
   "./daily-theme.css",
+  "./ui-en.js",
+  "./ui-en-extra.js",
   "./icon.svg"
 ];
 
