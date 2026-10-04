@@ -9,8 +9,8 @@ function Test-ScaiHub {
   param([int]$Port)
 
   try {
-    $response = Invoke-WebRequest -Uri "http://127.0.0.1:$Port/index.html" -UseBasicParsing -TimeoutSec 1
-    return $response.StatusCode -eq 200 -and $response.Content -match "<title>SCAI ME1 Study Hub</title>"
+    $response = Invoke-WebRequest -Uri "http://127.0.0.1:$Port/landing.html" -UseBasicParsing -TimeoutSec 1
+    return $response.StatusCode -eq 200 -and $response.Content -match "<title>SCAI Learning Hub</title>"
   } catch {
     return $false
   }
@@ -20,9 +20,9 @@ function Open-ScaiHub {
   param([int]$Port)
 
   if (-not $NoBrowser) {
-    Start-Process "http://127.0.0.1:$Port/index.html"
+    Start-Process "http://127.0.0.1:$Port/landing.html"
   }
-  Write-Host "SCAI local website: http://127.0.0.1:$Port/index.html"
+  Write-Host "SCAI local website: http://127.0.0.1:$Port/landing.html"
 }
 
 $occupiedPorts = @(
