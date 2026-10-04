@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#24352F">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>SCAI 升学竞赛作战台</title>
+<style>
+:root{
+  --paper:#F4F2EC;
+  --surface:#FFFDF8;
+  --surface2:#EDEAE1;
+  --ink:#17211C;
+  --muted:#5E6A64;
+  --line:#D5D9D3;
+  --grid:rgba(23,33,28,.045);
+  --accent:#C4522E;
+  --accent-soft:#F4E2DA;
+  --green:#2E6E5E;
+  --green-soft:#DDECE6;
+  --blue:#356B8C;
+  --blue-soft:#DFEBF1;
+  --gold:#9A7400;
+  --gold-soft:#F4EACB;
+  --plum:#725B82;
+  --plum-soft:#EAE1EF;
+  --danger:#A83B2B;
+  --danger-soft:#F5DED9;
+  --shadow:0 16px 45px rgba(23,33,28,.09);
+  --radius:8px;
+  --serif:Georgia,"Times New Roman","Noto Serif SC","Songti SC",serif;
+  --sans:"Segoe UI","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --mono:"Cascadia Mono","Consolas","Courier New",monospace;
+}
+:root[data-theme="dark"]{
+  --paper:#111713;
+  --surface:#19211D;
+  --surface2:#222C27;
+  --ink:#EAF0EB;
+  --muted:#A2AEA7;
+  --line:#34423B;
+  --grid:rgba(234,240,235,.035);
+  --accent:#E07552;
+  --accent-soft:#3C271F;
+  --green:#72B6A4;
+  --green-soft:#213A32;
+  --blue:#80AEC8;
+  --blue-soft:#20343F;
+  --gold:#D1A83D;
+  --gold-soft:#3A3118;
+  --plum:#B69BCF;
+  --plum-soft:#332940;
+  --danger:#E08070;
+  --danger-soft:#3D2520;
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.topbar{
+  position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:11px clamp(16px,4vw,44px);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--surface) 92%,transparent);
+  backdrop-filter:blur(14px)
+}
+.brand{color:var(--ink);text-decoration:none;font:700 1rem/1 var(--serif);letter-spacing:.06em}
+.brand span{color:var(--accent)}
+.top-actions{display:flex;gap:8px;align-items:center}
+.btn{
+  min-height:38px;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:8px 13px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);text-decoration:none
+}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+.hero-link{font-size:.86rem}
+.shell{width:min(1240px,calc(100% - 32px));margin:0 auto;padding:30px 0 90px}
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.7fr);gap:28px;align-items:end;
+  padding:26px 0 28px;border-bottom:1px solid var(--line)
+}
+.eyebrow{font:700 .72rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:10px 0 8px;font:600 clamp(2.2rem,5.5vw,4rem)/1.02 var(--serif);text-wrap:balance}
+.hero p{max-width:70ch;margin:0;color:var(--muted)}
+.deadline-card{
+  position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;min-height:180px
+}
+.deadline-card .stamp{
+  display:inline-block;padding:4px 8px;border-radius:5px;background:var(--accent-soft);color:var(--accent);
+  font:700 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase
+}
+.deadline-card h2{margin:12px 0 4px;font:600 1.25rem/1.25 var(--serif)}
+.deadline-card .count{font:700 2.8rem/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--accent)}
+.deadline-card .sub{color:var(--muted);font-size:.84rem}
+.dash{display:grid;grid-template-columns:1.35fr .85fr .85fr .85fr;gap:11px;margin:22px 0 28px}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.metric b{display:block;font:700 1.8rem/1.1 var(--serif);font-variant-numeric:tabular-nums}
+.metric span{color:var(--muted);font-size:.78rem}
+.metric.accent{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:34px 0 13px}
+.section-head h2{margin:0;font:600 1.55rem/1.2 var(--serif)}
+.section-head .note{color:var(--muted);font-size:.82rem;text-align:right}
+.action-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.action-item{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px 15px 48px}
+.action-item .n{position:absolute;left:14px;top:14px;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--paper);font:700 .72rem/1 var(--mono)}
+.action-item b{display:block;font-size:.91rem}
+.action-item p{margin:2px 0 0;color:var(--muted);font-size:.81rem}
+.toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:12px}
+.filters{display:flex;flex-wrap:wrap;gap:7px}
+.filter{
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:7px 11px;font-size:.8rem
+}
+.filter:hover{color:var(--ink);border-color:var(--muted)}
+.filter.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search{position:relative;min-width:min(340px,100%)}
+.search input{width:100%;padding:10px 12px 10px 34px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink)}
+.search svg{position:absolute;left:11px;top:11px;width:16px;height:16px;color:var(--muted)}
+.subfilters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 16px}
+.subfilters select{padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink)}
+.result-count{margin-left:auto;color:var(--muted);font:600 .75rem/1 var(--mono)}
+.timeline-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px 17px 12px;overflow-x:auto}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(12,minmax(100px,1fr));min-width:1200px;padding-top:18px}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:36px;height:1px;background:var(--line)}
+.month{position:relative;padding-top:35px;text-align:center}
+.month::before{content:"";position:absolute;left:50%;top:30px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--line);transform:translateX(-50%);z-index:1}
+.month.has-events::before{background:var(--accent);border-color:var(--accent)}
+.month strong{display:block;font:700 .78rem/1.3 var(--mono);position:relative;z-index:2;pointer-events:none}
+.month small{display:block;color:var(--muted);font-size:.7rem;position:relative;z-index:2;pointer-events:none}
+.month button{position:absolute;inset:0;z-index:3;border:0;background:transparent;border-radius:6px}
+.month button:hover{background:var(--surface2)}
+.month.active button{background:var(--accent-soft)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.comp-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.comp-card[data-goal="1"]{border-color:var(--green)}
+.comp-main{padding:15px 16px}
+.comp-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.badges{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
+.badge{border:1px solid var(--line);background:var(--surface2);color:var(--muted);border-radius:999px;padding:3px 7px;font-size:.67rem;white-space:nowrap}
+.badge.priority{background:var(--accent-soft);color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+.badge.open{background:var(--green-soft);color:var(--green);border-color:color-mix(in srgb,var(--green) 35%,var(--line))}
+.badge.team{background:var(--blue-soft);color:var(--blue);border-color:color-mix(in srgb,var(--blue) 35%,var(--line))}
+.badge.observe{background:var(--gold-soft);color:var(--gold);border-color:color-mix(in srgb,var(--gold) 35%,var(--line))}
+.comp-card h3{margin:4px 0 5px;font:600 1.05rem/1.3 var(--serif)}
+.comp-meta{color:var(--muted);font-size:.8rem;margin:0}
+.deadline-line{display:flex;gap:8px;align-items:baseline;margin:10px 0 0;font-size:.82rem}
+.deadline-line b{color:var(--accent)}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.card-actions .btn{min-height:34px;padding:6px 10px;font-size:.78rem}
+.card-actions .goal[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+details.more{border-top:1px solid var(--line)}
+details.more summary{cursor:pointer;list-style:none;padding:10px 16px;color:var(--muted);font-size:.8rem}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:" +";font-family:var(--mono)}
+details.more[open] summary::after{content:" −"}
+.more-body{padding:0 16px 15px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.more-body h4{margin:0 0 5px;font:700 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.more-body ul{margin:0;padding-left:17px}
+.more-body li{font-size:.8rem;margin:4px 0}
+.comp-empty{grid-column:1/-1;padding:28px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius)}
+.roadmap-wrap{overflow-x:auto;padding-bottom:4px}
+.roadmap{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));gap:10px;min-width:980px}
+.stage{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--stage);border-radius:var(--radius);padding:14px}
+.stage .phase{font:700 .7rem/1 var(--mono);letter-spacing:.08em;color:var(--stage)}
+.stage h3{margin:8px 0 6px;font:600 1rem/1.3 var(--serif)}
+.stage ul{margin:0;padding-left:17px}
+.stage li{font-size:.8rem;margin:4px 0}
+.plan-board{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px}
+.week-strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px}
+.week-btn{min-width:51px;padding:7px 8px;border:1px solid var(--line);border-radius:7px;background:var(--surface2);color:var(--muted);font:700 .76rem/1 var(--mono)}
+.week-btn.current{border-color:var(--accent);color:var(--accent)}
+.week-btn.active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.week-head{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end;margin:14px 0}
+.week-head h3{margin:0;font:600 1.3rem/1.3 var(--serif)}
+.week-head p{margin:3px 0 0;color:var(--muted);font-size:.83rem}
+.progress-mini{display:grid;gap:5px;min-width:170px}
+.progress-track{height:8px;border-radius:999px;background:var(--surface2);overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--blue));transition:width .2s}
+.progress-mini span{color:var(--muted);font:600 .72rem/1 var(--mono);text-align:right}
+.task-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.task{position:relative;display:grid;grid-template-columns:24px 1fr;gap:9px;background:var(--surface2);border:1px solid var(--line);border-radius:7px;padding:12px}
+.task input{width:17px;height:17px;margin-top:3px;accent-color:var(--green)}
+.task b{display:block;font-size:.83rem}
+.task p{margin:3px 0 0;color:var(--muted);font-size:.79rem}
+.task.done{opacity:.65}
+.task.done b{text-decoration:line-through}
+.advice-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px}
+.advice{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
+.advice b{display:block;font-family:var(--serif);font-size:1rem;margin-bottom:5px}
+.advice p{margin:0;color:var(--muted);font-size:.82rem}
+.notice{border-left:4px solid var(--gold);background:var(--gold-soft);padding:12px 14px;border-radius:0 7px 7px 0;color:var(--ink);font-size:.85rem;margin:14px 0}
+.footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:.76rem}
+.footer code{font-family:var(--mono)}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .dash{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:1fr}
+  .action-rail,.advice-grid{grid-template-columns:1fr}
+  .toolbar{grid-template-columns:1fr}
+  .search{min-width:0}
+}
+@media(max-width:560px){
+  .shell{width:calc(100% - 20px)}
+  .topbar{align-items:flex-start;flex-wrap:wrap}
+  .hero h1{font-size:2.2rem}
+  .dash{grid-template-columns:1fr 1fr}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .section-head .note{text-align:left}
+  .more-body,.task-grid{grid-template-columns:1fr}
+  .week-head{grid-template-columns:1fr}
+  .footer{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  .topbar,.toolbar,.subfilters,.card-actions,.week-strip{display:none!important}
+  body{background:#fff}.shell{width:100%}.comp-card,.stage,.task{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html">SCAI <span>STUDY</span></a>
+  <div class="top-actions">
+    <a class="btn hero-link" href="daily.html">每日训练</a>
+    <a class="btn hero-link" href="index.html#/home">完整版首页</a>
+    <button class="btn" id="themeBtn" type="button">切换主题</button>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Freshman Route Control · 2026 Fall</div>
+      <h1>大一升学作战台</h1>
+      <p>把竞赛、报名入口、课程进度和转专业准备放在一张可操作的计划表里。目标不是参加更多比赛，而是在绩点、编程、科研、英语四条线上持续形成可验证成果。</p>
+    </div>
+    <aside class="deadline-card" id="nextDeadline"></aside>
+  </section>
+
+  <section class="dash" id="dashboard"></section>
+
+  <div class="section-head">
+    <h2>最近应该做什么</h2>
+    <span class="note">按优先级排列，不按比赛数量排列</span>
+  </div>
+  <div class="action-rail" id="actionRail"></div>
+
+  <div class="section-head">
+    <h2>竞赛与项目库</h2>
+    <span class="note">按方向筛选，点击卡片查看准备路线</span>
+  </div>
+  <div class="toolbar">
+    <div class="filters" id="categoryFilters"></div>
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input id="competitionSearch" type="search" placeholder="搜索竞赛、方向或准备内容" aria-label="搜索竞赛">
+    </label>
+  </div>
+  <div class="subfilters">
+    <select id="stageFilter" aria-label="筛选阶段"></select>
+    <select id="eligibilityFilter" aria-label="筛选参与条件">
+      <option value="all">全部参与条件</option>
+      <option value="available">当前可参加或准备</option>
+      <option value="later">下一周期或需选拔</option>
+    </select>
+    <button class="filter active" id="monthClear" type="button">显示全部月份</button>
+    <span class="result-count" id="resultCount"></span>
+  </div>
+  <div class="timeline-wrap">
+    <div class="timeline" id="competitionTimeline"></div>
+  </div>
+  <div class="cards" id="competitionCards" style="margin-top:12px"></div>
+
+  <div class="section-head">
+    <h2>大一到大三升学路线</h2>
+    <span class="note">每阶段只保留最重要的产出</span>
+  </div>
+  <div class="roadmap-wrap">
+    <div class="roadmap" id="roadmap"></div>
+  </div>
+
+  <div class="section-head">
+    <h2>18 周课程与竞赛双轨计划</h2>
+    <span class="note">课程部分对齐数学建模、线代、物理、化学官方大纲</span>
+  </div>
+  <section class="plan-board">
+    <div class="week-strip" id="weekStrip"></div>
+    <div id="weekPlan"></div>
+  </section>
+
+  <div class="section-head">
+    <h2>执行建议</h2>
+    <span class="note">从效率手册和升学规则中提炼</span>
+  </div>
+  <div class="advice-grid" id="adviceGrid"></div>
+  <div class="notice" id="routeNotice"></div>
+
+  <footer class="footer">
+    <span>资料核对日期：<code id="updatedAt"></code>。竞赛日期可能调整，以官方通知为准。</span>
+    <span>本页与完整版共用本地学习数据。</span>
+  </footer>
+</main>
+
+<script src="data-competitions.js"></script>
+<script>
+(function(){
+"use strict";
+const competitions=window.SCAI_COMPETITIONS||{categories:[],stages:[],competitions:[]};
+const plan=window.SCAI_GROWTH_PLAN||{weeks:[],tracks:[]};
+const $=(s,r)=>(r||document).querySelector(s);
+const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+const LS={
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const state={
+  theme:LS.get("scai_theme","light"),
+  category:"all",
+  stage:"all",
+  eligibility:"all",
+  month:"all",
+  query:"",
+  goals:LS.get("scai_competition_goals",{}),
+  progress:LS.get("scai_growth_progress",{}),
+  week:null
+};
+
+function calendarWeek(){
+  const start=new Date(2026,7,31,0,0,0);
+  const diff=Math.floor((new Date()-start)/86400000);
+  return Math.max(1,Math.min(plan.weeks.length||1,Math.floor(diff/7)+1));
+}
+function applyTheme(){
+  document.documentElement.setAttribute("data-theme",state.theme);
+  LS.set("scai_theme",state.theme);
+  $("#themeBtn").textContent=state.theme==="dark"?"浅色主题":"深色主题";
+}
+function daysUntil(date){
+  if(!date) return null;
+  const target=new Date(date+"T23:59:59");
+  return Math.ceil((target-new Date())/86400000);
+}
+function formatDate(date){
+  if(!date) return "";
+  const [y,m,d]=date.split("-");
+  return `${y}.${m}.${d}`;
+}
+function categoryLabel(id){
+  const item=competitions.categories.find(x=>x.id===id);
+  return item?item.label:id;
+}
+function stageLabel(id){
+  const item=competitions.stages.find(x=>x.id===id);
+  return item?item.label:id;
+}
+function filtered(){
+  const q=state.query.trim().toLowerCase();
+  return competitions.competitions.filter(c=>{
+    const hay=[c.name,categoryLabel(c.category),c.eligibility,c.dateLabel,c.registration,c.value,...(c.prepare||[]),...(c.tags||[])].join(" ").toLowerCase();
+    if(state.category!=="all"&&c.category!==state.category)return false;
+    if(state.stage!=="all"&&c.stage!==state.stage)return false;
+    if(state.eligibility==="available"&&["later","observe"].includes(c.stage))return false;
+    if(state.eligibility==="later"&&!["later","observe"].includes(c.stage))return false;
+    if(state.month!=="all"&&!(c.months||[]).includes(state.month))return false;
+    return !q||hay.includes(q);
+  });
+}
+function nextDeadline(){
+  const candidates=competitions.competitions
+    .filter(c=>c.deadline&&daysUntil(c.deadline)>=0)
+    .sort((a,b)=>a.deadline.localeCompare(b.deadline));
+  return candidates[0]||null;
+}
+function renderHero(){
+  const next=nextDeadline();
+  if(next){
+    const days=daysUntil(next.deadline);
+    $("#nextDeadline").innerHTML=`
+      <span class="stamp">最近节点</span>
+      <h2>${esc(next.name)}</h2>
+      <div class="count">${days} 天</div>
+      <div class="sub">${esc(next.deadlineLabel)} · ${formatDate(next.deadline)}</div>
+      <div class="card-actions"><a class="btn primary" href="${esc(next.url)}" target="_blank" rel="noopener">打开官方入口</a></div>`;
+  }else{
+    $("#nextDeadline").innerHTML=`
+      <span class="stamp">当前状态</span>
+      <h2>没有登记中的紧急截止日期</h2>
+      <div class="count">稳住</div>
+      <div class="sub">继续推进课程、算法和项目；新比赛通知发布后再加入。</div>`;
+  }
+}
+function renderDashboard(){
+  const all=competitions.competitions;
+  const goals=all.filter(c=>state.goals[c.id]).length;
+  const current=all.filter(c=>["open","prepare"].includes(c.stage)).length;
+  const totalTasks=all.length;
+  const doneTasks=goals;
+  $("#dashboard").innerHTML=`
+    <article class="metric accent"><b>${calendarWeek()}</b><span>当前学期周次</span></article>
+    <article class="metric"><b>${current}</b><span>当前可报 / 可准备</span></article>
+    <article class="metric"><b>${goals}</b><span>已加入个人备战</span></article>
+    <article class="metric"><b>${totalTasks-doneTasks}</b><span>仍可探索的项目</span></article>`;
+}
+function renderActions(){
+  const actions=[
+    ["确认转专业范围","向学院确认只能院内转，还是可申请本部计算机学院。"],
+    ["建立编程底座","C++、数据结构、CSP真题；这是转CS最直接的证据。"],
+    ["组队与项目","APMCM/美赛练建模，大创/实验室形成长期成果。"]
+  ];
+  $("#actionRail").innerHTML=actions.map((x,i)=>`
+    <article class="action-item"><span class="n">0${i+1}</span><b>${esc(x[0])}</b><p>${esc(x[1])}</p></article>`).join("");
+}
+function renderFilters(){
+  $("#categoryFilters").innerHTML=competitions.categories.map(c=>`
+    <button class="filter ${state.category===c.id?"active":""}" type="button" data-category="${c.id}" aria-pressed="${state.category===c.id}">${esc(c.label)}</button>`).join("");
+  $("#stageFilter").innerHTML=competitions.stages.map(s=>`<option value="${s.id}">${esc(s.label)}</option>`).join("");
+  $("#stageFilter").value=state.stage;
+}
+function monthList(){
+  return ["2026-09","2026-10","2026-11","2026-12","2027-01","2027-02","2027-03","2027-04","2027-05","2027-06","2027-07","2027-08","2027-09","2027-10"];
+}
+function monthLabel(month){
+  const [year,m]=month.split("-");
+  return `<strong>${Number(m)}月</strong><small>${year.slice(2)}</small>`;
+}
+function renderTimeline(){
+  const months=monthList();
+  $("#competitionTimeline").innerHTML=months.map(month=>{
+    const count=competitions.competitions.filter(c=>(c.months||[]).includes(month)).length;
+    return `<div class="month ${count?"has-events":""} ${state.month===month?"active":""}">
+      <button type="button" data-month="${month}" aria-label="筛选${month}"></button>
+      ${monthLabel(month)}
+      <small>${count?count+" 项":""}</small>
+    </div>`;
+  }).join("");
+  $("#monthClear").classList.toggle("active",state.month==="all");
+}
+function priorityClass(c){
+  return c.stage==="open"?"open":c.stage==="observe"?"observe":c.priority==="S"?"priority":"";
+}
+function renderCards(){
+  const list=filtered();
+  $("#resultCount").textContent=`${list.length} / ${competitions.competitions.length} 项`;
+  $("#competitionCards").innerHTML=list.length?list.map(c=>`
+    <article class="comp-card" data-goal="${state.goals[c.id]?1:0}">
+      <div class="comp-main">
+        <div class="comp-top">
+          <div>
+            <div class="eyebrow">${esc(categoryLabel(c.category))} · ${esc(c.eligibility)}</div>
+            <h3>${esc(c.name)}</h3>
+          </div>
+          <div class="badges">
+            <span class="badge ${priorityClass(c)}">${c.priority==="S"?"最高优先":c.priority==="A"?"高优先":"拓展"}</span>
+            <span class="badge">${esc(stageLabel(c.stage))}</span>
+          </div>
+        </div>
+        <p class="comp-meta">${esc(c.dateLabel)}</p>
+        <p class="deadline-line"><b>${esc(c.deadlineLabel)}</b><span>${esc(c.registration)}</span></p>
+      </div>
+      <div class="card-actions" style="padding:0 16px 14px">
+        <button class="btn goal" type="button" data-goal-id="${esc(c.id)}" aria-pressed="${state.goals[c.id]?true:false}">${state.goals[c.id]?"已加入备战":"加入备战"}</button>
+        <a class="btn primary" href="${esc(c.url)}" target="_blank" rel="noopener">报名 / 官方入口</a>
+        ${c.sourceUrl&&c.sourceUrl!==c.url?`<a class="btn" href="${esc(c.sourceUrl)}" target="_blank" rel="noopener">政策 / 通知</a>`:""}
+      </div>
+      <details class="more">
+        <summary>查看价值、目标与准备路线</summary>
+        <div class="more-body">
+          <div>
+            <h4>为什么值得</h4>
+            <p>${esc(c.value)}</p>
+            <h4 style="margin-top:10px">阶段目标</h4>
+            <p>${esc(c.target)}</p>
+          </div>
+          <div>
+            <h4>准备清单</h4>
+            <ul>${(c.prepare||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+          </div>
+        </div>
+      </details>
+    </article>`).join(""):`<div class="comp-empty">当前筛选没有结果。清除月份或更换分类试试。</div>`;
+}
+function renderRoadmap(){
+  const stages=[
+    ["大一上","打底",["GPA前20%","C++语法与STL","APMCM/美赛体验","建立GitHub"]],
+    ["大一下","转向",["院内转CS/AI","CSP 200+","蓝桥杯/天梯赛","大创立项"]],
+    ["大二上","深化",["必修保持高绩点","CSP 300+","ICPC/CCPC校赛","数学竞赛"]],
+    ["大二下","产出",["数学建模国赛","科研项目阶段成果","暑期实习/实验室","英语六级500+"]],
+    ["大三","冲刺",["论文/软著/竞赛","联系科研导师","参加夏令营/预推免","完成综测材料"]]
+  ];
+  const colors=["var(--accent)","var(--green)","var(--blue)","var(--gold)","var(--plum)"];
+  $("#roadmap").innerHTML=stages.map((s,i)=>`
+    <article class="stage" style="--stage:${colors[i]}">
+      <div class="phase">${esc(s[0])} · ${esc(s[1])}</div>
+      <h3>${i===0?"完成第一次能力定位":"形成下一层证据"}</h3>
+      <ul>${s[2].map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    </article>`).join("");
+}
+function renderWeekStrip(){
+  const current=calendarWeek();
+  const selected=state.week||current;
+  $("#weekStrip").innerHTML=plan.weeks.map(w=>`
+    <button class="week-btn ${w.week===current?"current":""} ${w.week===selected?"active":""}" type="button" data-week="${w.week}" aria-pressed="${w.week===selected}">W${w.week}</button>`).join("");
+}
+function taskDone(week,key){return !!state.progress[`${week}:${key}`]}
+function renderWeekPlan(){
+  const week=Number(state.week||calendarWeek());
+  const item=plan.weeks.find(x=>x.week===week)||plan.weeks[0];
+  if(!item)return;
+  const tracks=plan.tracks||[];
+  const keys=["gpa","coding","contest","research","english"];
+  const done=keys.filter(k=>taskDone(week,k)).length;
+  const pct=Math.round(done/keys.length*100);
+  $("#weekPlan").innerHTML=`
+    <div class="week-head">
+      <div><h3>第 ${week} 周 · ${esc(item.dates)}</h3><p>${esc(item.verify)}</p></div>
+      <div class="progress-mini">
+        <div class="progress-track"><div class="progress-fill" id="weekProgressFill" style="width:${pct}%"></div></div>
+        <span id="weekProgressText">${done}/${keys.length} 项完成</span>
+      </div>
+    </div>
+    <div class="task-grid">
+      ${tracks.map((t,i)=>{
+        const key=keys[i];
+        const checked=taskDone(week,key);
+        return `<label class="task ${checked?"done":""}" data-task="${week}:${key}">
+          <input type="checkbox" data-week="${week}" data-track="${key}" ${checked?"checked":""}>
+          <span><b style="color:${t.color}">${esc(t.title)}</b><p>${esc(item[key]||"")}</p></span>
+        </label>`;
+      }).join("")}
+    </div>`;
+}
+function renderAdvice(){
+  const advice=[
+    ["成绩决定资格，竞赛决定排序位置","推免综合成绩中课程占60%，科研和专业能力占35%。先把课内成绩保持住，再投入竞赛。"],
+    ["一个真实项目胜过一堆证书","大创、实验室代码、技术报告和可解释的个人贡献，比只看名称的奖项更容易通过审核与面试。"],
+    ["每周预设一个可验收结果","例如“完成12道算法题”“写出美赛摘要初稿”“向导师发送一页研究计划”，避免长期停留在收藏和报名。"],
+    ["英语是隐藏门槛","六级425只是最低线，目标是500+；英文报告、答辩和全英课程都需要持续训练。"],
+    ["转专业先确认路径","在投入大量竞赛前，先向学院确认你能申请的是院内CS/AI还是本部计算机学院。"],
+    ["保研时间线从大三开始加速","大三下参加春令营/夏令营，大四上完成预推免与正式填报，所以前两年的成绩和作品不能拖。"]
+  ];
+  $("#adviceGrid").innerHTML=advice.map(x=>`<article class="advice"><b>${esc(x[0])}</b><p>${esc(x[1])}</p></article>`).join("");
+}
+function updateWeekProgress(){
+  const week=Number(state.week||calendarWeek());
+  const keys=["gpa","coding","contest","research","english"];
+  const done=keys.filter(k=>taskDone(week,k)).length;
+  const pct=Math.round(done/keys.length*100);
+  const fill=$("#weekProgressFill"), text=$("#weekProgressText");
+  if(fill)fill.style.width=pct+"%";
+  if(text)text.textContent=`${done}/${keys.length} 项完成`;
+}
+function bind(){
+  $("#themeBtn").addEventListener("click",()=>{state.theme=state.theme==="dark"?"light":"dark";applyTheme()});
+  $("#categoryFilters").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-category]");if(!btn)return;
+    state.category=btn.dataset.category;renderFilters();renderCards();
+  });
+  $("#stageFilter").addEventListener("change",e=>{state.stage=e.target.value;renderCards()});
+  $("#eligibilityFilter").addEventListener("change",e=>{state.eligibility=e.target.value;renderCards()});
+  $("#monthClear").addEventListener("click",()=>{state.month="all";renderTimeline();renderCards()});
+  $("#competitionTimeline").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-month]");if(!btn)return;
+    state.month=state.month===btn.dataset.month?"all":btn.dataset.month;
+    renderTimeline();renderCards();
+  });
+  $("#competitionSearch").addEventListener("input",e=>{state.query=e.target.value;renderCards()});
+  $("#competitionCards").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-goal-id]");if(!btn)return;
+    const id=btn.dataset.goalId;
+    if(state.goals[id])delete state.goals[id];else state.goals[id]={ts:Date.now()};
+    LS.set("scai_competition_goals",state.goals);
+    renderCards();renderDashboard();
+  });
+  $("#weekStrip").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-week]");if(!btn)return;
+    state.week=Number(btn.dataset.week);renderWeekStrip();renderWeekPlan();
+  });
+  $("#weekPlan").addEventListener("change",e=>{
+    if(e.target.type!=="checkbox")return;
+    const key=`${e.target.dataset.week}:${e.target.dataset.track}`;
+    if(e.target.checked)state.progress[key]=true;else delete state.progress[key];
+    LS.set("scai_growth_progress",state.progress);
+    e.target.closest(".task").classList.toggle("done",e.target.checked);
+    updateWeekProgress();
+  });
+}
+function init(){
+  applyTheme();
+  renderHero();renderDashboard();renderActions();renderFilters();renderTimeline();renderCards();renderRoadmap();renderWeekStrip();renderWeekPlan();renderAdvice();
+  $("#updatedAt").textContent=competitions.updated||"";
+  $("#routeNotice").textContent="重要口径：2026年校级转专业通知限制匹兹堡学院学生原则上只能在学院内转专业；奥克兰学院公开介绍说明可在其五个专业间申请转专业。是否能申请本部计算机学院必须向学院和教务处书面确认。";
+  bind();
+}
+init();
+})();
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
-# SCAI ME1 Study Hub · v2.2.0（第四版）
+# SCAI ME1 Study Hub · v2.3.0（本地完整版）
 
-川大奥克兰学院机械 1 班大一全教材学习网站，双击 `index.html` 即可使用，无需安装或构建。第四版把官方课程大纲设为周计划主线，新增 CHEM0960 官方进度、国内教材逐章精读、独立计算机编程课程，以及课件解析后自动生成知识点、易错点、自测题和思维导图。
+川大奥克兰学院机械 1 班大一全教材学习网站。本项目仅供个人在本机使用，不包含公开部署、国内分享版或线上托管配置。第五版把官方课程大纲设为周计划主线，新增升学竞赛、每日训练、雅思词汇遗忘曲线、剑桥雅思精听和 C 语言训练。
 
 ## 版本历史
 
@@ -8,6 +8,15 @@
 - v2.0.0：第二版，加入机械设计制造及其自动化六本国内教材的双线映射、学年计划、CS C/C++ 自学子应用
 - v2.1.0：第三版，加入上海交大微积分、张三慧物理、C++、汇编、大学计算机基础逐章精读；接入数学建模、线性代数、物理官方大纲与周次；新增独立计算机编程课程
 - v2.2.0：第四版，把课程大纲设为周计划主线；加入 CHEM0960 官方进度；课件上传后自动生成知识点、易错点、自测问题和思维导图
+- v2.3.0：第五版，改为本机个人版；新增升学竞赛作战台、每日训练、雅思词汇动态分批、C10-C21 精听、C 语言 56 天训练和打卡热力图
+
+## 本机运行
+
+- 双击桌面快捷方式 `SCAI本地学习中心`
+- 或在 `freshman-hub` 中双击 `启动学习网站.cmd`
+- 本机地址：`http://127.0.0.1:8765/index.html`
+
+启动脚本只在本机打开 `127.0.0.1`，不会上传任何文件，也不会创建公网地址。学习进度、词卡、打卡和编程记录全部保存在当前浏览器。
 
 ## 已整合教材
 
@@ -30,6 +39,8 @@
   - 姚琳《大学计算机基础》
   - 张三慧《大学物理学》力学热学分册、电磁光学量子分册、热学光学量子分册、学习辅导
 - 官方进度：Mathematical Modeling 1、MATH0280 Linear Algebra、CHEM0960、大学物理 2026 Fall
+- 升学竞赛作战台：`growth.html`，含竞赛筛选、月份时间轴、官方报名入口、个人备战清单、18周课程与竞赛双轨计划
+- 每日训练台：`daily.html`，含雅思词汇遗忘曲线、剑桥雅思 C10-C21 精听、C 语言 56 天训练、计时器、打卡热力图与本地导入导出
 
 ## 功能
 
@@ -48,6 +59,7 @@
 - 离线支持：通过本地服务访问时自动注册 PWA，核心页面与 PDF 讲义可离线打开
 - 课件上传：支持 `.txt/.md/.pdf/.docx/.pptx`；上传后自动生成课程关键知识点、易错点、自测问题和思维导图，在线 AI 失败时自动使用本地分析
 - AI 助手：默认 DeepSeek，可换 Base URL 与模型；未联网或请求失败时自动使用离线模式
+- 每日训练：雅思词汇按完整 Chapter 动态分成约 30-60 词的连续批次，不在一个批次内混入下一章；复习节点为第 1、2、4、7、15、30 天
 
 ## PDF 资料
 
@@ -74,7 +86,7 @@ API Key 存放在 `config.local.js`，该文件已被 `.gitignore` 忽略，不�
 
 ## 本地数据
 
-浏览器本地存储键：`scai_llm_config`、`scai_uploaded_courseware`、`scai_courseware_insights`、`scai_quiz_scores`、`scai_progress`、`scai_notes`、`scai_dual_group`、`scai_plan_week`、`scai_timetable`。设置面板中的“清除本地数据”可一键清空。
+浏览器本地存储键：`scai_llm_config`、`scai_uploaded_courseware`、`scai_courseware_insights`、`scai_quiz_scores`、`scai_progress`、`scai_notes`、`scai_dual_group`、`scai_plan_week`、`scai_timetable`、`scai_daily_profile`、`scai_word_records`、`scai_daily_tasks`、`scai_programming_records`、`scai_daily_checkins`。设置面板中的“清除本地数据”可一键清空。
 
 ## 课表导入格式
 

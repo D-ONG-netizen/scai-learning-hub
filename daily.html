@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#24352F">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>SCAI 每日训练打卡</title>
+<style>
+:root{
+  --paper:#F4F2EC;
+  --surface:#FFFDF8;
+  --surface2:#EDEAE1;
+  --ink:#17211C;
+  --muted:#5E6A64;
+  --line:#D5D9D3;
+  --grid:rgba(23,33,28,.045);
+  --accent:#C4522E;
+  --accent-soft:#F4E2DA;
+  --green:#2E6E5E;
+  --green-soft:#DDECE6;
+  --blue:#356B8C;
+  --blue-soft:#DFEBF1;
+  --gold:#9A7400;
+  --gold-soft:#F4EACB;
+  --plum:#725B82;
+  --plum-soft:#EAE1EF;
+  --danger:#A83B2B;
+  --danger-soft:#F5DED9;
+  --shadow:0 16px 45px rgba(23,33,28,.09);
+  --radius:8px;
+  --serif:Georgia,"Times New Roman","Noto Serif SC","Songti SC",serif;
+  --sans:"Segoe UI","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --mono:"Cascadia Mono","Consolas","Courier New",monospace;
+}
+:root[data-theme="dark"]{
+  --paper:#111713;
+  --surface:#19211D;
+  --surface2:#222C27;
+  --ink:#EAF0EB;
+  --muted:#A2AEA7;
+  --line:#34423B;
+  --grid:rgba(234,240,235,.035);
+  --accent:#E07552;
+  --accent-soft:#3C271F;
+  --green:#72B6A4;
+  --green-soft:#213A32;
+  --blue:#80AEC8;
+  --blue-soft:#20343F;
+  --gold:#D1A83D;
+  --gold-soft:#3A3118;
+  --plum:#B69BCF;
+  --plum-soft:#332940;
+  --danger:#E08070;
+  --danger-soft:#3D2520;
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.topbar{
+  position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:11px clamp(16px,4vw,44px);border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--surface) 93%,transparent);backdrop-filter:blur(14px)
+}
+.brand{color:var(--ink);text-decoration:none;font:700 1rem/1 var(--serif);letter-spacing:.06em}
+.brand span{color:var(--accent)}
+.top-actions{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.btn{
+  min-height:38px;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:8px 13px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);text-decoration:none
+}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn.small{min-height:32px;padding:6px 9px;font-size:.78rem}
+.shell{width:min(1240px,calc(100% - 32px));margin:0 auto;padding:28px 0 90px}
+.hero{
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.75fr);gap:26px;align-items:end;
+  padding:24px 0 27px;border-bottom:1px solid var(--line)
+}
+.eyebrow{font:700 .72rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:9px 0 8px;font:600 clamp(2.2rem,5.3vw,3.9rem)/1.03 var(--serif);text-wrap:balance}
+.hero p{max-width:70ch;margin:0;color:var(--muted)}
+.checkin-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px}
+.checkin-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.checkin-top h2{margin:0;font:600 1.25rem/1.3 var(--serif)}
+.checkin-top p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+.ring{
+  --p:0;width:116px;height:116px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
+  background:conic-gradient(var(--green) calc(var(--p)*1%),var(--surface2) 0)
+}
+.ring::before{content:"";width:88px;height:88px;border-radius:50%;background:var(--surface)}
+.ring b{position:absolute;font:700 1.4rem/1 var(--mono);font-variant-numeric:tabular-nums}
+.checkin-steps{display:grid;gap:6px;margin-top:14px}
+.checkin-step{display:flex;justify-content:space-between;gap:10px;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--surface2);font-size:.82rem}
+.checkin-step b{color:var(--accent)}
+.checkin-step.done{background:var(--green-soft);border-color:color-mix(in srgb,var(--green) 40%,var(--line))}
+.checkin-step.done b{color:var(--green)}
+.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0 28px}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.metric b{display:block;font:700 1.7rem/1.1 var(--serif);font-variant-numeric:tabular-nums}
+.metric span{color:var(--muted);font-size:.78rem}
+.metric.green{background:var(--green-soft);border-color:color-mix(in srgb,var(--green) 35%,var(--line))}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:34px 0 13px}
+.section-head h2{margin:0;font:600 1.5rem/1.2 var(--serif)}
+.section-head .note{color:var(--muted);font-size:.82rem;text-align:right}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px}
+.training-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:11px}
+.training-main{grid-column:1/-1}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
+.panel-head h3{margin:0;font:600 1.22rem/1.3 var(--serif)}
+.panel-head p{margin:3px 0 0;color:var(--muted);font-size:.81rem}
+.status{font:700 .7rem/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:var(--surface2);color:var(--muted)}
+.status.done{background:var(--green-soft);color:var(--green)}
+.status.warn{background:var(--danger-soft);color:var(--danger)}
+.stat-line{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.stat-chip{padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--surface2);font-size:.77rem}
+.stat-chip b{font-family:var(--mono)}
+.word-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tab{border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);padding:7px 11px;font-size:.79rem}
+.tab.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.word-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}
+.word-toolbar span{color:var(--muted);font:600 .74rem/1 var(--mono)}
+.word-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:560px;overflow:auto;padding-right:3px}
+.word-card{border:1px solid var(--line);border-radius:7px;background:var(--surface2);padding:11px 12px}
+.word-card.done{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:var(--green-soft)}
+.word-card.review{background:var(--blue-soft)}
+.word-card.extra{background:var(--gold-soft)}
+.word-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.word-head b{font:700 1rem/1.25 var(--mono);word-break:break-word}
+.speak{width:30px;height:30px;padding:0;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.word-meta{margin-top:4px;color:var(--muted);font-size:.72rem}
+.rate-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9px}
+.rate-row button{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 3px;font-size:.72rem}
+.rate-row button:hover{border-color:var(--accent)}
+.rate-row button.known{color:var(--green)}
+.rate-row button.fuzzy{color:var(--gold)}
+.rate-row button.forgot{color:var(--danger)}
+.load-more{display:flex;justify-content:center;margin-top:10px}
+.empty{padding:22px;text-align:center;color:var(--muted);font-size:.86rem}
+.warning{margin-top:10px;padding:9px 11px;border-left:4px solid var(--danger);background:var(--danger-soft);border-radius:0 6px 6px 0;font-size:.8rem}
+.steps{display:grid;gap:7px;margin:12px 0}
+.step{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:var(--surface2)}
+.step input{width:17px;height:17px;margin-top:3px;accent-color:var(--green)}
+.step b{display:block;font-size:.83rem}
+.step p{margin:2px 0 0;color:var(--muted);font-size:.78rem}
+.step.done{background:var(--green-soft);border-color:color-mix(in srgb,var(--green) 35%,var(--line))}
+.timer{display:flex;align-items:center;gap:8px;margin:12px 0}
+.timer-display{font:700 2rem/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--blue)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.form-grid label{display:grid;gap:4px;font-size:.75rem;color:var(--muted)}
+.form-grid input,.form-grid select,.form-grid textarea{width:100%;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);padding:8px 9px}
+.form-grid textarea{min-height:66px;resize:vertical}
+.wide{grid-column:1/-1}
+.heat-wrap{overflow-x:auto}
+.heat{display:grid;grid-template-columns:38px repeat(8,minmax(56px,1fr));gap:6px;min-width:620px}
+.heat-label{font:700 .68rem/1 var(--mono);color:var(--muted);align-self:center}
+.heat-cell{min-height:50px;border:1px solid var(--line);border-radius:6px;background:var(--surface2);padding:6px;position:relative}
+.heat-cell.complete{background:var(--green-soft);border-color:color-mix(in srgb,var(--green) 40%,var(--line))}
+.heat-cell.partial{background:var(--gold-soft);border-color:color-mix(in srgb,var(--gold) 40%,var(--line))}
+.heat-cell span{display:block;font:700 .67rem/1.2 var(--mono)}
+.heat-cell small{color:var(--muted);font-size:.65rem}
+.platform-table-wrap{overflow-x:auto}
+.platform-table{width:100%;border-collapse:collapse;min-width:820px;font-size:.82rem}
+.platform-table th,.platform-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.platform-table th{font:700 .7rem/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.platform-name{font-weight:700;color:var(--ink);text-decoration:none}
+.platform-name:hover{color:var(--accent)}
+.advice-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.advice{border:1px solid var(--line);border-radius:7px;background:var(--surface2);padding:12px}
+.advice b{font-size:.86rem}
+.advice p{margin:3px 0 0;color:var(--muted);font-size:.79rem}
+.toast{
+  position:fixed;left:50%;bottom:24px;z-index:90;transform:translateX(-50%) translateY(18px);
+  background:var(--ink);color:var(--paper);padding:9px 15px;border-radius:999px;font-size:.84rem;
+  opacity:0;pointer-events:none;transition:.18s
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:.76rem}
+@media(max-width:900px){
+  .hero,.training-grid{grid-template-columns:1fr}
+  .dash{grid-template-columns:1fr 1fr}
+  .word-list{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .shell{width:calc(100% - 20px)}
+  .topbar{align-items:flex-start;flex-wrap:wrap}
+  .hero h1{font-size:2.15rem}
+  .dash{grid-template-columns:1fr 1fr}
+  .checkin-top{flex-direction:column}
+  .ring{width:94px;height:94px}
+  .ring::before{width:70px;height:70px}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .section-head .note{text-align:left}
+  .form-grid,.advice-list{grid-template-columns:1fr}
+  .footer{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  .topbar,.word-toolbar,.rate-row,.timer,.btn{display:none!important}
+  body{background:#fff}.shell{width:100%}.panel,.word-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html">SCAI <span>DAILY</span></a>
+  <div class="top-actions">
+    <a class="btn small" href="index.html#/home">完整版</a>
+    <a class="btn small" href="growth.html">竞赛计划</a>
+    <button class="btn small" id="exportBtn" type="button">导出进度</button>
+    <label class="btn small" for="importFile">导入进度</label>
+    <input id="importFile" type="file" accept=".json,application/json" hidden>
+    <button class="btn small" id="themeBtn" type="button">切换主题</button>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Daily Practice Board · 从 2026-10-05 开始</div>
+      <h1 id="heroTitle">今天的训练台</h1>
+      <p id="heroText"></p>
+    </div>
+    <aside class="checkin-box">
+      <div class="checkin-top">
+        <div>
+          <h2 id="dateTitle"></h2>
+          <p id="dateMeta"></p>
+        </div>
+        <div class="ring" id="dailyRing"><b id="dailyPct">0%</b></div>
+      </div>
+      <div class="checkin-steps" id="checkinSteps"></div>
+      <button class="btn primary" id="checkinBtn" type="button" style="width:100%;margin-top:11px">完成今日打卡</button>
+    </aside>
+  </section>
+
+  <section class="dash" id="dash"></section>
+
+  <div class="section-head">
+    <h2>今日训练</h2>
+    <span class="note">每天 00:00 进入新任务，未完成项保留为补学队列</span>
+  </div>
+  <section class="training-grid">
+    <section class="panel training-main">
+      <div class="panel-head">
+        <div><h3>雅思词汇 · 章节动态批次 + 遗忘曲线复习</h3><p id="vocabSub"></p></div>
+        <span class="status" id="vocabStatus">进行中</span>
+      </div>
+      <div class="stat-line" id="vocabStats"></div>
+      <div class="word-tabs" id="wordTabs"></div>
+      <div class="word-toolbar">
+        <button class="btn small" id="pauseNewBtn" type="button"></button>
+        <span id="wordPageMeta"></span>
+      </div>
+      <div class="word-list" id="wordList"></div>
+      <div class="load-more"><button class="btn small" id="wordMoreBtn" type="button">加载更多</button></div>
+      <div id="wordWarning"></div>
+      <button class="btn" id="vocabDoneBtn" type="button" style="margin-top:12px">完成今日词汇任务</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h3>剑桥雅思精听</h3><p id="listeningSub">Cambridge 10-21 · 每天一个 Section</p></div>
+        <span class="status" id="listeningStatus">进行中</span>
+      </div>
+      <div id="listeningTask"></div>
+      <div class="steps" id="listeningSteps"></div>
+      <a class="btn primary" id="dictationLink" href="https://www.idictation.cn/main/book" target="_blank" rel="noopener">打开爱听写</a>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h3>C 语言 · 30 分钟</h3><p>先基础，再逐步加入算法平台</p></div>
+        <span class="status" id="programmingStatus">进行中</span>
+      </div>
+      <div id="programmingTask"></div>
+      <div class="timer">
+        <div class="timer-display" id="timerDisplay">30:00</div>
+        <button class="btn small" id="timerToggle" type="button">开始</button>
+        <button class="btn small" id="timerReset" type="button">重置</button>
+      </div>
+      <div class="steps" id="programmingSteps"></div>
+      <div class="form-grid">
+        <label>题目名称<input id="problemName" data-program-field="problemName" type="text" placeholder="写下你完成的题目"></label>
+        <label>练习结果<select id="problemResult" data-program-field="result">
+          <option value="">待记录</option>
+          <option value="independent">独立完成</option>
+          <option value="hint">提示后完成</option>
+          <option value="solution">看题解后重写</option>
+        </select></label>
+        <label class="wide">错误类型<textarea id="problemErrors" data-program-field="errors" placeholder="如：数组越界、循环边界、类型转换、输入格式"></textarea></label>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <a class="btn primary" id="programmingLink" href="https://pintia.cn/problem-sets/2096403164988022784/exam/overview" target="_blank" rel="noopener">打开练习题</a>
+        <button class="btn" id="programmingDoneBtn" type="button">完成今日编程任务</button>
+      </div>
+    </section>
+  </section>
+
+  <div class="section-head">
+    <h2>8 周打卡记录</h2>
+    <span class="note">绿色为完整打卡，黄色为部分完成</span>
+  </div>
+  <section class="panel heat-wrap"><div class="heat" id="heatmap"></div></section>
+
+  <div class="section-head">
+    <h2>编程练习平台对比</h2>
+    <span class="note">当前主平台：PTA</span>
+  </div>
+  <section class="panel platform-table-wrap">
+    <table class="platform-table">
+      <thead><tr><th>平台</th><th>语言</th><th>难度</th><th>最适合</th><th>建议</th><th>说明</th></tr></thead>
+      <tbody id="platformRows"></tbody>
+    </table>
+  </section>
+
+  <div class="section-head">
+    <h2>坚持建议</h2>
+    <span class="note">优先保证真实练习，不用打开页面代替完成</span>
+  </div>
+  <section class="advice-list" id="habitAdvice"></section>
+
+  <footer class="footer">
+    <span>IELTS 词库来源：《雅思词汇真经》可检索文本层，仅存单词、章节和页码。</span>
+    <span>平台需自行登录；数据保存与备份均在本机浏览器完成。</span>
+  </footer>
+</main>
+<div class="toast" id="toast"></div>
+
+<script src="data-ielts.js"></script>
+<script src="data-daily.js"></script>
+<script>
+(function(){
+"use strict";
+const IELTS=window.SCAI_IELTS_WORDS||{chapters:[]};
+const DAILY=window.SCAI_DAILY||{};
+const META=DAILY.meta||{};
+const LISTENING=DAILY.listening||{items:[]};
+const PROGRAMMING=DAILY.programming||{phases:[],platforms:[]};
+const $=(s,r)=>(r||document).querySelector(s);
+const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+const KEYS={
+  profile:"scai_daily_profile",
+  words:"scai_word_records",
+  tasks:"scai_daily_tasks",
+  programming:"scai_programming_records",
+  checkins:"scai_daily_checkins"
+};
+const LS={
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+
+const storedProfile=LS.get(KEYS.profile,{});
+const state={
+  theme:LS.get("scai_theme","light"),
+  profile:Object.assign({startDate:META.startDate||"2026-10-05",newWordsPerDay:50},storedProfile),
+  wordRecords:LS.get(KEYS.words,{}),
+  dailyTasks:LS.get(KEYS.tasks,{byDate:{},listening:{}}),
+  programming:LS.get(KEYS.programming,{}),
+  checkins:LS.get(KEYS.checkins,{}),
+  wordTab:"new",
+  wordLimit:40,
+  timer:{remaining:Number(storedProfile.timerRemaining||1800),running:!!storedProfile.timerRunning,lastTick:Date.now()}
+};
+if(!state.dailyTasks.byDate)state.dailyTasks.byDate={};
+if(!state.dailyTasks.listening)state.dailyTasks.listening={};
+
+const allWords=(IELTS.chapters||[])
+  .filter(c=>Number(c.number)>=Number(IELTS.startChapter||6))
+  .flatMap(c=>(c.words||[]).map(w=>({...w,chapter:c.number,chapterTitle:c.title})));
+const chapterMap=new Map((IELTS.chapters||[]).map(c=>[Number(c.number),c.title]));
+
+function pad(n){return String(n).padStart(2,"0")}
+function localDateKey(date){
+  const d=date||new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function parseDateKey(key){const [y,m,d]=key.split("-").map(Number);return new Date(y,m-1,d,0,0,0,0)}
+function addDays(key,n){const d=parseDateKey(key);d.setDate(d.getDate()+n);return localDateKey(d)}
+function diffDays(a,b){return Math.round((parseDateKey(b)-parseDateKey(a))/86400000)}
+function dateLabel(key){
+  const d=parseDateKey(key);
+  const week=["周日","周一","周二","周三","周四","周五","周六"][d.getDay()];
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · ${week}`;
+}
+function todayKey(){return localDateKey(new Date())}
+function activeDateKey(){
+  const today=todayKey(),start=state.profile.startDate;
+  return diffDays(start,today)<0?start:today;
+}
+function studyDay(){return Math.max(1,diffDays(state.profile.startDate,activeDateKey())+1)}
+function saveAll(){
+  LS.set(KEYS.profile,Object.assign({},state.profile,{
+    timerRemaining:state.timer.remaining,
+    timerRunning:state.timer.running
+  }));
+  LS.set(KEYS.words,state.wordRecords);
+  LS.set(KEYS.tasks,state.dailyTasks);
+  LS.set(KEYS.programming,state.programming);
+  LS.set(KEYS.checkins,state.checkins);
+}
+function dateTask(key){
+  if(!state.dailyTasks.byDate[key])state.dailyTasks.byDate[key]={
+    date:key,
+    vocab:false,
+    listeningId:null,
+    listeningDone:false,
+    programmingDay:null,
+    programmingDone:false,
+    completedAt:null
+  };
+  return state.dailyTasks.byDate[key];
+}
+function applyTheme(){
+  document.documentElement.setAttribute("data-theme",state.theme);
+  LS.set("scai_theme",state.theme);
+  $("#themeBtn").textContent=state.theme==="dark"?"浅色主题":"深色主题";
+}
+function toast(message){
+  const node=$("#toast");node.textContent=message;node.classList.add("show");
+  clearTimeout(node._t);node._t=setTimeout(()=>node.classList.remove("show"),2400);
+}
+function buildWordUnits(){
+  const target=Number(state.profile.newWordsPerDay||50);
+  const minWords=Number(META.minWordsPerDay||30);
+  const maxWords=Number(META.maxWordsPerDay||60);
+  const units=[];
+  for(const chapter of (IELTS.chapters||[]).filter(c=>Number(c.number)>=Number(IELTS.startChapter||6))){
+    const words=chapter.words||[];
+    if(!words.length)continue;
+    let parts=Math.max(1,Math.round(words.length/target));
+    while(parts>1&&words.length/parts<minWords)parts-=1;
+    while(words.length/parts>maxWords)parts+=1;
+    let cursor=0;
+    for(let part=1;part<=parts;part++){
+      const remaining=words.length-cursor;
+      const remainingParts=parts-part+1;
+      const size=Math.ceil(remaining/remainingParts);
+      const slice=words.slice(cursor,cursor+size);
+      units.push({
+        id:`${chapter.id}-part-${part}`,
+        chapter:chapter.number,
+        chapterTitle:chapter.title,
+        label:`Chapter ${chapter.number} · ${chapter.title} · 第 ${part}/${parts} 组`,
+        part,
+        parts,
+        words:slice.map(word=>({...word,chapter:chapter.number,chapterTitle:chapter.title}))
+      });
+      cursor+=size;
+    }
+  }
+  return units;
+}
+const WORD_UNITS=buildWordUnits();
+const wordUnitDay=new Map();
+WORD_UNITS.forEach((unit,index)=>unit.words.forEach(word=>wordUnitDay.set(word.id,index+1)));
+function batchForDay(day){return (WORD_UNITS[day-1]&&WORD_UNITS[day-1].words)||[]}
+function wordBatchDay(word){return wordUnitDay.get(word.id)||null}
+function completedReviewOffsets(record){
+  return Object.keys(record&&record.completedReviews||{}).map(Number);
+}
+function dueReviewInfo(word,dateKey){
+  const record=state.wordRecords[word.id];
+  if(!record||!record.firstLearnedDate)return null;
+  const offsets=META.reviewOffsets||[1,2,4,7,15,30];
+  const done=new Set(completedReviewOffsets(record));
+  const elapsed=diffDays(record.firstLearnedDate,dateKey);
+  for(const offset of offsets){
+    if(elapsed>=offset&&!done.has(offset))return {type:"scheduled",offset,elapsed};
+  }
+  if(record.extraDue&&diffDays(record.extraDue,dateKey)>=0&&!(record.extraReviews&&record.extraReviews[dateKey])){
+    return {type:"extra",offset:0,elapsed};
+  }
+  return null;
+}
+function buildWordPool(){
+  const date=activeDateKey(),day=studyDay();
+  const currentBatch=batchForDay(day);
+  const backlog=[];
+  for(let d=1;d<day;d++){
+    for(const word of batchForDay(d)){
+      const record=state.wordRecords[word.id];
+      if(!record||!record.firstLearnedDate)backlog.push(word);
+    }
+  }
+  const newWords=[];const seenNew=new Set();
+  for(const word of currentBatch.concat(backlog)){
+    if(!seenNew.has(word.id)){seenNew.add(word.id);newWords.push(word)}
+  }
+  const reviewWords=[],extraWords=[];
+  for(const word of allWords){
+    const info=dueReviewInfo(word,date);
+    if(!info)continue;
+    if(info.type==="extra")extraWords.push({...word,dueInfo:info});
+    else reviewWords.push({...word,dueInfo:info});
+  }
+  return {
+    newWords:newWords.map(w=>({...w,pool:"new"})),
+    reviewWords,
+    extraWords,
+    currentBatch,
+    backlog
+  };
+}
+function firstUncompletedListening(){
+  return LISTENING.items.find(item=>!(state.dailyTasks.listening[item.id]&&state.dailyTasks.listening[item.id].completedAt))||null;
+}
+function listeningRecord(id){
+  if(!state.dailyTasks.listening[id])state.dailyTasks.listening[id]={steps:{},completedAt:null};
+  return state.dailyTasks.listening[id];
+}
+function programmingTaskForDay(day){
+  for(const phase of PROGRAMMING.phases||[]){
+    if(day>=phase.days[0]&&day<=phase.days[1]){
+      const localIndex=day-phase.days[0];
+      return {day,phase:phase.title,task:phase.tasks[localIndex]||phase.tasks[phase.tasks.length-1]};
+    }
+  }
+  return {day,phase:"巩固与复盘",task:{title:"回炉本周错题",goal:"重写两道错题并补测试用例。"}};
+}
+function firstUncompletedProgrammingDay(){
+  for(let day=1;day<=56;day++){
+    if(!(state.programming[day]&&state.programming[day].completedAt))return day;
+  }
+  return null;
+}
+function programmingRecord(day){
+  if(!state.programming[day])state.programming[day]={steps:{},form:{},elapsed:0,completedAt:null};
+  if(!state.programming[day].steps)state.programming[day].steps={};
+  if(!state.programming[day].form)state.programming[day].form={};
+  return state.programming[day];
+}
+function platformForDay(day){
+  const platforms=PROGRAMMING.platforms||[];
+  const byId=id=>platforms.find(p=>p.id===id)||platforms[0];
+  if(day<=21)return byId("pta");
+  if(day<=28)return [1,2,4,5,7].includes(((day-22)%7)+1)?byId("pta"):byId("nowcoder");
+  if(day<=42)return [1,2,4,5].includes(((day-29)%7)+1)?byId("pta"):byId("leetcode");
+  if(day<=49)return ([1,4].includes(((day-43)%7)+1)?byId("pta"):[2,5].includes(((day-43)%7)+1)?byId("leetcode"):[3,6].includes(((day-43)%7)+1)?byId("luogu"):byId("codeforces"));
+  return ([1,3].includes(((day-50)%7)+1)?byId("pta"):[2,5].includes(((day-50)%7)+1)?byId("leetcode"):[4,6].includes(((day-50)%7)+1)?byId("luogu"):byId("codeforces"));
+}
+function wordRecord(wordId){return state.wordRecords[wordId]||null}
+function rateWord(wordId,rating,pool){
+  const now=activeDateKey();
+  let record=state.wordRecords[wordId];
+  if(!record||!record.firstLearnedDate){
+    record={
+      id:wordId,
+      firstLearnedDate:now,
+      lastRating:rating,
+      lastReviewedDate:now,
+      completedReviews:{},
+      extraReviews:{},
+      extraDue:rating==="known"?null:addDays(now,1)
+    };
+  }else{
+    const info=dueReviewInfo({id:wordId},now);
+    if(info){
+      if(info.type==="scheduled"){
+        record.completedReviews=record.completedReviews||{};
+        record.completedReviews[info.offset]=now;
+      }else{
+        record.extraReviews=record.extraReviews||{};
+        record.extraReviews[now]=true;
+      }
+    }
+    if(rating==="known"){
+      if(record.extraDue&&diffDays(now,record.extraDue)>=0)record.extraDue=null;
+    }else{
+      record.extraDue=addDays(now,1);
+    }
+    record.lastReviewedDate=now;
+    record.lastRating=rating;
+  }
+  state.wordRecords[wordId]=record;
+  saveAll();
+  renderVocabulary();
+  renderDashboard();
+}
+function speak(word){
+  if(!("speechSynthesis"in window)){toast("当前浏览器不支持语音朗读");return}
+  window.speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(word);
+  utterance.lang=/^[A-Za-z]/.test(word)?"en-GB":"en-US";
+  utterance.rate=.82;
+  window.speechSynthesis.speak(utterance);
+}
+function renderHero(){
+  const day=studyDay(),date=activeDateKey(),before=diffDays(date,todayKey())>0;
+  $("#heroTitle").textContent=before?"训练从明天开始":"今天的训练台";
+  $("#heroText").textContent=before
+    ? `计划从 ${dateLabel(date)} 开始。今天可以先预览词库、精听顺序和 C 语言任务，正式打卡将从明天计算。`
+    : "先完成雅思词汇、剑桥精听和 C 语言练习，再完成当日打卡。每天的记录只保存在当前浏览器。";
+  $("#dateTitle").textContent=dateLabel(date);
+  $("#dateMeta").textContent=`第 ${day} 天 · 自然日 00:00 切换 · ${state.profile.startDate} 起始`;
+}
+function statusText(done){return done?"已完成":"进行中"}
+function renderDashboard(){
+  const pool=buildWordPool();
+  const listening=firstUncompletedListening();
+  const programmingDay=firstUncompletedProgrammingDay();
+  const streak=calculateStreak();
+  const vocabDay=Math.min(dayBatchCount(),studyDay());
+  $("#dash").innerHTML=`
+    <article class="metric green"><b>${streak}</b><span>当前连续打卡天数</span></article>
+    <article class="metric"><b>${pool.newWords.length}</b><span>新词与补学待完成</span></article>
+    <article class="metric"><b>${pool.reviewWords.length+pool.extraWords.length}</b><span>今日到期复习词</span></article>
+    <article class="metric"><b>${listening?`C${listening.book}`:"完成"}</b><span>${programmingDay?`编程 Day ${programmingDay}`:"编程已进入复盘"}</span></article>`;
+  renderCheckin();
+}
+function dayBatchCount(){return Math.min(WORD_UNITS.length,studyDay())}
+function dailyRequirements(){
+  const date=activeDateKey(),task=dateTask(date);
+  const listening=firstUncompletedListening();
+  const listeningDone=Boolean(task.listeningDone)||(!listening&&Boolean(task.listeningId));
+  const pDay=firstUncompletedProgrammingDay();
+  const programDone=Boolean(task.programmingDone)||(!pDay&&Boolean(task.programmingDay));
+  return {vocab:!!task.vocab,listening:!!listeningDone,programming:!!programDone};
+}
+function renderCheckin(){
+  const req=dailyRequirements(),count=Object.values(req).filter(Boolean).length,pct=Math.round(count/3*100);
+  $("#dailyRing").style.setProperty("--p",pct);
+  $("#dailyPct").textContent=pct+"%";
+  $("#checkinSteps").innerHTML=[
+    ["雅思词汇","vocab"],["剑桥精听","listening"],["C 语言 30 分钟","programming"]
+  ].map(([label,key])=>`<div class="checkin-step ${req[key]?"done":""}"><span>${label}</span><b>${req[key]?"完成":"待完成"}</b></div>`).join("");
+  const done=!!state.checkins[activeDateKey()];
+  $("#checkinBtn").textContent=done?"今日已打卡":"完成今日打卡";
+  $("#checkinBtn").disabled=done||count<3;
+}
+function calculateStreak(){
+  let date=todayKey();
+  if(!state.checkins[date])date=addDays(date,-1);
+  let streak=0;
+  while(state.checkins[date]){
+    streak+=1;
+    date=addDays(date,-1);
+  }
+  return streak;
+}
+function renderVocabulary(){
+  const pool=buildWordPool();
+  const allPool={new:pool.newWords,review:pool.reviewWords,extra:pool.extraWords,completed:[]};
+  const current=allPool[state.wordTab]||[];
+  const total=pool.newWords.length+pool.reviewWords.length+pool.extraWords.length;
+  const currentUnit=WORD_UNITS[studyDay()-1];
+  $("#vocabSub").textContent=`Chapter 6 起 · 按章节动态分批 · 目标约 ${state.profile.newWordsPerDay} 词/天（实际约 ${META.minWordsPerDay||30}-${META.maxWordsPerDay||60} 词） · 复习节点 ${(META.reviewOffsets||[]).join("/")} 天`;
+  $("#vocabStats").innerHTML=`
+    <span class="stat-chip">${currentUnit?esc(currentUnit.label):"章末复习"} · <b>${pool.currentBatch.length}</b> 词</span>
+    <span class="stat-chip">补学 <b>${pool.backlog.length}</b></span>
+    <span class="stat-chip">到期复习 <b>${pool.reviewWords.length}</b></span>
+    <span class="stat-chip">加练 <b>${pool.extraWords.length}</b></span>
+    <span class="stat-chip">总待办 <b>${total}</b></span>`;
+  const task=dateTask(activeDateKey());
+  $("#vocabStatus").textContent=task.vocab?"已完成":"进行中";
+  $("#vocabStatus").className="status "+(task.vocab?"done":"");
+  $("#vocabDoneBtn").textContent=task.vocab?"重新打开今日词汇任务":"完成今日词汇任务";
+  $("#pauseNewBtn").textContent=state.profile.pauseNew?"恢复每日新词":"暂停新增词";
+  $("#pauseNewBtn").setAttribute("aria-pressed",state.profile.pauseNew?"true":"false");
+  $("#wordTabs").innerHTML=[
+    ["new","新词",pool.newWords.length],["review","复习",pool.reviewWords.length],
+    ["extra","加练",pool.extraWords.length],["completed","已标记",Object.keys(state.wordRecords).length]
+  ].map(([id,label,count])=>`<button class="tab ${state.wordTab===id?"active":""}" type="button" data-word-tab="${id}">${label} ${count}</button>`).join("");
+  const items=state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).slice(0,state.wordLimit):current.slice(0,state.wordLimit);
+  $("#wordPageMeta").textContent=`${items.length} / ${state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).length:current.length} 项`;
+  $("#wordList").innerHTML=items.length?items.map(word=>renderWordCard(word,state.wordTab)).join(""):`<div class="empty">这个分类当前没有任务。</div>`;
+  $("#wordMoreBtn").style.display=items.length<((state.wordTab==="completed"?allWords.filter(w=>state.wordRecords[w.id]).length:current.length))?"inline-flex":"none";
+  $("#wordWarning").innerHTML=total>(DAILY.ielts&&DAILY.ielts.overloadThreshold||200)
+    ?`<div class="warning">当前待复习量较大。建议暂时停止新增词，先清完复习；点击上方“暂停新增词”即可。</div>`:"";
+}
+function renderWordCard(word,pool){
+  const record=wordRecord(word.id);
+  const done=Boolean(record&&record.firstLearnedDate&&(pool!=="new"||record.lastReviewedDate===activeDateKey()));
+  const chapter=word.chapter?`Chapter ${word.chapter} · ${word.chapterTitle}`:`Chapter ${word.Chapter||""}`;
+  const due=word.dueInfo&&word.dueInfo.type==="scheduled"?`复习 +${word.dueInfo.offset} 天`:word.dueInfo?"加练":"";
+  return `<article class="word-card ${done?"done":""} ${pool==="review"?"review":""} ${pool==="extra"?"extra":""}" data-word-id="${esc(word.id)}">
+    <div class="word-head">
+      <div><b>${esc(word.word)}</b><div class="word-meta">${esc(chapter)} · PDF p.${word.page}${due?" · "+due:""}</div></div>
+      <button class="speak" type="button" data-speak="${esc(word.word)}" aria-label="朗读 ${esc(word.word)}">▶</button>
+    </div>
+    <div class="rate-row">
+      <button class="known" type="button" data-rate="known" data-word="${esc(word.id)}">认识</button>
+      <button class="fuzzy" type="button" data-rate="fuzzy" data-word="${esc(word.id)}">模糊</button>
+      <button class="forgot" type="button" data-rate="forgot" data-word="${esc(word.id)}">忘记</button>
+    </div>
+  </article>`;
+}
+function renderListening(){
+  const item=firstUncompletedListening();
+  const task=dateTask(activeDateKey());
+  if(!item){
+    $("#listeningStatus").textContent="全部完成";
+    $("#listeningStatus").className="status done";
+    $("#listeningTask").innerHTML=`<div class="empty">C10-C21 已全部完成，进入整套模考和错题回炉模式。</div>`;
+    $("#listeningSteps").innerHTML="";
+    return;
+  }
+  task.listeningId=item.id;
+  const record=listeningRecord(item.id);
+  $("#listeningStatus").textContent=record.completedAt?"已完成":"进行中";
+  $("#listeningStatus").className="status "+(record.completedAt?"done":"");
+  $("#listeningTask").innerHTML=`
+    <div class="stat-line">
+      <span class="stat-chip">顺序 <b>${item.order}/192</b></span>
+      <span class="stat-chip"><b>Cambridge ${item.book}</b></span>
+      <span class="stat-chip">Test <b>${item.test}</b> · Section <b>${item.section}</b></span>
+      ${item.reviewAfterTest?`<span class="stat-chip">本日含 Test 回炉</span>`:""}
+    </div>`;
+  $("#listeningSteps").innerHTML=(LISTENING.steps||[]).map(step=>`
+    <label class="step ${record.steps[step.id]?"done":""}">
+      <input type="checkbox" data-listening-step="${step.id}" ${record.steps[step.id]?"checked":""}>
+      <span><b>${esc(step.label)} · ${step.minutes} 分钟</b><p>按精听流程完成再勾选。</p></span>
+    </label>`).join("");
+  if(item.reviewAfterTest){
+    $("#listeningSteps").insertAdjacentHTML("beforeend",`
+      <label class="step ${record.steps.review?"done":""}">
+        <input type="checkbox" data-listening-step="review" ${record.steps.review?"checked":""}>
+        <span><b>本 Test 回炉复习</b><p>找出最弱的 Section，重听错题和连读。</p></span>
+      </label>`);
+  }
+  saveAll();
+}
+function renderProgramming(){
+  let day=firstUncompletedProgrammingDay();
+  const task=dateTask(activeDateKey());
+  if(!day){
+    $("#programmingStatus").textContent="56天已完成";
+    $("#programmingStatus").className="status done";
+    $("#programmingTask").innerHTML=`<div class="empty">已完成 56 天起步计划，继续刷题和复盘错题。</div>`;
+    $("#programmingSteps").innerHTML="";
+    return;
+  }
+  task.programmingDay=day;
+  const detail=programmingTaskForDay(day);
+  const record=programmingRecord(day);
+  const platform=platformForDay(day);
+  $("#programmingStatus").textContent=record.completedAt?"已完成":"进行中";
+  $("#programmingStatus").className="status "+(record.completedAt?"done":"");
+  $("#programmingTask").innerHTML=`
+    <div class="stat-line">
+      <span class="stat-chip">Day <b>${day}/56</b></span>
+      <span class="stat-chip"><b>${esc(detail.phase)}</b></span>
+      <span class="stat-chip">主平台 <b>${esc(platform.name)}</b></span>
+    </div>
+    <div class="advice"><b>${esc(detail.task.title)}</b><p>${esc(detail.task.goal)}</p></div>`;
+  $("#programmingLink").href=platform.url;
+  $("#programmingLink").textContent="打开 "+platform.name;
+  $("#programmingSteps").innerHTML=(PROGRAMMING.routine||[]).map((step,i)=>{
+    const key=["review","solve","log"][i]||`step${i}`;
+    return `<label class="step ${record.steps[key]?"done":""}">
+      <input type="checkbox" data-program-step="${key}" ${record.steps[key]?"checked":""}>
+      <span><b>${step.minutes} 分钟 · ${esc(step.label)}</b></span>
+    </label>`;
+  }).join("");
+  $$("[data-program-field]").forEach(input=>{
+    const key=input.dataset.programField;
+    input.value=record.form[key]||"";
+  });
+  saveAll();
+}
+function renderHeatmap(){
+  const start=state.profile.startDate;
+  const cells=[];
+  for(let offset=0;offset<56;offset++){
+    const key=addDays(start,offset);
+    const task=state.dailyTasks.byDate[key];
+    const checked=!!state.checkins[key];
+    const req=task?[
+      task.vocab,
+      task.listeningDone,
+      task.programmingDone
+    ].filter(Boolean).length:0;
+    cells.push({key,day:offset+1,checked,count:req});
+  }
+  $("#heatmap").innerHTML=`<div class="heat-label">周次</div>${Array.from({length:8},(_,i)=>`<div class="heat-label">W${i+1}</div>`).join("")}
+    ${Array.from({length:7},(_,weekday)=>`
+      <div class="heat-label">${["日","一","二","三","四","五","六"][weekday]}</div>
+      ${cells.filter((_,i)=>i%7===weekday).map(cell=>`<div class="heat-cell ${cell.checked?"complete":cell.count?"partial":""}" title="${cell.key}"><span>D${cell.day}</span><small>${cell.checked?"完成":cell.count?cell.count+"/3":"—"}</small></div>`).join("")}`).join("")}`;
+}
+function renderPlatforms(){
+  $("#platformRows").innerHTML=(PROGRAMMING.platforms||[]).map(p=>`
+    <tr>
+      <td><a class="platform-name" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a></td>
+      <td>${esc(p.locale)}</td><td>${esc(p.difficulty)}</td><td>${esc(p.bestFor)}</td>
+      <td>${esc(p.recommend)}</td><td>${esc(p.note)}</td>
+    </tr>`).join("");
+}
+function renderAdvice(){
+  $("#habitAdvice").innerHTML=(DAILY.habits||[]).map(x=>`<article class="advice"><p>${esc(x)}</p></article>`).join("");
+}
+function updateTimerDisplay(){
+  const total=Math.max(0,Math.floor(state.timer.remaining));
+  $("#timerDisplay").textContent=`${pad(Math.floor(total/60))}:${pad(total%60)}`;
+  $("#timerToggle").textContent=state.timer.running?"暂停":"开始";
+}
+function timerTick(){
+  if(state.timer.running){
+    const now=Date.now(),delta=Math.floor((now-state.timer.lastTick)/1000);
+    if(delta>0){
+      state.timer.remaining=Math.max(0,state.timer.remaining-delta);
+      state.timer.lastTick=now;
+      if(state.timer.remaining===0){
+        state.timer.running=false;
+        toast("30 分钟训练完成");
+      }
+      saveAll();
+    }
+  }
+  updateTimerDisplay();
+}
+function renderAll(){
+  renderHero();renderDashboard();renderVocabulary();renderListening();renderProgramming();renderHeatmap();renderPlatforms();renderAdvice();updateTimerDisplay();saveAll();
+}
+function bind(){
+  $("#themeBtn").addEventListener("click",()=>{state.theme=state.theme==="dark"?"light":"dark";applyTheme()});
+  $("#wordTabs").addEventListener("click",e=>{
+    const btn=e.target.closest("[data-word-tab]");if(!btn)return;
+    state.wordTab=btn.dataset.wordTab;state.wordLimit=40;renderVocabulary();
+  });
+  $("#wordMoreBtn").addEventListener("click",()=>{state.wordLimit+=40;renderVocabulary()});
+  $("#pauseNewBtn").addEventListener("click",()=>{
+    state.profile.pauseNew=!state.profile.pauseNew;saveAll();renderVocabulary();
+    toast(state.profile.pauseNew?"已暂停新增词，先清理积压":"已恢复每日新增词");
+  });
+  $("#vocabDoneBtn").addEventListener("click",()=>{
+    const task=dateTask(activeDateKey());task.vocab=!task.vocab;saveAll();renderVocabulary();renderDashboard();
+  });
+  $("#wordList").addEventListener("click",e=>{
+    const speaker=e.target.closest("[data-speak]");
+    if(speaker){speak(speaker.dataset.speak);return}
+    const rate=e.target.closest("[data-rate]");
+    if(rate)rateWord(rate.dataset.word,rate.dataset.rate,state.wordTab);
+  });
+  $("#listeningSteps").addEventListener("change",e=>{
+    if(e.target.type!=="checkbox")return;
+    const task=dateTask(activeDateKey()),item=firstUncompletedListening();if(!item)return;
+    task.listeningId=item.id;
+    const record=listeningRecord(item.id);record.steps[e.target.dataset.listeningStep]=e.target.checked;
+    if((LISTENING.steps||[]).every(step=>record.steps[step.id])&&(!item.reviewAfterTest||record.steps.review)){
+      record.completedAt=new Date().toISOString();
+      task.listeningDone=true;
+    }else{
+      record.completedAt=null;
+      task.listeningDone=false;
+    }
+    saveAll();renderListening();renderDashboard();renderHeatmap();
+  });
+  $("#programmingSteps").addEventListener("change",e=>{
+    if(e.target.type!=="checkbox")return;
+    const day=firstUncompletedProgrammingDay();if(!day)return;
+    const task=dateTask(activeDateKey());
+    task.programmingDay=day;
+    const record=programmingRecord(day);record.steps[e.target.dataset.programStep]=e.target.checked;
+    if((PROGRAMMING.routine||[]).every((_,i)=>record.steps[["review","solve","log"][i]])){
+      record.completedAt=record.completedAt||new Date().toISOString();
+      task.programmingDone=true;
+    }else{
+      record.completedAt=null;
+      task.programmingDone=false;
+    }
+    saveAll();renderProgramming();renderDashboard();renderHeatmap();
+  });
+  $$("[data-program-field]").forEach(input=>{
+    input.addEventListener("input",()=>{
+      const day=firstUncompletedProgrammingDay();if(!day)return;
+      const record=programmingRecord(day);record.form[input.dataset.programField]=input.value;
+      saveAll();
+    });
+  });
+  $("#programmingDoneBtn").addEventListener("click",()=>{
+    const day=firstUncompletedProgrammingDay();if(!day){toast("56天计划已完成");return}
+    const record=programmingRecord(day);
+    record.completedAt=new Date().toISOString();
+    (PROGRAMMING.routine||[]).forEach((_,i)=>record.steps[["review","solve","log"][i]]=true);
+    const task=dateTask(activeDateKey());
+    task.programmingDay=day;
+    task.programmingDone=true;
+    saveAll();renderProgramming();renderDashboard();renderHeatmap();toast("已记录今天的编程训练");
+  });
+  $("#timerToggle").addEventListener("click",()=>{
+    state.timer.lastTick=Date.now();state.timer.running=!state.timer.running;saveAll();updateTimerDisplay();
+  });
+  $("#timerReset").addEventListener("click",()=>{
+    state.timer.remaining=1800;state.timer.running=false;state.timer.lastTick=Date.now();saveAll();updateTimerDisplay();
+  });
+  $("#checkinBtn").addEventListener("click",()=>{
+    const req=dailyRequirements();if(Object.values(req).some(x=>!x)){toast("三项训练全部标记完成后才能打卡");return}
+    const key=activeDateKey();state.checkins[key]={completedAt:new Date().toISOString(),taskCount:3};
+    saveAll();renderDashboard();renderHeatmap();toast("今日打卡完成");
+  });
+  $("#exportBtn").addEventListener("click",()=>{
+    const payload={
+      app:"scai-daily",version:1,exportedAt:new Date().toISOString(),
+      profile:state.profile,wordRecords:state.wordRecords,dailyTasks:state.dailyTasks,
+      programming:state.programming,checkins:state.checkins
+    };
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+    a.download="scai-daily-backup-"+todayKey()+".json";document.body.appendChild(a);a.click();a.remove();
+    URL.revokeObjectURL(a.href);toast("每日训练进度已导出");
+  });
+  $("#importFile").addEventListener("change",async e=>{
+    const file=e.target.files[0];if(!file)return;
+    try{
+      const data=JSON.parse(await file.text());
+      if(data.app!=="scai-daily"||!data.profile)throw new Error("不是每日训练备份文件");
+      state.profile=Object.assign(state.profile,data.profile);
+      state.wordRecords=data.wordRecords||{};
+      state.dailyTasks=data.dailyTasks||{byDate:{},listening:{}};
+      state.programming=data.programming||{};
+      state.checkins=data.checkins||{};
+      saveAll();renderAll();toast("每日训练进度已导入");
+    }catch(error){toast("导入失败："+error.message)}
+    e.target.value="";
+  });
+  document.addEventListener("keydown",e=>{
+    if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;
+    if(!["1","2","3"].includes(e.key))return;
+    const card=$("#wordList .word-card:not(.done)");if(!card)return;
+    const rating={"1":"known","2":"fuzzy","3":"forgot"}[e.key];
+    rateWord(card.dataset.wordId,rating,state.wordTab);
+  });
+}
+setInterval(timerTick,1000);
+applyTheme();renderAll();bind();
+})();
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ const vm = require("vm");
 const dir = "C:/Users/DYH/Documents/ChatGPT/课本教程/freshman-hub";
 const sandbox = { window: {} };
 vm.createContext(sandbox);
-for (const f of ["data-courses.js", "data-meta.js", "data-china-textbooks.js"]) {
+for (const f of ["data-courses.js", "data-meta.js", "data-china-textbooks.js", "data-competitions.js"]) {
   vm.runInContext(fs.readFileSync(path.join(dir, f), "utf8"), sandbox, { filename: f });
 }
 
@@ -14,6 +14,8 @@ const books = sandbox.window.SCAI_BOOKS;
 const plan = sandbox.window.SCAI_PLAN;
 const compare = sandbox.window.SCAI_COMPARE;
 const china = sandbox.window.SCAI_CHINA;
+const competitions = sandbox.window.SCAI_COMPETITIONS;
+const growth = sandbox.window.SCAI_GROWTH_PLAN;
 const errors = [];
 
 if (courses.length < 10) errors.push("course count < 10: " + courses.length);
@@ -63,6 +65,19 @@ for (const book of (china && china.books) || []) {
 }
 if (!china || !china.syllabus || !china.syllabus.modeling || !china.syllabus.linearAlgebra || !china.syllabus.chemistry || !china.syllabus.physics) {
   errors.push("formal syllabus schedules incomplete");
+}
+if (!competitions || !competitions.competitions || competitions.competitions.length < 18) errors.push("competition catalog incomplete");
+for (const item of (competitions && competitions.competitions) || []) {
+  if (!item.id || !item.name || !item.category || !item.stage || !item.eligibility) errors.push("competition metadata incomplete: " + (item.id || item.name));
+  if (!item.dateLabel || !item.registration || !item.url || !item.value || !item.target) errors.push("competition guidance incomplete: " + item.id);
+  if (!item.prepare || !item.prepare.length) errors.push("competition preparation missing: " + item.id);
+  if (!item.months || !item.months.length) errors.push("competition months missing: " + item.id);
+}
+if (!growth || !growth.weeks || growth.weeks.length < 18) errors.push("growth plan weeks incomplete");
+for (const week of (growth && growth.weeks) || []) {
+  for (const key of ["gpa", "coding", "contest", "research", "english", "verify"]) {
+    if (!week[key]) errors.push("growth week " + week.week + " missing " + key);
+  }
 }
 
 if (errors.length) {

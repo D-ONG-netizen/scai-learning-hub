@@ -1,0 +1,18 @@
+Mathematical Modeling 1 Courseware Sample
+
+Week 6: Derivative rules and the chain rule
+
+Key ideas:
+- The derivative measures an instantaneous rate of change.
+- Product, quotient, and chain rules are used to differentiate composite expressions.
+- A common error is forgetting the inner derivative in a composite function.
+
+Review questions:
+1. Differentiate sin(x^2).
+2. Differentiate e^(3x) ln(x).
+3. Explain why the chain rule depends on the composition of functions.
+
+Mind map:
+Derivative rules -> constant, power, product, quotient, chain
+Applications -> velocity, related rates, approximation
+Common errors -> missing inner derivative, incorrect signs, mixing variables

@@ -1,7 +1,7 @@
 const { chromium } = require("C:/Users/DYH/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright-core");
 
 const BASE = "file:///C:/Users/DYH/Documents/ChatGPT/课本教程/freshman-hub/index.html";
-const SAMPLE = "C:/Users/DYH/Desktop/课件/Syllabus-CHEM0960_Fall 2026_final.pdf";
+const SAMPLE = process.env.SAMPLE_COURSEWARE || "C:/Users/DYH/Documents/ChatGPT/课本教程/freshman-hub/build/qa-courseware.txt";
 
 (async () => {
   const browser = await chromium.launch({

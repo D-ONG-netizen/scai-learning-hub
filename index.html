@@ -659,6 +659,7 @@ tr:last-child td{border-bottom:none}
 <script src="data-meta.js"></script>
 <script src="data-dual.js"></script>
 <script src="data-china-textbooks.js"></script>
+<script src="data-competitions.js"></script>
 <script>
 (function(){
 "use strict";
@@ -669,6 +670,7 @@ const plan = window.SCAI_PLAN || {weeks:[],daily:[]};
 const compare = window.SCAI_COMPARE || {similarities:[],differences:[],terms:[]};
 const dual = window.SCAI_DUAL || {groups:[],principle:[],yearPlan:null};
 const china = window.SCAI_CHINA || {books:[],syllabus:{},principle:[]};
+const competitions = window.SCAI_COMPETITIONS || {competitions:[]};
 const DAYS = ["周一","周二","周三","周四","周五","周六","周日"];
 
 const $ = (s,r)=> (r||document).querySelector(s);
@@ -692,7 +694,14 @@ let state = {
   chat: [],
   currentCourse: null,
   week: LS.get("scai_plan_week", null),
-  timetable: LS.get("scai_timetable", null)
+  timetable: LS.get("scai_timetable", null),
+  competitionGoals: LS.get("scai_competition_goals", {}),
+  growthProgress: LS.get("scai_growth_progress", {}),
+  dailyProfile: LS.get("scai_daily_profile", { startDate: "2026-10-05" }),
+  wordRecords: LS.get("scai_word_records", {}),
+  dailyTasks: LS.get("scai_daily_tasks", { byDate: {}, listening: {} }),
+  programmingRecords: LS.get("scai_programming_records", {}),
+  dailyCheckins: LS.get("scai_daily_checkins", {})
 };
 
 function esc(s){
@@ -710,6 +719,13 @@ function save(){
   LS.set("scai_dual_group",state.dual);
   LS.set("scai_plan_week",state.week);
   LS.set("scai_timetable",state.timetable);
+  LS.set("scai_competition_goals",state.competitionGoals);
+  LS.set("scai_growth_progress",state.growthProgress);
+  LS.set("scai_daily_profile",state.dailyProfile);
+  LS.set("scai_word_records",state.wordRecords);
+  LS.set("scai_daily_tasks",state.dailyTasks);
+  LS.set("scai_programming_records",state.programmingRecords);
+  LS.set("scai_daily_checkins",state.dailyCheckins);
 }
 function toast(msg){
   const t=$("#toast"); if(!t) return;
@@ -812,6 +828,11 @@ function buildSearchIndex(){
       text:[book.title,ch.title,ch.summary,...(ch.points||[]),...(ch.pitfalls||[]),...(ch.exam||[])].join(" ")
     }));
   });
+  (competitions.competitions||[]).forEach(c=>out.push({
+    type:"竞赛",kind:"link",url:c.url,title:c.name,
+    sub:(c.eligibility||"")+" · "+(c.dateLabel||""),
+    text:[c.name,c.eligibility,c.dateLabel,c.registration,c.value,...(c.prepare||[]),...(c.tags||[])].join(" ")
+  }));
   const syllabusGroups=[
     ["数学建模大纲",china.syllabus&&china.syllabus.modeling,"calculus"],
     ["线性代数大纲",china.syllabus&&china.syllabus.linearAlgebra,"linear-algebra"],
@@ -900,7 +921,7 @@ function bindSearch(){
 function renderNav(){
   const r=getRoute();
   const items=[["home","总览"],["plan","周计划"],["dual","双语对照"],["deep","国内教材精读"],["books","教材地图"],["pdfs","PDF 资料库"]];
-  $("#nav").innerHTML=items.map(([id,label])=>`<a href="#/${id}" class="${r.name===id?"active":""}">${label}</a>`).join("");
+  $("#nav").innerHTML=items.map(([id,label])=>`<a href="#/${id}" class="${r.name===id?"active":""}">${label}</a>`).join("")+`<a href="daily.html">每日训练</a><a href="growth.html">升学竞赛</a>`;
 }
 function applyTheme(){
   document.documentElement.setAttribute("data-theme",state.theme);
@@ -951,6 +972,7 @@ function renderHomeHTML(){
   const wk=plan.weeks[activeWeek()-1]||plan.weeks[0];
   const p=progressStats();
   const reviews=dueReviewLessons();
+  const dailySummary=homeDailySummary();
   const rows=data.map(c=>`
     <a class="course-row" href="#/course/${c.id}">
       <span class="bar" style="background:${c.accent}"></span>
@@ -960,7 +982,7 @@ function renderHomeHTML(){
   return `
   <section class="hero">
     <div class="kicker">${esc(meta.semester)} · ${esc(meta.versionLabel||"")}</div>
-    <h1>大一全教材学习中心 · 第四版</h1>
+    <h1>大一全教材学习中心 · 本地完整版</h1>
     <p>${esc(meta.subtitle)}。以 SCAI 官方英文教材 + 机械设计制造及其自动化国内教材为双线，用“相同只学一遍、差异单独补”的对照方法、周计划与 AI 伴学把大一课程一次学透。</p>
   </section>
   <div class="stat-row">
@@ -968,6 +990,19 @@ function renderHomeHTML(){
     <div class="stat"><b>${plan.weeks.length}</b><span>周计划</span></div>
     <div class="stat"><b>${p.done}/${p.total}</b><span>学习进度</span></div>
     <div class="stat"><b>${videoCount()}</b><span>匹配视频</span></div>
+  </div>
+  <div class="panel">
+    <div class="section" style="margin-top:0"><h2>每日训练打卡</h2><span class="note">${esc(dailySummary.dateLabel)} · 第 ${dailySummary.day} 天</span></div>
+    <div class="focus-list">
+      <span class="focus-chip">词汇 ${dailySummary.vocab?"已打卡":"待完成"}</span>
+      <span class="focus-chip">精听 ${dailySummary.listening?"已打卡":"待完成"}</span>
+      <span class="focus-chip">C 语言 ${dailySummary.programming?"已打卡":"待完成"}</span>
+      <span class="focus-chip">连续 ${dailySummary.streak} 天</span>
+    </div>
+    <div class="focus-list" style="margin-top:10px">
+      <a class="btn btn-primary" href="daily.html">进入今日训练</a>
+      <a class="btn" href="daily.html">复习词卡 / 精听 / 编程</a>
+    </div>
   </div>
   <div class="panel">
     <div class="section" style="margin-top:0"><h2>本周 · 第 ${activeWeek()} 周 ${wk?esc(wk.theme):""}</h2><span class="note">${wk?esc(wk.verify.join(" / ")):""}</span></div>
@@ -979,11 +1014,45 @@ function renderHomeHTML(){
     ${reviews.length?`<h3>今日复习</h3><div class="review-list">${reviews.map(r=>`<a class="review-link" href="#/course/${r.course.id}/${r.lesson.id}"><span><b>${esc(r.course.name)} · ${esc(r.lesson.title)}</b><br><small>${esc(r.lesson.chapters)}</small></span><span class="due">到期</span></a>`).join("")}</div>`:""}
     <div class="focus-list" style="margin-top:14px">
       <a class="btn" href="#/plan">查看周计划</a>
+      <a class="btn" href="growth.html">升学与竞赛作战台</a>
       <a class="btn btn-primary" href="#/dual">国内 ↔ 国外 双语对照</a>
     </div>
   </div>
   <div class="section"><h2>课程与教材</h2><span class="note">官方课程 + 自学与先修模块</span></div>
   <div class="course-list">${rows}</div>`;
+}
+
+function homeDateKey(date){
+  const d=date||new Date();
+  const p=n=>String(n).padStart(2,"0");
+  return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());
+}
+function homeDateFromKey(key){
+  const [y,m,d]=String(key).split("-").map(Number);
+  return new Date(y,m-1,d,0,0,0,0);
+}
+function homeAddDays(key,n){
+  const d=homeDateFromKey(key);d.setDate(d.getDate()+n);return homeDateKey(d);
+}
+function homeDailySummary(){
+  const start=(state.dailyProfile&&state.dailyProfile.startDate)||"2026-10-05";
+  const today=homeDateKey();
+  const date=homeDateFromKey(today)<homeDateFromKey(start)?start:today;
+  const day=Math.max(1,Math.round((homeDateFromKey(date)-homeDateFromKey(start))/86400000)+1);
+  const task=(state.dailyTasks&&state.dailyTasks.byDate&&state.dailyTasks.byDate[date])||{};
+  const listeningRecord=task.listeningId&&state.dailyTasks.listening&&state.dailyTasks.listening[task.listeningId];
+  const program=task.programmingDay&&state.programmingRecords&&state.programmingRecords[task.programmingDay];
+  let streakDate=state.dailyCheckins&&state.dailyCheckins[today]?today:homeAddDays(today,-1);
+  let streak=0;
+  while(state.dailyCheckins&&state.dailyCheckins[streakDate]){streak+=1;streakDate=homeAddDays(streakDate,-1)}
+  return {
+    day,
+    dateLabel:date.replace(/-/g,"."),
+    vocab:!!task.vocab,
+    listening:!!(listeningRecord&&listeningRecord.completedAt),
+    programming:!!(program&&program.completedAt),
+    streak
+  };
 }
 
 function renderPlanHTML(){
@@ -1915,7 +1984,14 @@ function exportStudyData(){
     insights:state.insights,
     week:state.week,
     timetable:state.timetable,
-    chat:state.chat
+    chat:state.chat,
+    competitionGoals:state.competitionGoals,
+    growthProgress:state.growthProgress,
+    dailyProfile:state.dailyProfile,
+    wordRecords:state.wordRecords,
+    dailyTasks:state.dailyTasks,
+    programmingRecords:state.programmingRecords,
+    dailyCheckins:state.dailyCheckins
   };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
   const a=document.createElement("a");
@@ -1940,6 +2016,13 @@ async function importStudyData(file){
     state.week=j.week||null;
     state.timetable=j.timetable||null;
     state.chat=Array.isArray(j.chat)?j.chat:[];
+    state.competitionGoals=j.competitionGoals||{};
+    state.growthProgress=j.growthProgress||{};
+    state.dailyProfile=j.dailyProfile||state.dailyProfile;
+    state.wordRecords=j.wordRecords||{};
+    state.dailyTasks=j.dailyTasks||{byDate:{},listening:{}};
+    state.programmingRecords=j.programmingRecords||{};
+    state.dailyCheckins=j.dailyCheckins||{};
     save();
     applyTheme();
     render();
@@ -1972,8 +2055,8 @@ function bindSettings(){
   });
   $("#cfgClear").addEventListener("click",()=>{
     if(!confirm("确定清除本地学习数据与 AI 配置？")) return;
-    state.quiz={}; state.progress={}; state.notes={}; state.courseware={}; state.insights={}; state.llm=null; state.chat=[]; state.timetable=null; state.week=null;
-    ["scai_quiz_scores","scai_progress","scai_notes","scai_uploaded_courseware","scai_courseware_insights","scai_llm_config","scai_dual_group","scai_plan_week","scai_timetable"].forEach(k=>LS.del(k));
+    state.quiz={}; state.progress={}; state.notes={}; state.courseware={}; state.insights={}; state.llm=null; state.chat=[]; state.timetable=null; state.week=null; state.competitionGoals={}; state.growthProgress={}; state.dailyProfile={startDate:"2026-10-05"}; state.wordRecords={}; state.dailyTasks={byDate:{},listening:{}}; state.programmingRecords={}; state.dailyCheckins={};
+    ["scai_quiz_scores","scai_progress","scai_notes","scai_uploaded_courseware","scai_courseware_insights","scai_llm_config","scai_dual_group","scai_plan_week","scai_timetable","scai_competition_goals","scai_growth_progress","scai_daily_profile","scai_word_records","scai_daily_tasks","scai_programming_records","scai_daily_checkins"].forEach(k=>LS.del(k));
     if(window.LLM_CONFIG) window.LLM_CONFIG.apiKey="";
     render();
     toast("本地数据已清除");
