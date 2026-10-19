@@ -286,7 +286,7 @@ async function main() {
         displayHeaderFooter: true,
         footerTemplate: `
           <div style="width:100%;font-size:8px;color:#5F6C66;text-align:center;padding:0 13mm;">
-            SCAI ME1 · ${esc(course.name)} · ${esc(lesson.title)} — 第 <span class="pageNumber"></span> 页
+            SCAI ME · ${esc(course.name)} · ${esc(lesson.title)} — 第 <span class="pageNumber"></span> 页
           </div>`
       });
       files.push({

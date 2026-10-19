@@ -18,7 +18,7 @@ function pageHTML(courses) {
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>SCAI ME1 全课思维导图</title>
+<title>SCAI ME 全课思维导图</title>
 <style>
   :root{--ink:#17211C;--muted:#5F6C66;--line:#D8DED8}
   *{box-sizing:border-box}
@@ -35,7 +35,7 @@ function pageHTML(courses) {
 </head>
 <body>
   <section class="cover">
-    <div class="kicker">SCAI ME1 STUDY HUB · 2026</div>
+    <div class="kicker">SCAI ME STUDY HUB · 2026</div>
     <h1>全课思维导图</h1>
     <p>${courses.length} 门课程 · ${courses.reduce((n, c) => n + c.lessons.length, 0)} 课 · 每课一页，可打印、批注与复习。</p>
   </section>

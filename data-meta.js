@@ -1,5 +1,5 @@
 window.SCAI_META = {
-  title: "SCAI ME1 Study Hub",
+  title: "SCAI ME Study Hub",
   version: "2.3.0",
   versionLabel: "学习总览 · 每日训练",
   subtitle: "大一全教材学习中心 · 国内 ↔ 英文双线 · 官方大纲进度 · 课件自动知识图谱 · AI 伴学",

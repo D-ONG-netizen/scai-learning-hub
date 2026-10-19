@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#58BDE8">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>SCAI ME1 Study Hub</title>
+<title>SCAI ME Study Hub</title>
 <style>
 :root{
   --bg:#F5F6F2;
@@ -1898,7 +1898,7 @@ async function generateCoursewareInsights(courseId,record){
 }
 function buildSystemPrompt(courseId){
   const c=data.find(x=>x.id===courseId);
-  let s="你是 SCAI ME1 学习助手。你的任务：结合课程、课件和 16 周计划，用中文给出准确、可执行的回答；公式用清晰文本形式表达。";
+  let s="你是 SCAI ME 学习助手。你的任务：结合课程、课件和 16 周计划，用中文给出准确、可执行的回答；公式用清晰文本形式表达。";
   if(c){
     s+="\n当前课程："+c.name+"（"+c.enName+"）";
     s+="\n课程摘要："+c.summary;

@@ -88,7 +88,7 @@ def page_footer(canvas, doc):
     canvas.line(1.4 * cm, 1.15 * cm, A4[0] - 1.4 * cm, 1.15 * cm)
     canvas.setFont("STSong-Light", 8)
     canvas.setFillColor(MUTED)
-    canvas.drawString(1.4 * cm, 0.78 * cm, "SCAI ME1 · 大一全教材学习中心")
+    canvas.drawString(1.4 * cm, 0.78 * cm, "SCAI ME · 大一全教材学习中心")
     canvas.drawRightString(A4[0] - 1.4 * cm, 0.78 * cm, "第 %d 页" % doc.page)
     canvas.restoreState()
 
@@ -182,7 +182,7 @@ def build_lesson(course, lesson):
         topMargin=1.4 * cm,
         bottomMargin=1.5 * cm,
         title="%s · %s" % (course["name"], lesson["title"]),
-        author="SCAI ME1 Study Hub",
+        author="SCAI ME Study Hub",
     )
     story = []
     story.append(Paragraph("%s · %s" % (esc(course["code"]), esc(course["name"])), S_KICKER))
