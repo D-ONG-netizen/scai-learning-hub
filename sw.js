@@ -1,4 +1,4 @@
-const CACHE = "scai-me1-v14";
+const CACHE = "scai-me1-v15";
 const CORE = [
   "./index.html",
   "./landing.html",
@@ -13,7 +13,7 @@ const CORE = [
   "./data-pat.js",
   "./data-meta.js",
   "./lesson-extra.js",
-  "./config.local.js",
+  "./config.public.js",
   "./pdfs/index.json",
   "./mindmaps/思维导图预览.pdf",
   "./mindmaps/思维导图预览.html",

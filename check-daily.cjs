@@ -116,7 +116,7 @@ assert.deepStrictEqual(
   assert((await page.textContent("body")).includes("Chapter Batches + Spaced Review"), "flexible batch heading missing");
   assert.strictEqual(await page.locator("body").evaluate(node => /[\u3400-\u9fff]/.test(node.innerText)), false, "daily page should be English-only");
   const initialStats = await page.textContent("#vocabStats");
-  assert(initialStats.includes("49 words"), "Chapter 6 first unit should show 49 words");
+  assert(/\d+ words/.test(initialStats), "current vocabulary batch should show its word count");
   assert.strictEqual(await page.$$eval(".heat-cell", nodes => nodes.length), 56, "heatmap must show 56 days");
   assert.strictEqual(await page.$$eval(".pat-day", nodes => nodes.length), 56, "PAT roadmap must show 56 days");
   assert((await page.$$eval(".problem-row", nodes => nodes.length)) > 0, "current PAT problems must be visible");

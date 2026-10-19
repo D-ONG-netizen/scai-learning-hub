@@ -654,7 +654,12 @@ tr:last-child td{border-bottom:none}
 
 <div class="toast" id="toast"></div>
 
-<script src="config.local.js"></script>
+<script src="config.public.js"></script>
+<script>
+if (location.protocol === "file:" || location.hostname === "127.0.0.1" || location.hostname === "localhost") {
+  document.write('<script src="config.local.js"><\/script>');
+}
+</script>
 <script src="data-courses.js"></script>
 <script src="lesson-extra.js"></script>
 <script src="data-meta.js"></script>
